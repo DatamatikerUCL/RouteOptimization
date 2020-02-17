@@ -6,12 +6,13 @@ namespace RouteOptimization.RoutePlanner
 {
     public class NearestNeighbourRoutePlanner : IRoutePlanner
     {
-        IDistanceCalculator _distanceCalculator;
+        private readonly IDistanceCalculator _distanceCalculator;
 
         public NearestNeighbourRoutePlanner(IDistanceCalculator calculator)
         {
             _distanceCalculator = calculator;
         }
+
         public OrderedRoute PlanRoute(UnorderedRoute routeToPlan)
         {
             AdjacencyMatrix matrix = CreateAdjacencyMatrix(routeToPlan);
