@@ -9,12 +9,13 @@ namespace RoutePlannerTest
     [TestClass]
     public class NearestNeighbourRoutePlannerTest
     {
+        private IDistanceCalculator _testCalculator = new TestDistanceCalculator();
         private List<Location> _locations = new List<Location>();
         private OrderedRoute _orderedRoute;
         private Location _startLocation = new Location();
 
         [TestInitialize]
-        private void SetupLocations()
+        public void SetupLocations()
         {
             _startLocation = new Location("Test lokation 1", 0, 0);
             Location locationOne = new Location("", 1, 12);
@@ -28,24 +29,29 @@ namespace RoutePlannerTest
             List<Location> locationsInOrder = new List<Location>();
             locationsInOrder.Add(locationTwo);
             locationsInOrder.Add(locationThree);
+            locationsInOrder.Add(locationOne);
             
-            _orderedRoute = new OrderedRoute(_startLocation,locationOne, locationsInOrder);
+            _orderedRoute = new OrderedRoute(_startLocation, locationsInOrder);
         }
         
         [TestMethod]
         public void InheritanceTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner();
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
 
             Assert.IsInstanceOfType(temp, typeof(IRoutePlanner));
         }
 
         [TestMethod]
-        public void RoutePlannerTest()
+        public void RoutePlannerCorrectEndLocationTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner();
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
 
             UnorderedRoute routeToOrder = new UnorderedRoute(_startLocation, _locations);
+
+            OrderedRoute route = temp.PlanRoute(routeToOrder);
+
+            Assert.AreEqual(route.EndLocation, _orderedRoute.EndLocation);
 
         }
     }

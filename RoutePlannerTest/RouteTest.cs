@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner;
@@ -32,6 +33,24 @@ namespace RoutePlannerTest
             tempRoute.EndLocation = new Location();
 
             Assert.IsNotNull(tempRoute.EndLocation);
+        }
+
+        [TestMethod]
+        public void LocationsCountTest()
+        {
+            Location startLocation = new Location();
+            Location locationOne = new Location();
+            Location locationTwo = new Location();
+            Location locationThree = new Location();
+            
+            List<Location> locations = new List<Location>
+            {
+                locationOne, locationTwo, locationThree
+            };
+
+            UnorderedRoute tempRoute = new UnorderedRoute(startLocation, locations);
+
+            Assert.AreEqual(tempRoute.LocationsCount, 4);
         }
     }
 }
