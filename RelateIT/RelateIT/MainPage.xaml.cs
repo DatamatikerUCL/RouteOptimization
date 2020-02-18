@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace RelateIT
 {
@@ -15,6 +16,9 @@ namespace RelateIT
     {
         public MainPage()
         {
+            Map map = new Map();
+            Content = map;
+
             InitializeComponent();
             if (Device.Idiom == TargetIdiom.Phone)
             {
