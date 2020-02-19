@@ -16,10 +16,12 @@ namespace RelateIT
 
         public MainPage()
         {
-            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map();
-            Content = map;
+            Position position = new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude);
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan);
 
-            InitializeMap();
+
+            OnInitializeMap();
 
             InitializeComponent();
             if (Device.Idiom == TargetIdiom.Phone)
@@ -35,20 +37,20 @@ namespace RelateIT
 
         }
 
-        public void InitializeMap()
+        public void OnInitializeMap()
         {
-            map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(GetDeviceLocation().Result.Latitude, GetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
+            map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
             };
 
-            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(GetDeviceLocation().Result.Latitude, GetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
+            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
             };
         }
 
-        public async Task<Location> GetDeviceLocation()
+        public async Task<Location> OnGetDeviceLocation()
         {
 
             var location = await Geolocation.GetLastKnownLocationAsync();

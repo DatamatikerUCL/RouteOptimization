@@ -39,7 +39,6 @@ namespace RelateIT.UWP
             var map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(GetDeviceLocation().Result.Latitude, GetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
-                VerticalOptions = LayoutOptions.FillAndExpand
             };
         }
 
