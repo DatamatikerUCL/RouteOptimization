@@ -2,16 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              x:Class="RelateIT.MainPage">
+    
+    
 
     <StackLayout>
 
 
         <StackLayout x:Name="PhoneView">
-            <Button Text="Ændre rute" Margin="20, 20"/>
-            <Button Text="Gem rute" Margin="20, 20"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <maps:Map x:Name="map" MapType="Street" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" />
+
+                <Button Text="Ændre rute" Margin="20, 20" Grid.Row="1" Grid.Column="0"/>
+                <Button Text="Gem rute" Margin="20, 20" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+     
+
         </StackLayout>
 
         <Grid x:Name="TabletView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -34,8 +51,10 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
 
+            <maps:Map x:Name="map2" MapType="Street" />
             <Button Text="Ændre rute" Margin="20, 20" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
             <Button Text="Gem rute" Margin="20, 20" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+
 
         </Grid>
 
