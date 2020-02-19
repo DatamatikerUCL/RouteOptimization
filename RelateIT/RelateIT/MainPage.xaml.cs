@@ -10,8 +10,6 @@ using Xamarin.Forms.Maps;
 
 namespace RelateIT
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
@@ -42,7 +40,11 @@ namespace RelateIT
             map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(GetDeviceLocation().Result.Latitude, GetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
-                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+
+            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(GetDeviceLocation().Result.Latitude, GetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
+            {
+                IsShowingUser = true,
             };
         }
 

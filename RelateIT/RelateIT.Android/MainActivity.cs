@@ -69,7 +69,11 @@ namespace RelateIT.Droid
                 }
                 else
                 {
-                    // Permissions already granted - display a message.
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    AlertDialog alert = dialog.Create();
+                    alert.SetTitle("Adgang allerede givet");
+                    alert.SetMessage("Adgang er givet til lokationen");
+                    alert.Show();
                 }
             }
         }
