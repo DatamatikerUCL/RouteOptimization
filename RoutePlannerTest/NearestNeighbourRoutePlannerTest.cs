@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner;
 using RouteOptimization.RoutePlanner.Datastructures;
@@ -10,7 +11,7 @@ namespace RoutePlannerTest
     public class NearestNeighbourRoutePlannerTest
     {
         private IDistanceCalculator _testCalculator = new TestDistanceCalculator();
-        private List<Location> _locations = new List<Location>();
+        private ImmutableList<Location> _locations = ImmutableList<Location>.Empty;
         private OrderedRoute _orderedRoute;
         private Location _startLocation = new Location();
 
@@ -26,7 +27,7 @@ namespace RoutePlannerTest
             _locations.Add(locationTwo); // 2
             _locations.Add(locationThree); // 3.6
 
-            List<Location> locationsInOrder = new List<Location>();
+            ImmutableList<Location> locationsInOrder = ImmutableList<Location>.Empty;
             locationsInOrder.Add(locationTwo);
             locationsInOrder.Add(locationThree);
             locationsInOrder.Add(locationOne);

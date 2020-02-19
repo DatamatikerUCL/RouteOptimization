@@ -1,6 +1,7 @@
-using System;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.Interfaces;
+using System;
+using System.Collections.Immutable;
 
 namespace RouteOptimization.RoutePlanner
 {
@@ -13,34 +14,42 @@ namespace RouteOptimization.RoutePlanner
             _distanceCalculator = calculator;
         }
 
-        public OrderedRoute PlanRoute(UnorderedRoute routeToPlan)
+        public OrderedRoute PlanRoute(UnorderedRoute route)
         {
-            AdjacencyMatrix matrix = CreateAdjacencyMatrix(routeToPlan);
-            matrix = AddWeightsToMatrix(matrix, routeToPlan);
+            var current = route.StartLocation;
+            var remaining = route.Locations;
+            var path = ImmutableList<Location>.Empty.Add(route.StartLocation);
 
-            throw new NotImplementedException();
+            while (!remaining.IsEmpty)
+            {
+                var next = Closest(current, remaining);
+                path = path.Add(next);
+
+                remaining = remaining.Remove(next);
+
+                current = next;
+            }
+
+            return new OrderedRoute(path);
         }
 
-        private AdjacencyMatrix AddWeightsToMatrix(AdjacencyMatrix matrix, UnorderedRoute routeToPlan)
+        private Location Closest(Location current, ImmutableList<Location> remaining)
         {
-            for (int i = 0; i < routeToPlan.LocationsCount; i++)
+            double TOLERANCE = 0.01;
+            double smallestDistance = 0;
+            Location nextLocation = current;
+
+            foreach (var location in remaining)
             {
-                for (int j = 0; j < routeToPlan.LocationsCount; j++)
+                double tempDistance = _distanceCalculator.CalculateDistanceBetweenLocations(current, location);
+                if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < TOLERANCE)
                 {
-                    if (i != j)
-                    {
-                        double tempWeight = _distanceCalculator.CalculateDistanceBetweenLocations(routeToPlan.GetLocation(i), routeToPlan.GetLocation(j));
-                        matrix.ChangeWeightAtCoordinates(i, j, tempWeight);
-                    }
+                    smallestDistance = tempDistance;
+                    nextLocation = location;
                 }
             }
 
-            return matrix;
-        }
-
-        private AdjacencyMatrix CreateAdjacencyMatrix(UnorderedRoute routeToPlan)
-        {
-            return new AdjacencyMatrix(routeToPlan.LocationsCount);
+            return nextLocation;
         }
     }
 }

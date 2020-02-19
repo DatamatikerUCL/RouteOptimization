@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner;
@@ -43,14 +44,14 @@ namespace RoutePlannerTest
             Location locationTwo = new Location();
             Location locationThree = new Location();
             
-            List<Location> locations = new List<Location>
-            {
-                locationOne, locationTwo, locationThree
-            };
+            ImmutableList<Location> locations = ImmutableList<Location>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
 
             UnorderedRoute tempRoute = new UnorderedRoute(startLocation, locations);
 
-            Assert.AreEqual(tempRoute.LocationsCount, 4);
+            Assert.AreEqual(4, tempRoute.LocationsCount);
         }
     }
 }
