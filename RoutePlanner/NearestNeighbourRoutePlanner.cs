@@ -17,7 +17,7 @@ namespace RouteOptimization.RoutePlanner
         public OrderedRoute PlanRoute(UnorderedRoute route)
         {
             var current = route.StartLocation;
-            var remaining = route.Locations;
+            var remaining = route.Locations.Remove(route.StartLocation);
             var path = ImmutableList<Location>.Empty.Add(route.StartLocation);
 
             while (!remaining.IsEmpty)

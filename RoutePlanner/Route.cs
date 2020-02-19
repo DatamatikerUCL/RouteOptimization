@@ -7,8 +7,6 @@ namespace RouteOptimization.RoutePlanner
 {
     public abstract class Route
     {
-        private ImmutableList<Location> _locations;
-
         protected Route()
         {
             Locations = ImmutableList<Location>.Empty;
@@ -18,22 +16,18 @@ namespace RouteOptimization.RoutePlanner
         {
 
             Locations = ImmutableList<Location>.Empty.Add(startLocation);
-            Locations = Locations.AddRange(locations);
+
+            foreach (var location in locations)
+            {
+                Locations = Locations.Add(location);
+            }
             
+
         }
 
         public Location StartLocation => Locations[0];
-        public ImmutableList<Location> Locations
-        {
-            get => _locations;
-            set => _locations = value;
-        }
+        public ImmutableList<Location> Locations { get; }
 
         public int LocationsCount => Locations.Count;
-
-        internal Location GetLocation(int i)
-        {
-            return Locations[i];
-        }
     }
 }

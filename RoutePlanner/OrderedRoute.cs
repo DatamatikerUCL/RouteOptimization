@@ -11,7 +11,7 @@ namespace RouteOptimization.RoutePlanner
         {
         }
 
-        public OrderedRoute(ImmutableList<Location> path) : base(path[0], path)
+        public OrderedRoute(ImmutableList<Location> path) : base(path[0], path.Remove(path[0]))
         {
         }
 
@@ -19,6 +19,9 @@ namespace RouteOptimization.RoutePlanner
         {
         }
 
-        public Location EndLocation { get => Locations[^1]; set => Locations = Locations.Add(value); }
+        public object GetLocation(int i)
+        {
+            return Locations[i];
+        }
     }
 }

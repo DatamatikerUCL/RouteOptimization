@@ -27,14 +27,6 @@ namespace RoutePlannerTest
             Assert.IsInstanceOfType(tempRoute, typeof(Route));
         }
 
-        [TestMethod]
-        public void OrderedRouteEndlocationPropertyTest()
-        {
-            OrderedRoute tempRoute = new OrderedRoute();
-            tempRoute.EndLocation = new Location();
-
-            Assert.IsNotNull(tempRoute.EndLocation);
-        }
 
         [TestMethod]
         public void LocationsCountTest()

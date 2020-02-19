@@ -11,7 +11,7 @@ namespace RouteOptimization.RoutePlanner
         {
         }
 
-        public UnorderedRoute(Location location, ImmutableList<Location> locations) : base(location, locations)
+        public UnorderedRoute(Location startLocation, ImmutableList<Location> locations) : base(startLocation, locations)
         {
         }
     }
