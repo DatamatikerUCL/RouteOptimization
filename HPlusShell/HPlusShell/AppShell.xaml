@@ -30,7 +30,7 @@
     </Shell.Resources>
 
     <!-- Your Pages -->
-    <TabBar>
+    <FlyoutItem Title="Main">
         <Tab Title="Browse" Icon="tab_feed.png">
             <ShellContent Title="Basic" ContentTemplate="{DataTemplate local:ItemsPage}" />
             <ShellContent Title="Additional" ContentTemplate="{DataTemplate local:ItemsPage}" />
@@ -41,8 +41,14 @@
         <Tab Title="Other" Icon="tab_about.png">
             <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
         </Tab>
-    </TabBar>
-
+    </FlyoutItem>
+    <FlyoutItem Title="Custom Flyout">
+        <Tab Title="Browse" Icon="tab_feed.png">
+            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        </Tab>
+    </FlyoutItem>
+    <MenuItem Text="Custom Menu Item"></MenuItem>
+  
     <!-- Optional Templates 
     // These may be provided inline as below or as separate classes.
 
