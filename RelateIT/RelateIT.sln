@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelateIT.Android", "RelateI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelateIT.iOS", "RelateIT.iOS\RelateIT.iOS.csproj", "{74D3630F-BF25-434D-9C6E-8B9652BC7919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelateIT", "RelateIT\RelateIT.csproj", "{76CCC07B-47BA-4B3F-9158-351E9B2D4ACE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RelateIT", "RelateIT\RelateIT.csproj", "{76CCC07B-47BA-4B3F-9158-351E9B2D4ACE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
