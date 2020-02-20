@@ -20,7 +20,7 @@ namespace RouteOptimization.RoutePlanner
             var remaining = route.Locations.Remove(route.StartLocation);
             var path = ImmutableList<ILocateable>.Empty.Add(route.StartLocation);
 
-            while (!remaining.IsEmpty)
+            while (!remaining.IsEmpty) 
             {
                 var next = Closest(current, remaining);
                 path = path.Add(next);

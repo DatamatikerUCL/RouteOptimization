@@ -16,6 +16,13 @@ namespace RoutePlannerTest
         }
 
         [TestMethod]
+        public void InterfaceImplentationTest()
+        {
+            ILocateable tempLocation = new TestLocation();
+            Assert.IsInstanceOfType(tempLocation, typeof(ILocateable));
+        }
+
+        [TestMethod]
         public void LatitudePropertyTest()
         {
             double latitude = 209135.573190;
