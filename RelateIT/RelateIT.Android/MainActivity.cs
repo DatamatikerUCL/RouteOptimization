@@ -14,6 +14,8 @@ using Xamarin.Forms.Xaml;
 using Android.Gms.Maps;
 using RelateIT.Droid;
 using Android.Gms.Maps.Model;
+using Xamarin.Forms.Maps;
+using RelateIT;
 
 namespace RelateIT.Droid
 {
@@ -60,10 +62,18 @@ namespace RelateIT.Droid
             {
                 if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted)
                 {
+
                     RequestPermissions(LocationPermissions, RequestLocationId);
+                    //Position position = new Position(LocationHelper.OnGetDeviceLastLocation().Result.Latitude, LocationHelper.OnGetDeviceLastLocation().Result.Longitude);
+                    //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+                    //Map map = new Map(mapSpan);
                 }
                 else
                 {
+                    //Position position = new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude);
+                    //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+                    //Map map = new Map(mapSpan);
+
                     AlertDialog.Builder dialog = new AlertDialog.Builder(this);
                     AlertDialog alert = dialog.Create();
                     alert.SetTitle("Adgang allerede givet");

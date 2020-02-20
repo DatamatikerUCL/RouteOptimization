@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Android.OS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace RelateIT
 
         public MainPage()
         {
-            Position position = new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude);
+            Position position = new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan);
 
@@ -39,22 +40,17 @@ namespace RelateIT
 
         public void OnInitializeMap()
         {
-            map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
+            map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
             };
 
-            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(OnGetDeviceLocation().Result.Latitude, OnGetDeviceLocation().Result.Longitude), Distance.FromKilometers(5)))
+            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude), Distance.FromKilometers(5)))
             {
                 IsShowingUser = true,
             };
         }
 
-        public async Task<Location> OnGetDeviceLocation()
-        {
-
-            var location = await Geolocation.GetLastKnownLocationAsync();
-            return location;
-        }
+        
     }
 }
