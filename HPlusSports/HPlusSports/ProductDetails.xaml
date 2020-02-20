@@ -6,7 +6,18 @@
              mc:Ignorable="d"
              x:Class="HPlusSports.ProductDetails">
     <ContentPage.Content>
-        <Label Text="Product Detail Page" ></Label>
-               
+        <StackLayout Orientation="Vertical" Padding="10,20">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name:"></Label>
+                <Label Text="PRODUCT NAME"></Label>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Discription:"></Label>
+                <Label Text="PRODUCT DISCRIPTION PRODUCT DISCRIPTION PRODUCT DISCRIPTION PRODUCT DISCRIPTION PRODUCT DISCRIPTION PRODUCT DISCRIPTION PRODUCT DISCRIPTION"></Label>
+            </StackLayout>
+
+            <Image Source="https://hplussport.com/wp-content/uploads/2016/12/v-neck-T-shirt-for-women_LYNDA_29948.jpg" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"></Image>
+        </StackLayout>               
     </ContentPage.Content>
 </ContentPage>
