@@ -8,13 +8,15 @@ namespace RouteOptimization.RoutePlanner
     public class NearestNeighbourRoutePlanner : IRoutePlanner
     {
         private readonly IDistanceCalculator _distanceCalculator;
+        private readonly IPlannableFactory _iPlannableFactory;
 
-        public NearestNeighbourRoutePlanner(IDistanceCalculator calculator)
+        public NearestNeighbourRoutePlanner(IDistanceCalculator calculator, IPlannableFactory factory)
         {
             _distanceCalculator = calculator;
+            _iPlannableFactory = factory;
         }
 
-        public OrderedRoute PlanRoute(UnorderedRoute route)
+        public IPlannable PlanRoute(IPlannable route)
         {
             var current = route.StartLocation;
             var remaining = route.Locations.Remove(route.StartLocation);
@@ -30,7 +32,7 @@ namespace RouteOptimization.RoutePlanner
                 current = next;
             }
 
-            return new OrderedRoute(path);
+            return _iPlannableFactory.NewIPlannable(path);
         }
 
         private ILocateable Closest(ILocateable current, ImmutableList<ILocateable> remaining)

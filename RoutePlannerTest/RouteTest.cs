@@ -12,20 +12,12 @@ namespace RoutePlannerTest
     public class RouteTest
     {
         [TestMethod]
-        public void OrderedRouteInheritanceTest()
+        public void InterfaceImplementationTest()
         {
-            OrderedRoute tempRoute = new OrderedRoute();
+            IPlannable tempRoute = new TestPlannable();
 
-            Assert.IsInstanceOfType(tempRoute, typeof(Route));
+            Assert.IsInstanceOfType(tempRoute, typeof(IPlannable));
 
-        }
-
-        [TestMethod]
-        public void UnorderedRouteInheritanceTest()
-        {
-            UnorderedRoute tempRoute = new UnorderedRoute();
-
-            Assert.IsInstanceOfType(tempRoute, typeof(Route));
         }
 
 
@@ -42,9 +34,9 @@ namespace RoutePlannerTest
             locations = locations.Add(locationTwo);
             locations = locations.Add(locationThree);
 
-            UnorderedRoute tempRoute = new UnorderedRoute(startLocation, locations);
+            IPlannable tempRoute = new TestPlannable(startLocation, locations);
 
-            Assert.AreEqual(4, tempRoute.LocationsCount);
+            Assert.AreEqual(4, tempRoute.LocationCount);
         }
     }
 }

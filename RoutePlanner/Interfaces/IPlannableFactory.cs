@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 
 namespace RouteOptimization.RoutePlanner.Interfaces
 {
-    public interface IRoutePlanner
+    public interface IPlannableFactory
     {
-        IPlannable PlanRoute(IPlannable route);
+        IPlannable NewIPlannable(ImmutableList<ILocateable> path);
     }
 }

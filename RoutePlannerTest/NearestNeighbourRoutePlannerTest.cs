@@ -12,8 +12,9 @@ namespace RoutePlannerTest
     public class NearestNeighbourRoutePlannerTest
     {
         private readonly IDistanceCalculator _testCalculator = new TestDistanceCalculator();
+        private readonly TestPlannableFactory _testFactory = new TestPlannableFactory();
         private ImmutableList<ILocateable> _locations = ImmutableList<ILocateable>.Empty;
-        private OrderedRoute _orderedRoute;
+        private IPlannable _orderedRoute;
         private ILocateable _startLocation = new TestLocation();
 
         [TestInitialize]
@@ -33,13 +34,13 @@ namespace RoutePlannerTest
             locationsInOrder = locationsInOrder.Add(locationThree);
             locationsInOrder = locationsInOrder.Add(locationOne);
             
-            _orderedRoute = new OrderedRoute(_startLocation, locationsInOrder);
+            _orderedRoute = new TestPlannable(_startLocation, locationsInOrder);
         }
         
         [TestMethod]
         public void InheritanceTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator, _testFactory);
 
             Assert.IsInstanceOfType(temp, typeof(IRoutePlanner));
         }
@@ -47,13 +48,13 @@ namespace RoutePlannerTest
         [TestMethod]
         public void RoutePlannerCorrectEndLocationTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator, _testFactory);
 
-            UnorderedRoute routeToOrder = new UnorderedRoute(_startLocation, _locations);
+            IPlannable routeToOrder = new TestPlannable(_startLocation, _locations);
 
-            OrderedRoute route = temp.PlanRoute(routeToOrder);
+            IPlannable route = temp.PlanRoute(routeToOrder);
 
-            Assert.AreEqual(route.GetLocation(2), _orderedRoute.GetLocation(2));
+            Assert.AreEqual(route.Locations[2], _orderedRoute.Locations[2]);
 
         }
     }
