@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 
-namespace RouteOptimization.RoutePlanner
+namespace RouteOptimization.RoutePlanner.Datastructures
 {
     public class OrderedRoute : Route
     {
@@ -11,11 +11,11 @@ namespace RouteOptimization.RoutePlanner
         {
         }
 
-        public OrderedRoute(ImmutableList<Location> path) : base(path[0], path.Remove(path[0]))
+        public OrderedRoute(ImmutableList<ILocateable> path) : base(path[0], path.Remove(path[0]))
         {
         }
 
-        public OrderedRoute(Location startLocation, ImmutableList<Location> locations) : base(startLocation, locations)
+        public OrderedRoute(ILocateable startLocation, ImmutableList<ILocateable> locations) : base(startLocation, locations)
         {
         }
 

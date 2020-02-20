@@ -2,11 +2,11 @@ using System;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.Interfaces;
 
-namespace RoutePlannerTest
+namespace RoutePlannerTest.InterfaceImplementations
 {
     public class TestDistanceCalculator : IDistanceCalculator
     {
-        public double CalculateDistanceBetweenLocations(Location firstLocation, Location secondLocation)
+        public double CalculateDistanceBetweenLocations(ILocateable firstLocation, ILocateable secondLocation)
         {
             double firstDistance = CalculateDistanceFromZero(firstLocation.Longtitude, firstLocation.Latitude);
             double secondDistance = CalculateDistanceFromZero(secondLocation.Longtitude, secondLocation.Latitude);

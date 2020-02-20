@@ -4,6 +4,7 @@ using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner;
 using RouteOptimization.RoutePlanner.Datastructures;
+using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest
 {
@@ -31,12 +32,12 @@ namespace RoutePlannerTest
         [TestMethod]
         public void LocationsCountTest()
         {
-            Location startLocation = new Location();
-            Location locationOne = new Location();
-            Location locationTwo = new Location();
-            Location locationThree = new Location();
+            ILocateable startLocation = new TestLocation();
+            ILocateable locationOne = new TestLocation();
+            ILocateable locationTwo = new TestLocation();
+            ILocateable locationThree = new TestLocation();
             
-            ImmutableList<Location> locations = ImmutableList<Location>.Empty;
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
             locations = locations.Add(locationOne);
             locations = locations.Add(locationTwo);
             locations = locations.Add(locationThree);

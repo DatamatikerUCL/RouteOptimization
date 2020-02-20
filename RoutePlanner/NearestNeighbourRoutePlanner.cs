@@ -18,7 +18,7 @@ namespace RouteOptimization.RoutePlanner
         {
             var current = route.StartLocation;
             var remaining = route.Locations.Remove(route.StartLocation);
-            var path = ImmutableList<Location>.Empty.Add(route.StartLocation);
+            var path = ImmutableList<ILocateable>.Empty.Add(route.StartLocation);
 
             while (!remaining.IsEmpty)
             {
@@ -33,16 +33,16 @@ namespace RouteOptimization.RoutePlanner
             return new OrderedRoute(path);
         }
 
-        private Location Closest(Location current, ImmutableList<Location> remaining)
+        private ILocateable Closest(ILocateable current, ImmutableList<ILocateable> remaining)
         {
-            double TOLERANCE = 0.01;
+            double tolerance = 0.01;
             double smallestDistance = 0;
-            Location nextLocation = current;
+            ILocateable nextLocation = current;
 
             foreach (var location in remaining)
             {
                 double tempDistance = _distanceCalculator.CalculateDistanceBetweenLocations(current, location);
-                if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < TOLERANCE)
+                if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < tolerance)
                 {
                     smallestDistance = tempDistance;
                     nextLocation = location;

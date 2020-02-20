@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 
-namespace RouteOptimization.RoutePlanner
+namespace RouteOptimization.RoutePlanner.Datastructures
 {
     public class UnorderedRoute : Route
     {
@@ -11,7 +11,7 @@ namespace RouteOptimization.RoutePlanner
         {
         }
 
-        public UnorderedRoute(Location startLocation, ImmutableList<Location> locations) : base(startLocation, locations)
+        public UnorderedRoute(ILocateable startLocation, ImmutableList<ILocateable> locations) : base(startLocation, locations)
         {
         }
     }

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 
-namespace RouteOptimization.RoutePlanner
+namespace RouteOptimization.RoutePlanner.Datastructures
 {
     public abstract class Route
     {
         protected Route()
         {
-            Locations = ImmutableList<Location>.Empty;
+            Locations = ImmutableList<ILocateable>.Empty;
         }
 
-        protected Route(Location startLocation, ImmutableList<Location> locations)
+        protected Route(ILocateable startLocation, ImmutableList<ILocateable> locations)
         {
 
-            Locations = ImmutableList<Location>.Empty.Add(startLocation);
+            Locations = ImmutableList<ILocateable>.Empty.Add(startLocation);
 
             foreach (var location in locations)
             {
@@ -25,8 +25,8 @@ namespace RouteOptimization.RoutePlanner
 
         }
 
-        public Location StartLocation => Locations[0];
-        public ImmutableList<Location> Locations { get; }
+        public ILocateable StartLocation => Locations[0];
+        public ImmutableList<ILocateable> Locations { get; }
 
         public int LocationsCount => Locations.Count;
     }

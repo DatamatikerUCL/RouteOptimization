@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.Interfaces;
+using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest
 {
@@ -11,23 +12,23 @@ namespace RoutePlannerTest
     public class NearestNeighbourRoutePlannerTest
     {
         private readonly IDistanceCalculator _testCalculator = new TestDistanceCalculator();
-        private ImmutableList<Location> _locations = ImmutableList<Location>.Empty;
+        private ImmutableList<ILocateable> _locations = ImmutableList<ILocateable>.Empty;
         private OrderedRoute _orderedRoute;
-        private Location _startLocation = new Location();
+        private ILocateable _startLocation = new TestLocation();
 
         [TestInitialize]
         public void SetupLocations()
         {
-            _startLocation = new Location("startlokation", 0, 0);
-            Location locationOne = new Location("1", 1, 12);
-            Location locationTwo = new Location("2", 0, 2);
-            Location locationThree = new Location("3", 3, 4);
+            _startLocation = new TestLocation(0, 0);
+            ILocateable locationOne = new TestLocation(1, 12);
+            ILocateable locationTwo = new TestLocation(0, 2);
+            ILocateable locationThree = new TestLocation(3, 4);
 
             _locations = _locations.Add(locationOne); // 12.04
             _locations =_locations.Add(locationTwo); // 2
             _locations = _locations.Add(locationThree); // 3.6
 
-            ImmutableList<Location> locationsInOrder = ImmutableList<Location>.Empty;
+            ImmutableList<ILocateable> locationsInOrder = ImmutableList<ILocateable>.Empty;
             locationsInOrder = locationsInOrder.Add(locationTwo);
             locationsInOrder = locationsInOrder.Add(locationThree);
             locationsInOrder = locationsInOrder.Add(locationOne);

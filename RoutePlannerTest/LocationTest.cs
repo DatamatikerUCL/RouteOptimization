@@ -1,6 +1,7 @@
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner.Datastructures;
+using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest
 {
@@ -10,24 +11,15 @@ namespace RoutePlannerTest
         [TestMethod]
         public void CreationTest()
         {
-            Location tempLocation = new Location();
+            ILocateable tempLocation = new TestLocation();
             Assert.IsNotNull(tempLocation);
-        }
-
-        [TestMethod]
-        public void AddressPropertyTest()
-        {
-            string addressString = "TestAddress 40, 2457 Testington";
-            Location tempLocation = new Location(addressString);
-
-            Assert.AreEqual(tempLocation.Address, addressString);
         }
 
         [TestMethod]
         public void LatitudePropertyTest()
         {
             double latitude = 209135.573190;
-            Location tempLocation = new Location("rcgoaeduh", latitude);
+            ILocateable tempLocation = new TestLocation(latitude);
 
             Assert.AreEqual(tempLocation.Latitude, latitude, 0.1);
         }
@@ -36,7 +28,7 @@ namespace RoutePlannerTest
         public void LongtitudePropertyTest()
         {
             double longtitude = 75319642091357.7531902;
-            Location tempLocation = new Location("%735110246HDIU", 7531902.75319, longtitude);
+            ILocateable tempLocation = new TestLocation(64209024.420, longtitude);
 
             Assert.AreEqual(tempLocation.Longtitude, longtitude, 0.01);
         }
