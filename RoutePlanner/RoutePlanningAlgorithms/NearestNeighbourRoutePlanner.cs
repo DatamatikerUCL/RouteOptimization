@@ -3,20 +3,18 @@ using RouteOptimization.RoutePlanner.Interfaces;
 using System;
 using System.Collections.Immutable;
 
-namespace RouteOptimization.RoutePlanner
+namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms
 {
     public class NearestNeighbourRoutePlanner : IRoutePlanner
     {
         private readonly IDistanceCalculator _distanceCalculator;
-        private readonly IPlannableFactory _iPlannableFactory;
 
-        public NearestNeighbourRoutePlanner(IDistanceCalculator calculator, IPlannableFactory factory)
+        public NearestNeighbourRoutePlanner(IDistanceCalculator calculator)
         {
             _distanceCalculator = calculator;
-            _iPlannableFactory = factory;
         }
 
-        public IPlannable PlanRoute(IPlannable route)
+        public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
         {
             var current = route.StartLocation;
             var remaining = route.Locations.Remove(route.StartLocation);
@@ -32,7 +30,7 @@ namespace RouteOptimization.RoutePlanner
                 current = next;
             }
 
-            return _iPlannableFactory.NewIPlannable(path);
+            return factory.NewIPlannable(path);
         }
 
         private ILocateable Closest(ILocateable current, ImmutableList<ILocateable> remaining)

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RouteOptimization.RoutePlanner;
+using RouteOptimization.RoutePlanner.RoutePlanningAlgorithms;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.Interfaces;
 using RoutePlannerTest.InterfaceImplementations;
@@ -40,7 +40,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void InheritanceTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator, _testFactory);
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
 
             Assert.IsInstanceOfType(temp, typeof(IRoutePlanner));
         }
@@ -48,11 +48,11 @@ namespace RoutePlannerTest
         [TestMethod]
         public void RoutePlannerCorrectEndLocationTest()
         {
-            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator, _testFactory);
+            NearestNeighbourRoutePlanner temp = new NearestNeighbourRoutePlanner(_testCalculator);
 
             IPlannable routeToOrder = new TestPlannable(_startLocation, _locations);
 
-            IPlannable route = temp.PlanRoute(routeToOrder);
+            IPlannable route = temp.PlanRoute(routeToOrder, _testFactory);
 
             Assert.AreEqual(route.Locations[2], _orderedRoute.Locations[2]);
 

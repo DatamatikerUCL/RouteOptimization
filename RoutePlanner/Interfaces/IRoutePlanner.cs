@@ -6,6 +6,6 @@ namespace RouteOptimization.RoutePlanner.Interfaces
 {
     public interface IRoutePlanner
     {
-        IPlannable PlanRoute(IPlannable route);
+        IPlannable PlanRoute(IPlannable route, IPlannableFactory factory);
     }
 }
