@@ -1,4 +1,6 @@
 ﻿using Android.OS;
+using Microsoft.Web.XmlTransform;
+using Plugin.Geolocator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,12 +19,12 @@ namespace RelateIT
 
         public MainPage()
         {
-            Position position = new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude);
+            Position position = new Position(/*LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude*/55.42068628, 10.35155292);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan);
 
+            CenterOnUserLocation();
 
-            OnInitializeMap();
 
             InitializeComponent();
             if (Device.Idiom == TargetIdiom.Phone)
@@ -38,19 +40,14 @@ namespace RelateIT
 
         }
 
-        public void OnInitializeMap()
+        public async void CenterOnUserLocation()
         {
-            map = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude), Distance.FromKilometers(5)))
-            {
-                IsShowingUser = true,
-            };
 
-            map2 = new Xamarin.Forms.Maps.Map(MapSpan.FromCenterAndRadius(new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude), Distance.FromKilometers(5)))
-            {
-                IsShowingUser = true,
-            };
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync();
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromKilometers(5)));
         }
 
-        
+
     }
 }
