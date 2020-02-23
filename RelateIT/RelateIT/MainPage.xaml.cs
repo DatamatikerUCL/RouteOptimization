@@ -19,9 +19,6 @@ namespace RelateIT
 
         public MainPage()
         {
-            Position position = new Position(/*LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude*/55.42068628, 10.35155292);
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan);
 
 
 
