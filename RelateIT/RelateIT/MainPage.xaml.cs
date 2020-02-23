@@ -20,8 +20,6 @@ namespace RelateIT
         public MainPage()
         {
 
-
-
             InitializeComponent();
 
             CenterOnUserLocation();
