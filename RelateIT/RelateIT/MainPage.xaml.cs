@@ -23,10 +23,12 @@ namespace RelateIT
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan);
 
-            CenterOnUserLocation();
 
 
             InitializeComponent();
+
+            CenterOnUserLocation();
+
             if (Device.Idiom == TargetIdiom.Phone)
             {
                 PhoneView.IsVisible = true;
