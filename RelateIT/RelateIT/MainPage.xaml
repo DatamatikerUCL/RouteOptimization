@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
              mc:Ignorable="d"
+             Title="RelateIT"
              x:Class="RelateIT.MainPage">
 
 
@@ -21,8 +22,7 @@
             </Grid.ColumnDefinitions>
             <maps:Map x:Name="map" MapType="Street" IsShowingUser="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" />
 
-            <Button Text="Ændre rute" Margin="20, 20" Grid.Row="1" Grid.Column="0"  HorizontalOptions="Center"/>
-            <Button Text="Gem rute" Margin="20, 20" Grid.Row="1" Grid.Column="1"  HorizontalOptions="Center"/>
+            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0"  HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
         </Grid>
 
         <Grid x:Name="TabletView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -40,8 +40,7 @@
             </Grid.ColumnDefinitions>
 
             <maps:Map x:Name="map2" MapType="Street" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2"/>
-            <Button Text="Ændre rute" Margin="20, 20" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center"/>
-            <Button Text="Gem rute" Margin="20, 20" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
         </Grid>
     </Grid>
 
