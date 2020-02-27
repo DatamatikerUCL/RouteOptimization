@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
+             mc:Ignorable="d"
+             Title="RelateIT"
+             x:Class="RelateIT.MainPage">
+
+
+
+    <Grid>
+        <Grid x:Name="PhoneView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <maps:Map x:Name="map" MapType="Street" IsShowingUser="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" />
+
+            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0"  HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
+        </Grid>
+
+        <Grid x:Name="TabletView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*">
+                </RowDefinition>
+                <RowDefinition Height="*">
+                </RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*">
+                </ColumnDefinition>
+                <ColumnDefinition Width="*">
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <maps:Map x:Name="map2" MapType="Street" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
+        </Grid>
+    </Grid>
+
+
+
+
+</ContentPage>
