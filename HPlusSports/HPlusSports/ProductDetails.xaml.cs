@@ -16,5 +16,11 @@ namespace HPlusSports
         {
             InitializeComponent();
         }
+
+        public ProductDetails(Services.Product product)
+        {
+            InitializeComponent();
+            BindingContext = product;
+        }
     }
 }
