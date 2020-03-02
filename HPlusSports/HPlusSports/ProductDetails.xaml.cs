@@ -22,5 +22,11 @@ namespace HPlusSports
             InitializeComponent();
             BindingContext = product;
         }
+
+        private void orderBtn_Clicked(object sender, EventArgs e)
+        {
+            Services.Product p = BindingContext as Services.Product;
+            Navigation.PushAsync(new OrderForm(new Services.Order { ProductName = p.Name, Quantity = 1 }));
+        }
     }
 }

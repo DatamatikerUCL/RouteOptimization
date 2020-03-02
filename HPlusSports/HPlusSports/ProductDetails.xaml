@@ -22,7 +22,7 @@
             <Image Source="{Binding Path=ImageUri}" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="Start"></Image>
 
             <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Start">
-                <Button Text="Order" x:Name="orderBtn" 
+                <Button Text="Order" x:Name="orderBtn" Clicked="orderBtn_Clicked" 
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.25}"></Button>
                 <Button Text="Favorite"
                         RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView ,ElementName=orderBtn, Property=X, Constant=200}">

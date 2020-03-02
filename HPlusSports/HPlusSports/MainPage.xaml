@@ -5,10 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="HPlusSports.MainPage">
-
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Button Text="View Product Details" Clicked="Button_Clicked"></Button>
-    </StackLayout>
-
+    <CollectionView ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" Span="2"></GridItemsLayout>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Orientation="Vertical">
+                    <Image Source="{Binding Path=ImageUri}" Aspect="AspectFit" HorizontalOptions="Center" ></Image>
+                    <Label Text="{Binding Path=Name}" FontSize="Large"></Label>
+                    <!--Label Text="{Binding Path=Description}" FontSize="Small"></-->
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        
+    </CollectionView>
 </ContentPage>

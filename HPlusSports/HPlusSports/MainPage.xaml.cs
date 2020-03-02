@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HPlusSports.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,9 +19,17 @@ namespace HPlusSports
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Navigation.PushAsync(new ProductDetails());
+            Services.Product product = e.CurrentSelection.First() as Services.Product;
+            Navigation.PushAsync(new ProductDetails(product));
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            var products = await ProductService.GetProductsAsync();
+            BindingContext = products;
         }
     }
 }
