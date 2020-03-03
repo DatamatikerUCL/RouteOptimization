@@ -7,7 +7,7 @@
              x:Class="HPlusSports.MainPage">
     <CollectionView ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
         <CollectionView.ItemsLayout>
-            <GridItemsLayout Orientation="Vertical" Span="2"></GridItemsLayout>
+            <GridItemsLayout VerticalItemSpacing="20" HorizontalItemSpacing="10" Orientation="Vertical" Span="3"></GridItemsLayout>
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
