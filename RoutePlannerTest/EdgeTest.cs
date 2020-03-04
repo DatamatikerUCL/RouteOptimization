@@ -26,5 +26,23 @@ namespace RoutePlannerTest
 
             Assert.AreEqual(startLocation, temp.Start);
         }
+
+        [TestMethod]
+        public void EndPropertyTest()
+        {
+            ILocateable startLocation = new TestLocation(953.751, 975373.2091);
+            ILocateable endLocation = new TestLocation(091573.091757, 095353002.055302246);
+
+            Edge temp = new Edge(startLocation, endLocation);
+
+            Assert.AreEqual(endLocation, temp.End);
+        }
+
+        [TestMethod]
+        public void StartReadOnlyProperty()
+        {
+            ILocateable startLocation = new TestLocation(9757.751, 9573053);
+            Edge temp = new Edge();
+        }
     }
 }
