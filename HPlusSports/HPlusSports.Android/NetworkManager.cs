@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Net;
+
 [assembly:Xamarin.Forms.Dependency(typeof(HPlusSports.Droid.NetworkManager))]
 namespace HPlusSports.Droid
 {

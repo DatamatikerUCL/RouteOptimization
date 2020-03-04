@@ -28,5 +28,11 @@ namespace HPlusSports
             Services.Product p = BindingContext as Services.Product;
             Navigation.PushAsync(new OrderForm(new Services.Order { ProductName = p.Name, Quantity = 1 }));
         }
+
+        private void favoriteBtn_Clicked(object sender, EventArgs e)
+        {
+            Services.Product p = BindingContext as Services.Product;
+            Services.ProductService.WishList.Add(p);
+        }
     }
 }

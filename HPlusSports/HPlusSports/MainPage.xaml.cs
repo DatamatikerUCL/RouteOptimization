@@ -32,8 +32,8 @@ namespace HPlusSports
             INetworkManager manager = DependencyService.Get<INetworkManager>();
             if (manager != null && manager.IsNetWorkConnected())
             {
-                var products = await ProductService.GetProductsAsync();
-                BindingContext = products;
+                    var products = await ProductService.GetProductsAsync();
+                    BindingContext = products;               
             }
             else
             {
