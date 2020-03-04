@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm;
@@ -36,13 +37,6 @@ namespace RoutePlannerTest
             Edge temp = new Edge(startLocation, endLocation);
 
             Assert.AreEqual(endLocation, temp.End);
-        }
-
-        [TestMethod]
-        public void StartReadOnlyProperty()
-        {
-            ILocateable startLocation = new TestLocation(9757.751, 9573053);
-            Edge temp = new Edge();
         }
     }
 }

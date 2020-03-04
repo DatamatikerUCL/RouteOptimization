@@ -61,6 +61,15 @@ namespace RoutePlannerTest
         {
             AdjacencyList temp = new AdjacencyList(testRoute, testDistanceCalculator);
 
+            for (int i = 0; i < temp.Matrix.Count; i++)
+            {
+                for (int j = 0; j < temp.Matrix[i].Count; j++)
+                {
+                    System.Console.Write(temp.Matrix[i][j]);
+                }
+                System.Console.WriteLine();
+            }
+
             Assert.AreEqual(0, temp.Matrix[1][1]);
         }
     }

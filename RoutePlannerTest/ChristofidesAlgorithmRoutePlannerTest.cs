@@ -18,6 +18,5 @@ namespace RoutePlannerTest
 
             Assert.IsInstanceOfType(tempPlanner, typeof(IRoutePlanner));
         }
-
     }
 }

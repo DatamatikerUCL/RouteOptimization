@@ -13,7 +13,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             End = endLocation;
         }
 
-        public ILocateable Start { get; set; }
-        public ILocateable End {get; set; }
+        public ILocateable Start { get; }
+        public ILocateable End {get; }
     }
 }
