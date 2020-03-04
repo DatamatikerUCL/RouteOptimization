@@ -4,13 +4,13 @@ using RouteOptimization.RoutePlanner.Datastructures;
 
 namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
-    public class AdjacencyList
+    public class AdjacencyMatrix
     {
         private readonly Interfaces.IDistanceCalculator _calculator;
         private ImmutableList<ImmutableList<double>> _matrix;
         public ImmutableList<ImmutableList<double>> Matrix { get => _matrix; }
 
-        public AdjacencyList(IPlannable route, Interfaces.IDistanceCalculator calculator)
+        public AdjacencyMatrix(IPlannable route, Interfaces.IDistanceCalculator calculator)
         {
             _calculator = calculator;
 

@@ -22,7 +22,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         {
             int amountOfVertexes = route.LocationCount;
 
-            AdjacencyList routeTree = new AdjacencyList(route, _calculator);
+            AdjacencyMatrix routeTree = new AdjacencyMatrix(route, _calculator);
 
             return Prim.PrimMinimumSpanningTree(routeTree, amountOfVertexes, route.Locations);
         }

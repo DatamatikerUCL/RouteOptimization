@@ -5,7 +5,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 {
     public static class Prim
     {
-        public static MinimumSpanningTree PrimMinimumSpanningTree(AdjacencyList routeTree, int amountOfVertexes, ImmutableList<ILocateable> locations)
+        public static MinimumSpanningTree PrimMinimumSpanningTree(AdjacencyMatrix routeTree, int amountOfVertexes, ImmutableList<ILocateable> locations)
         {
             int[] parent = new int[amountOfVertexes];
             double[] key = new double[amountOfVertexes];
@@ -37,7 +37,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
                 }
             }
 
-            for (int i = 0; i < amountOfVertexes; i++)
+            for (int i = 1; i < amountOfVertexes; i++)
             {
                 ILocateable startLocation = locations[parent[i]];
                 ILocateable endLocation = locations[i];

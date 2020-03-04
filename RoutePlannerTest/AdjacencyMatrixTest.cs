@@ -8,7 +8,7 @@ using RoutePlannerTest.InterfaceImplementations;
 namespace RoutePlannerTest
 {
     [TestClass]
-    public class AdjacencyListTest
+    public class AdjacencyMatrixTest
     {
         private IPlannable testRoute;
         private IDistanceCalculator testDistanceCalculator = new TestDistanceCalculator();
@@ -30,7 +30,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void CreationTest()
         {
-            AdjacencyList temp = new AdjacencyList(new TestPlannable(), testDistanceCalculator);
+            AdjacencyMatrix temp = new AdjacencyMatrix(new TestPlannable(), testDistanceCalculator);
 
             Assert.IsNotNull(temp);
         }
@@ -39,7 +39,7 @@ namespace RoutePlannerTest
         public void SquareTest()
         {
             
-            AdjacencyList temp = new AdjacencyList(testRoute, testDistanceCalculator);
+            AdjacencyMatrix temp = new AdjacencyMatrix(testRoute, testDistanceCalculator);
 
             Assert.AreEqual(temp.Matrix.Count, temp.Matrix[0].Count);
         }
@@ -47,7 +47,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void WeightTest1()
         {
-            AdjacencyList temp = new AdjacencyList(testRoute, testDistanceCalculator);
+            AdjacencyMatrix temp = new AdjacencyMatrix(testRoute, testDistanceCalculator);
 
             Assert.AreEqual(
                 temp.Matrix[1][0],
@@ -59,16 +59,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void WeightTestZeroDiagonal()
         {
-            AdjacencyList temp = new AdjacencyList(testRoute, testDistanceCalculator);
-
-            for (int i = 0; i < temp.Matrix.Count; i++)
-            {
-                for (int j = 0; j < temp.Matrix[i].Count; j++)
-                {
-                    System.Console.Write(temp.Matrix[i][j]);
-                }
-                System.Console.WriteLine();
-            }
+            AdjacencyMatrix temp = new AdjacencyMatrix(testRoute, testDistanceCalculator);
 
             Assert.AreEqual(0, temp.Matrix[1][1]);
         }

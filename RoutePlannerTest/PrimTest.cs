@@ -10,7 +10,7 @@ namespace RoutePlannerTest
     public class PrimTest
     {
         private ImmutableList<ILocateable> _locations = ImmutableList<ILocateable>.Empty;
-        private AdjacencyList _adjacencyList;
+        private AdjacencyMatrix _adjacencyMatrix;
 
         [TestInitialize]
         public void Setup()
@@ -25,13 +25,31 @@ namespace RoutePlannerTest
             _locations = _locations.Add(locationThree);
             _locations = _locations.Add(locationFour);
 
-            _adjacencyList = new AdjacencyList(new TestPlannable(_locations), new TestDistanceCalculator());
+            _adjacencyMatrix = new AdjacencyMatrix(new TestPlannable(_locations), new TestDistanceCalculator());
         }
 
         [TestMethod]
         public void PrimMinimumSpanningTreeTest()
         {
-            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyList, _locations.Count, _locations);
+            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+
+            Assert.AreEqual(_locations[0], temp.Edges[0].Start);
+        }
+
+        [TestMethod]
+        public void SizeTest()
+        {
+            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+
+            Assert.AreEqual(3, temp.Weights.Count);
+        }
+
+        [TestMethod]
+        public void WeightTest()
+        {
+            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+
+            Assert.AreEqual(_adjacencyMatrix.Matrix[0][1], temp.Weights[0]);
         }
     }
 }
