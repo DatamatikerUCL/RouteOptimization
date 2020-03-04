@@ -2,9 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -14,10 +18,13 @@
 
   <ItemGroup>
     <Reference Include="RelateIT">
-      <HintPath>..\RelateIT\RelateIT\bin\Debug\netstandard2.0\RelateIT.dll</HintPath>
+      <HintPath>..\RelateIT\RelateIT\obj\Debug\netstandard2.0\RelateIT.dll</HintPath>
     </Reference>
     <Reference Include="RelateIT.Android">
       <HintPath>..\RelateIT\RelateIT.Android\bin\Debug\RelateIT.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="RoutePlanner">
+      <HintPath>..\RoutePlanner\obj\Debug\netcoreapp3.1\RoutePlanner.dll</HintPath>
     </Reference>
   </ItemGroup>
 

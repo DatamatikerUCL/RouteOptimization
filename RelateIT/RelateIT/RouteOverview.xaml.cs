@@ -13,10 +13,10 @@ namespace RelateIT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage
     {
-        public IList<Route> Routes;
+        public IList<RoutePlanned> Routes;
         public RouteOverview()
         {
-            Routes = new List<Route>();
+            Routes = new List<RoutePlanned>();
             InitializeComponent();
             PopulateListView();
             
@@ -25,13 +25,7 @@ namespace RelateIT
 
         public void PopulateListView()
         {
-            Routes.Add(new Route
-            {
-                Name = "Test Route",
-                StartLocation = new Point(55.499680, 10.096780),
-                EndLocation = new Point(55.403450, 10.379370),
-                EstimatedTime = 4
-            });
+
 
             BindingContext = this;
         }
