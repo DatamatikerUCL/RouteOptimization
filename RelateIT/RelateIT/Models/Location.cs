@@ -11,10 +11,13 @@ namespace RelateIT.Models
 
         public double Longtitude { get; }
 
-        public Location(double _latitude, double _longitude)
+        public string Adress { get; set; }
+
+        public Location(double _latitude, double _longitude, string _adress)
         {
             Latitude = _latitude;
             Longtitude = _longitude;
+            Adress = _adress;
         }
     }
 }
