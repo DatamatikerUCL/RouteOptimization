@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 using RouteOptimization.RoutePlanner.Interfaces;
 
@@ -14,6 +17,8 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
         {
             MinimumSpanningTree minimumRouteTree = CreateMinimumSpanningTree(route);
+
+            List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
 
             throw new System.NotImplementedException();
         }

@@ -9,6 +9,7 @@ namespace RoutePlannerTest
     [TestClass]
     public class ChristofidesAlgorithmRoutePlannerTest
     {
+        
         private readonly IDistanceCalculator _calculator = new TestDistanceCalculator();
 
         [TestMethod]
@@ -17,6 +18,12 @@ namespace RoutePlannerTest
             IRoutePlanner tempPlanner = new ChristofidesAlgorithmRoutePlanner(_calculator);
 
             Assert.IsInstanceOfType(tempPlanner, typeof(IRoutePlanner));
+        }
+
+        [TestMethod]
+        public void CorrectEndlocationTest()
+        {
+
         }
     }
 }

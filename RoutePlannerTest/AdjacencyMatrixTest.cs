@@ -27,6 +27,7 @@ namespace RoutePlannerTest
 
             testRoute = new TestPlannable(tempList);
         }
+        
         [TestMethod]
         public void CreationTest()
         {
