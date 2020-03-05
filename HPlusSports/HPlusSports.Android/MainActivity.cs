@@ -30,5 +30,6 @@ namespace HPlusSports.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

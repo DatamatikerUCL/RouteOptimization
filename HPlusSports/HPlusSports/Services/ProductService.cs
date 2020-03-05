@@ -63,9 +63,11 @@ namespace HPlusSports.Services
         public static async Task LoadWishList()
         {
             WishList = new List<Product>();
+           
 
             var path = Path.Combine(FileSystem.AppDataDirectory, WISHLIST_FILE);
-
+            File.Delete(path);
+            
             if (File.Exists(path))
             {
                 using (var sReader = new StreamReader(path))
@@ -85,6 +87,12 @@ namespace HPlusSports.Services
             }
           
 
+        }
+
+        internal static void RemoveProductFromWishList(Product p)
+        {
+            Product temp = WishList.Find(item => item.Name == p.Name);
+            WishList.Remove(temp);
         }
     }
 }
