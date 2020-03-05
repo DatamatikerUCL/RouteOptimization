@@ -31,7 +31,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void PrimMinimumSpanningTreeTest()
         {
-            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+            Graph temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
 
             Assert.AreEqual(_locations[0], temp.Edges[0].Start);
         }
@@ -39,7 +39,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void SizeTest()
         {
-            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+            Graph temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
 
             Assert.AreEqual(3, temp.Weights.Count);
         }
@@ -47,7 +47,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void WeightTest()
         {
-            MinimumSpanningTree temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
+            Graph temp = Prim.PrimMinimumSpanningTree(_adjacencyMatrix, _locations.Count, _locations);
 
             Assert.AreEqual(_adjacencyMatrix.Matrix[0][1], temp.Weights[0]);
         }

@@ -16,14 +16,18 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
         public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
         {
-            MinimumSpanningTree minimumRouteTree = CreateMinimumSpanningTree(route);
+            Graph minimumRouteTree = CreateMinimumSpanningTree(route);
 
             List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
+
+            AdjacencyMatrix subGraph = new AdjacencyMatrix(oddDegreeLocations.ToImmutableList(), _calculator);
+
+            Graph minimumWeightPerfectMatching = subGraph.GetMinimumWeightPerfectMatching();
 
             throw new System.NotImplementedException();
         }
 
-        private MinimumSpanningTree CreateMinimumSpanningTree(IPlannable route)
+        private Graph CreateMinimumSpanningTree(IPlannable route)
         {
             int amountOfVertexes = route.LocationCount;
 

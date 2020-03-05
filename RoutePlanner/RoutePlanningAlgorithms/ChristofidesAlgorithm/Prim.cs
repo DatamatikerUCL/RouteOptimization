@@ -5,12 +5,12 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 {
     public static class Prim
     {
-        public static MinimumSpanningTree PrimMinimumSpanningTree(AdjacencyMatrix routeTree, int amountOfVertexes, ImmutableList<ILocateable> locations)
+        public static Graph PrimMinimumSpanningTree(AdjacencyMatrix routeTree, int amountOfVertexes, ImmutableList<ILocateable> locations)
         {
             int[] parent = new int[amountOfVertexes];
             double[] key = new double[amountOfVertexes];
             bool[] minimumSpanningTreeSet = new bool[amountOfVertexes];
-            MinimumSpanningTree returnTree = new MinimumSpanningTree();
+            Graph returnTree = new Graph();
 
             for (int i = 0; i < amountOfVertexes; i++)
             {

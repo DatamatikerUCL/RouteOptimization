@@ -12,7 +12,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void CreationTest()
         {
-            MinimumSpanningTree temp = new MinimumSpanningTree();
+            Graph temp = new Graph();
 
             Assert.IsNotNull(temp);
         }
@@ -20,7 +20,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void WeightsPropertyTest()
         {
-            MinimumSpanningTree temp = new MinimumSpanningTree();
+            Graph temp = new Graph();
 
             List<double> doubles = new List<double>();
 
@@ -36,7 +36,7 @@ namespace RoutePlannerTest
         [TestMethod]
         public void EdgesPropertyTest()
         {
-            MinimumSpanningTree temp = new MinimumSpanningTree();
+            Graph temp = new Graph();
 
             List<Edge> edges = new List<Edge>();
             Edge edgeOne = new Edge();
@@ -61,7 +61,7 @@ namespace RoutePlannerTest
             ILocateable locationFour = new TestLocation();
             ILocateable locationFive = new TestLocation();
 
-            MinimumSpanningTree temp = new MinimumSpanningTree();
+            Graph temp = new Graph();
 
             List<Edge> edges = new List<Edge>();
             Edge edgeOne = new Edge(locationOne, locationTwo);
@@ -90,7 +90,7 @@ namespace RoutePlannerTest
             ILocateable locationFour = new TestLocation();
             ILocateable locationFive = new TestLocation();
 
-            MinimumSpanningTree temp = new MinimumSpanningTree();
+            Graph temp = new Graph();
 
             List<Edge> edges = new List<Edge>()
             {
@@ -106,5 +106,6 @@ namespace RoutePlannerTest
 
             Assert.AreEqual(0, edgesWithOddDegrees.Count % 2);
         }
+
     }
 }

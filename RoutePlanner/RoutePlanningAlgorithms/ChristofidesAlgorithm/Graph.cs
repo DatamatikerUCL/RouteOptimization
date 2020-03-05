@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
-    public class MinimumSpanningTree
+    public class Graph
     {
         public List<Edge> Edges { get; set; }
         public List<double> Weights { get; set; }
 
-        public MinimumSpanningTree()
+        public Graph()
         {
             Edges = new List<Edge>();
             Weights = new List<double>();

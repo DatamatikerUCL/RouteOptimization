@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
 
@@ -15,6 +16,13 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             _calculator = calculator;
 
             SetupAdjacencyMatrix(route.Locations);
+        }
+
+        public AdjacencyMatrix(ImmutableList<ILocateable> locations, Interfaces.IDistanceCalculator calculator)
+        {
+            _calculator = calculator;
+
+            SetupAdjacencyMatrix(locations);
         }
 
         private void SetupAdjacencyMatrix(ImmutableList<ILocateable> locations)
@@ -45,6 +53,11 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             {
                 return _calculator.CalculateDistanceBetweenLocations(locateable1, locateable2);
             }
+        }
+
+        public Graph GetMinimumWeightPerfectMatching()
+        {
+            throw new NotImplementedException();
         }
     }
 
