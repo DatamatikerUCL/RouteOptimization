@@ -13,10 +13,10 @@ namespace RelateIT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage
     {
-        public IList<RoutePlanned> Routes;
+        public IList<Route> Routes;
         public RouteOverview()
         {
-            Routes = new List<RoutePlanned>();
+            Routes = new List<Route>();
             InitializeComponent();
             PopulateListView();
             

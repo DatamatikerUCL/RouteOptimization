@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace RelateIT.Models
 {
-    public class RoutePlanned : IPlannable
+    public class Route : IPlannable
     {
         public string Name { get; set; }
 
@@ -17,11 +17,17 @@ namespace RelateIT.Models
 
         public ILocateable StartLocation {get => Locations[0]; }
 
+        public DateTime DateOfExecution { get; set; }
 
-        public RoutePlanned(string _name, ImmutableList<ILocateable> _locations, int _locationCount, ILocateable _startLocation)
+        public double EstimatedCompletionTime { get; set; }
+
+
+        public Route(string _name, ImmutableList<ILocateable> _locations, int _locationCount, ILocateable _startLocation, DateTime _dateOfExecution, double _estimatedCompletionTime)
         {
             Name = _name;
             Locations = _locations;
+            DateOfExecution = _dateOfExecution;
+            EstimatedCompletionTime = _estimatedCompletionTime;
 
         }
     }
