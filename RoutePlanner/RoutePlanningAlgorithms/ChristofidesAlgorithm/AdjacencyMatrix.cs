@@ -7,35 +7,38 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 {
     public class AdjacencyMatrix
     {
+        private ImmutableList<ILocateable> _locations = ImmutableList<ILocateable>.Empty;
         private readonly Interfaces.IDistanceCalculator _calculator;
         private ImmutableList<ImmutableList<double>> _matrix;
         public ImmutableList<ImmutableList<double>> Matrix { get => _matrix; }
 
         public AdjacencyMatrix(IPlannable route, Interfaces.IDistanceCalculator calculator)
         {
+            _locations = route.Locations;
             _calculator = calculator;
 
-            SetupAdjacencyMatrix(route.Locations);
+            SetupAdjacencyMatrix();
         }
 
         public AdjacencyMatrix(ImmutableList<ILocateable> locations, Interfaces.IDistanceCalculator calculator)
         {
+            _locations = locations;
             _calculator = calculator;
 
-            SetupAdjacencyMatrix(locations);
+            SetupAdjacencyMatrix();
         }
 
-        private void SetupAdjacencyMatrix(ImmutableList<ILocateable> locations)
+        private void SetupAdjacencyMatrix()
         {
             _matrix = ImmutableList<ImmutableList<double>>.Empty;
             
-            for (int i = 0; i < locations.Count; i++)
+            for (int i = 0; i < _locations.Count; i++)
             {
                 ImmutableList<double> tempList = ImmutableList<double>.Empty;
 
-                for (int j = 0; j < locations.Count; j++)
+                for (int j = 0; j < _locations.Count; j++)
                 {
-                    tempList = tempList.Add(CalculateWeight(locations[i], locations[j]));
+                    tempList = tempList.Add(CalculateWeight(_locations[i], _locations[j]));
                 }
 
                 _matrix = _matrix.Add(ImmutableList<double>.Empty.AddRange(tempList));

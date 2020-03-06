@@ -17,7 +17,6 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         {
             Graph minimumRouteTree = CreateMinimumSpanningTree(route);
 
-
             List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
 
             // Find a way to avoid having to recalculate the weights.
