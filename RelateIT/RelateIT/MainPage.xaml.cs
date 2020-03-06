@@ -6,8 +6,10 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Plugin.Geolocator;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 
@@ -24,7 +26,7 @@ namespace RelateIT
         {
             InitializeComponent();
             // CenterOnUserLocation();
-           // GetDeviceLocationAsync();
+            // GetDeviceLocationAsync();
 
             if (Device.Idiom == TargetIdiom.Phone)
             {
@@ -64,12 +66,11 @@ namespace RelateIT
                     PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) });
                     PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(4, GridUnitType.Star) });
                     PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-        
+
                 }
             }
         }
 
-        public async void CenterOnUserLocation()
         /*public async void CenterOnUserLocation()
         {
             var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
@@ -111,9 +112,62 @@ namespace RelateIT
             if (status == PermissionStatus.Granted)
             {
                 //turn on location
-               DependencyService.Get<ILocation>().TurnOnGps();
+                DependencyService.Get<ILocation>().TurnOnGps();
             }
-            
+
+        }
+
+
+        private async void MoveToCurrentLocationAsync()
+        {
+            CurrentPosition position = await GetPosition();
+            Position mapPosition = new Position(position.Latitude, position.Longitude);
+            Device.BeginInvokeOnMainThread(() =>
+                {
+                    formMap.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
+                    var mapPin = new Pin
+                    {
+                        Type = PinType.Place,
+                        Position = mapPosition,
+                        Label = "Odense",
+                        Address = "Seebladsgade 1"
+                    };
+
+                    formMap.Pins.Add(mapPin);
+                });
+        }
+
+        private async Task<CurrentPosition> GetPosition()
+        {
+            CurrentPosition p = new CurrentPosition();
+            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            {
+                if (CrossGeolocator.Current.IsGeolocationEnabled)
+                {
+                    var locator = CrossGeolocator.Current;
+                    locator.DesiredAccuracy = 50;
+
+                    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
+
+                    p.Latitude = position.Latitude;
+                    p.Longitude = position.Longitude;
+                }
+                else
+                {
+                    await DisplayAlert("Message", "GPS not enabled", "OK");
+                }
+            }
+            else
+            {
+                await DisplayAlert("Message", "GPS not available", "OK");
+            }
+
+            return p;
+        }
+
+        private void MoveToCurrentLocation(object sender, EventArgs e)
+        {
+            MoveToCurrentLocationAsync();
         }
 
         //public async Task<Plugin.Permissions.Abstractions.PermissionStatus> CheckAndRequestPermissionAsync<TPermission>(TPermission permission)
