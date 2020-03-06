@@ -19,5 +19,17 @@ namespace RelateIT.Models
             Longtitude = _longitude;
             Adress = _adress;
         }
+
+        public Location(double _latitude, double _longitude)
+        {
+            Latitude = _latitude;
+            Longtitude = _longitude;
+        }
+
+
+        public Location()
+        {
+
+        }
     }
 }

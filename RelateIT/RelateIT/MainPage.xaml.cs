@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Geolocator;
+using RelateIT.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -120,26 +121,44 @@ namespace RelateIT
 
         private async void MoveToCurrentLocationAsync()
         {
-            CurrentPosition position = await GetPosition();
-            Position mapPosition = new Position(position.Latitude, position.Longitude);
+            Models.Location position = await GetPosition();
+            Position mapPosition = new Position(position.Latitude, position.Longtitude);
             Device.BeginInvokeOnMainThread(() =>
                 {
-                    formMap.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
-                    var mapPin = new Pin
-                    {
-                        Type = PinType.Place,
-                        Position = mapPosition,
-                        Label = "Odense",
-                        Address = "Seebladsgade 1"
-                    };
 
-                    formMap.Pins.Add(mapPin);
+                    if (Device.Idiom == TargetIdiom.Phone)
+                    {
+                        map.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
+                        var mapPin = new Pin
+                        {
+                            Type = PinType.Place,
+                            Position = mapPosition,
+                            Label = "Odense",
+                            Address = "Seebladsgade 1"
+                        };
+
+                        map.Pins.Add(mapPin);
+                    }
+                    else
+                    {
+                        map2.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
+                        var mapPin = new Pin
+                        {
+                            Type = PinType.Place,
+                            Position = mapPosition,
+                            Label = "Odense",
+                            Address = "Seebladsgade 1"
+                        };
+
+                        map2.Pins.Add(mapPin);
+                    }
+
                 });
         }
 
-        private async Task<CurrentPosition> GetPosition()
+        private async Task<Models.Location> GetPosition()
         {
-            CurrentPosition p = new CurrentPosition();
+            Models.Location p = new Models.Location();
             if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 if (CrossGeolocator.Current.IsGeolocationEnabled)
@@ -149,8 +168,7 @@ namespace RelateIT
 
                     var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
 
-                    p.Latitude = position.Latitude;
-                    p.Longitude = position.Longitude;
+                    p = new Models.Location(position.Latitude, position.Longitude);
                 }
                 else
                 {
