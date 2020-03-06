@@ -36,7 +36,12 @@ namespace RelateIT.Droid
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-            
+
+            // if instance state is not null, the restore saved state, and values otherwise start over
+            if(savedInstanceState != null)
+            {
+
+            }
         }
 
         public void OnMapReady(GoogleMap map)
@@ -122,5 +127,18 @@ namespace RelateIT.Droid
                 base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
+
+        // for saving state on orientation change so that it can be restored later
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+        }
+
+        // for restoring the state that was saved ealier
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            base.OnRestoreInstanceState(savedInstanceState);
+        }
+
     }
 }

@@ -17,7 +17,8 @@ namespace RelateIT
     public partial class MainPage : ContentPage
     {
 
-        TurnOnLocation location = new TurnOnLocation();
+        double width = 0;
+        double height = 0;
 
         public MainPage()
         {
@@ -40,6 +41,35 @@ namespace RelateIT
 
         }
 
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            if (width != this.width || height != this.height)
+            {
+                this.width = width;
+                this.height = height;
+                if (width > height)
+                {
+                    PhoneView.RowDefinitions.Clear();
+                    PhoneView.ColumnDefinitions.Clear();
+                    PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2.5, GridUnitType.Star) });
+                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                }
+                else
+                {
+                    PhoneView.RowDefinitions.Clear();
+                    PhoneView.ColumnDefinitions.Clear();
+                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) });
+                    PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(4, GridUnitType.Star) });
+                    PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+        
+                }
+            }
+        }
+
+        public async void CenterOnUserLocation()
         /*public async void CenterOnUserLocation()
         {
             var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
