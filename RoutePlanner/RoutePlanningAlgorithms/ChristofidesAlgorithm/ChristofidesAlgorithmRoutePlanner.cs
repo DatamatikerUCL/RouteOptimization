@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
@@ -18,8 +17,10 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         {
             Graph minimumRouteTree = CreateMinimumSpanningTree(route);
 
+
             List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
 
+            // Find a way to avoid having to recalculate the weights.
             AdjacencyMatrix subGraph = new AdjacencyMatrix(oddDegreeLocations.ToImmutableList(), _calculator);
 
             Graph minimumWeightPerfectMatching = subGraph.GetMinimumWeightPerfectMatching();
