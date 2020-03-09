@@ -12,7 +12,8 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
-
+using RelateIT.Interfaces;
+using System.Threading;
 
 namespace RelateIT
 {
@@ -26,22 +27,26 @@ namespace RelateIT
         public MainPage()
         {
             InitializeComponent();
-            // CenterOnUserLocation();
+           
             // GetDeviceLocationAsync();
 
             if (Device.Idiom == TargetIdiom.Phone)
             {
                 PhoneView.IsVisible = true;
                 TabletView.IsVisible = false;
+
             }
             else
             {
                 PhoneView.IsVisible = false;
                 TabletView.IsVisible = true;
+
             }
 
-            Task.Factory.StartNew(CheckLocationPermission);
 
+
+            Task.Factory.StartNew(CheckLocationPermission);
+            CenterOnUserLocation();
         }
 
 
@@ -72,20 +77,20 @@ namespace RelateIT
             }
         }
 
-        /*public async void CenterOnUserLocation()
+        public async void CenterOnUserLocation()
         {
-            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-            if (status == PermissionStatus.Granted)
-            {
-                var position = await GetLocationAsync();
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromKilometers(5)));
-            }
-            else
-            {
-                var requestPermission = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-            }
+           // var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+           // if (status.Equals(PermissionStatus.Granted))
+           // {
+            var position = await GetPosition();
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude), Distance.FromKilometers(5)));
+          //  }
+            /* else
+              {
+                  var requestPermission = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+              }*/
 
-        }*/
+        }
 
         public async void CheckLocationPermission()
         {
@@ -113,48 +118,11 @@ namespace RelateIT
             if (status == PermissionStatus.Granted)
             {
                 //turn on location
-                DependencyService.Get<ILocation>().TurnOnGps();
+                DependencyService.Get<ITurnOnLocation>().TurnOnGPS();
             }
 
         }
 
-
-        private async void MoveToCurrentLocationAsync()
-        {
-            Models.Location position = await GetPosition();
-            Position mapPosition = new Position(position.Latitude, position.Longtitude);
-            Device.BeginInvokeOnMainThread(() =>
-                {
-
-                    if (Device.Idiom == TargetIdiom.Phone)
-                    {
-                        map.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
-                        var mapPin = new Pin
-                        {
-                            Type = PinType.Place,
-                            Position = mapPosition,
-                            Label = "Odense",
-                            Address = "Seebladsgade 1"
-                        };
-
-                        map.Pins.Add(mapPin);
-                    }
-                    else
-                    {
-                        map2.MoveToRegion(MapSpan.FromCenterAndRadius(mapPosition, Distance.FromKilometers(5)));
-                        var mapPin = new Pin
-                        {
-                            Type = PinType.Place,
-                            Position = mapPosition,
-                            Label = "Odense",
-                            Address = "Seebladsgade 1"
-                        };
-
-                        map2.Pins.Add(mapPin);
-                    }
-
-                });
-        }
 
         private async Task<Models.Location> GetPosition()
         {
@@ -168,11 +136,13 @@ namespace RelateIT
 
                     var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
 
+
                     p = new Models.Location(position.Latitude, position.Longitude);
                 }
                 else
                 {
                     await DisplayAlert("Message", "GPS not enabled", "OK");
+                    CenterOnUserLocation();
                 }
             }
             else
@@ -181,11 +151,6 @@ namespace RelateIT
             }
 
             return p;
-        }
-
-        private void MoveToCurrentLocation(object sender, EventArgs e)
-        {
-            MoveToCurrentLocationAsync();
         }
 
         //public async Task<Plugin.Permissions.Abstractions.PermissionStatus> CheckAndRequestPermissionAsync<TPermission>(TPermission permission)

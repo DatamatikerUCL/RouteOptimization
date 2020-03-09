@@ -14,11 +14,12 @@ using Android.Views;
 using Android.Widget;
 using AngleSharp.Dom;
 using RelateIT.Droid;
+using RelateIT.Interfaces;
 
-
+[assembly: Xamarin.Forms.Dependency(typeof(TurnOnLocation))]
 namespace RelateIT.Droid
 {
-    public class TurnOnLocation : ILocation
+    public class TurnOnLocation : ITurnOnLocation
     {
         
         
@@ -51,35 +52,6 @@ namespace RelateIT.Droid
             {
                
             }
-        }
-
-
-        public string Href { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Protocol { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Host { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string HostName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Port { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PathName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Search { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Hash { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string UserName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public string Origin => throw new NotImplementedException();
-
-        public void Assign(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reload()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Replace(string url)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -20,7 +20,7 @@ using Plugin.Permissions;
 
 namespace RelateIT.Droid
 {
-    [Activity(Label = "RelateIT", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "RelateIT", Icon = "@mipmap/icon", Theme = "@style/AppTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
 
@@ -36,12 +36,7 @@ namespace RelateIT.Droid
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
-
-            // if instance state is not null, the restore saved state, and values otherwise start over
-            if(savedInstanceState != null)
-            {
-
-            }
+            
         }
 
         public void OnMapReady(GoogleMap map)
@@ -63,36 +58,12 @@ namespace RelateIT.Droid
              Manifest.Permission.AccessFineLocation
          };*/
 
-        /*
+        
        protected override void OnStart()
        {
            base.OnStart();
 
-
-           if ((int)Build.VERSION.SdkInt >= 23)
-           {
-               if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted)
-               {
-
-                   RequestPermissions(LocationPermissions, RequestLocationId);
-                   //Position position = new Position(LocationHelper.OnGetDeviceLastLocation().Result.Latitude, LocationHelper.OnGetDeviceLastLocation().Result.Longitude);
-                   //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-                   //Map map = new Map(mapSpan);
-               }
-               else
-               {
-                   //Position position = new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude);
-                   //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-                   //Map map = new Map(mapSpan);
-
-                   AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                   AlertDialog alert = dialog.Create();
-                   alert.SetTitle("Adgang allerede givet");
-                   alert.SetMessage("Adgang er givet til lokationen");
-                   alert.Show();
-               }
-           }
-       }*/
+       }
         
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
@@ -127,18 +98,5 @@ namespace RelateIT.Droid
                 base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
-
-        // for saving state on orientation change so that it can be restored later
-        protected override void OnSaveInstanceState(Bundle outState)
-        {
-            base.OnSaveInstanceState(outState);
-        }
-
-        // for restoring the state that was saved ealier
-        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
-        {
-            base.OnRestoreInstanceState(savedInstanceState);
-        }
-
     }
 }
