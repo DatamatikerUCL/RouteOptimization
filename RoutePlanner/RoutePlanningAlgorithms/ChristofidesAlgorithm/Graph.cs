@@ -73,10 +73,16 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
                 matching.Add(tempEdge);
                 matchingWeight.Add(tempWeight);
 
-                edgesToMatch = RemoveEdgesFromNode(tempEdge.Start, edgesToMatch);
-                edgesToMatch = RemoveEdgesFromNode(tempEdge.End, edgesToMatch);
-
-                weightsToMatch.Remove(tempWeight);
+                RemoveEdgesAndWeightsFromNode(tempEdge.Start,
+                                              edgesToMatch,
+                                              weightsToMatch,
+                                              out edgesToMatch,
+                                              out weightsToMatch);
+                RemoveEdgesAndWeightsFromNode(tempEdge.End,
+                                              edgesToMatch,
+                                              weightsToMatch,
+                                              out edgesToMatch,
+                                              out weightsToMatch);
             }
 
             returnGraph.Edges = matching;
@@ -85,18 +91,30 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             return returnGraph;
         }
 
-        private static List<Edge> RemoveEdgesFromNode(ILocateable point, List<Edge> edgesToMatch)
+        private static void RemoveEdgesAndWeightsFromNode(ILocateable point,
+                                                          List<Edge> edgesToMatch,
+                                                          List<double> weightsToMatch,
+                                                          out List<Edge> returnEdges,
+                                                          out List<double> returnWeights)
         {
-            List<Edge> tempList = new List<Edge>(edgesToMatch);
+            int index = 0;
+            List<Edge> tempEdges = new List<Edge>(edgesToMatch);
+            List<double> tempWeights = new List<double>(weightsToMatch);
+
             foreach (var item in edgesToMatch)
             {
                 if (item.Start == point || item.End == point)
                 {
-                    tempList.Remove(item);
+                    tempEdges.Remove(item);
+                    tempWeights.RemoveAt(index);
                 }
+
+                index++;
             }
-            
-            return tempList;
+
+            returnEdges = tempEdges;
+            returnWeights = tempWeights;
+
         }
 
         private void FindLightestEdge(List<Edge> edgesToMatch,
@@ -107,7 +125,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             int index = 0;
             int minWeightIndex = 0;
             double minWeight = int.MaxValue;
-            
+
             foreach (double weight in weightsToMatch)
             {
                 if (weight < minWeight)
@@ -115,6 +133,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
                     minWeight = weight;
                     minWeightIndex = index;
                 }
+
                 index++;
             }
 
