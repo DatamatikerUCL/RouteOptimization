@@ -9,6 +9,7 @@
              x:Class="HPlusSports.MainPage">
     <Grid>
         <StackLayout>
+            <Button x:Name="lct" Text="Location" Clicked="lct_Clicked"></Button>
             <Button x:Name="fvt" Text="Favorits" Clicked="fvt_Button_Clicked"></Button>
             <CollectionView ItemsSource="{Binding}" SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged" Grid.Column="1">
                 <CollectionView.ItemsLayout>
