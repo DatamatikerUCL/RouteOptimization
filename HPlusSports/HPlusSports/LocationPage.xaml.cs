@@ -50,6 +50,12 @@ namespace HPlusSports
 
         private async void Location_Clicked(object sender, EventArgs e)
         {
+            var status = await CheckAndRequestPermissionAsync(new Permissions.LocationWhenInUse());
+            if (status != PermissionStatus.Granted)
+            {
+                await DisplayAlert("Faild", "Promision wasnt granted", "OK");
+                await Navigation.PopAsync();
+            }
             DependencyService.Get<ITurnOnGPS>().turnOnGPS();
             try
             {
