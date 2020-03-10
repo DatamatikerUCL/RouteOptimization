@@ -74,7 +74,7 @@ namespace RoutePlannerTest
         }
 
         [TestMethod]
-        public void PerfectMinimumMatching()
+        public void ToGraphTest()
         {
             ILocateable locationOne = new TestLocation(1, 37);
             ILocateable locationTwo = new TestLocation(4, 57);
@@ -89,10 +89,31 @@ namespace RoutePlannerTest
 
             AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
             
-            Graph perfectMinimumMatching = temp.GetMinimumWeightPerfectMatching();
+            Graph newGraph = temp.ToGraph();
 
-            Assert.AreEqual(2, perfectMinimumMatching.Edges.Count);
+            Assert.AreEqual(locationOne, newGraph.Edges[0].Start);
+        }
 
+        [TestMethod]
+        public void ToGraphWeightTest()
+        {
+
+            ILocateable locationOne = new TestLocation(1, 37);
+            ILocateable locationTwo = new TestLocation(4, 57);
+            ILocateable locationThree = new TestLocation(675, 637);
+            ILocateable locationFour = new TestLocation(75, 63);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenLocations(locationOne, locationTwo), newGraph.Weights[0]);
         }
     }
     

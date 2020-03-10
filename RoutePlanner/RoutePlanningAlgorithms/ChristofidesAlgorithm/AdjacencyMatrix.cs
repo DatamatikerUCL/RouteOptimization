@@ -57,17 +57,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
                 return _calculator.CalculateDistanceBetweenLocations(locateable1, locateable2);
             }
         }
-
-        public Graph GetMinimumWeightPerfectMatching()
-        {
-            Graph tempGraph = ToGraph();
-
-            
-
-            throw new NotImplementedException();
-        }
-
-        private Graph ToGraph()
+        public Graph ToGraph()
         {
             Graph returnGraph = new Graph();
             List<Edge> edges = new List<Edge>();

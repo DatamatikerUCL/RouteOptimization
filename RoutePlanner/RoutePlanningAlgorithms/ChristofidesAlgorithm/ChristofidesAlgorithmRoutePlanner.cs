@@ -20,9 +20,9 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
 
             // Find a way to avoid having to recalculate the weights.
-            AdjacencyMatrix subGraph = new AdjacencyMatrix(oddDegreeLocations.ToImmutableList(), _calculator);
+            AdjacencyMatrix subAdjacencyMatrix = new AdjacencyMatrix(oddDegreeLocations.ToImmutableList(), _calculator);
 
-            Graph minimumWeightPerfectMatching = subGraph.GetMinimumWeightPerfectMatching();
+            Graph subGraph = subAdjacencyMatrix.ToGraph();
 
             throw new System.NotImplementedException();
         }
