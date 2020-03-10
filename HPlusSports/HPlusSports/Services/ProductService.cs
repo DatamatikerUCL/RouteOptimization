@@ -66,8 +66,7 @@ namespace HPlusSports.Services
            
 
             var path = Path.Combine(FileSystem.AppDataDirectory, WISHLIST_FILE);
-            File.Delete(path);
-            
+                       
             if (File.Exists(path))
             {
                 using (var sReader = new StreamReader(path))

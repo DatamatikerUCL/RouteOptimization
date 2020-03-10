@@ -32,7 +32,6 @@ namespace HPlusSports
 
         }
 
-
         public async Task<Location> GetLocationAsync()
         {
             var status = await CheckAndRequestPermissionAsync(new Permissions.LocationWhenInUse());
