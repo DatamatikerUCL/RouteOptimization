@@ -207,5 +207,65 @@ namespace RoutePlannerTest
             Assert.IsTrue(newGraph.Weights[0] < newGraph.Weights[1]);
         }
 
+        [TestMethod]
+        public void CombineGraphEdgesTest()
+        {
+            ILocateable locationOne = new TestLocation(732, 327);
+            ILocateable locationTwo = new TestLocation(75, 3);
+            ILocateable locationThree = new TestLocation(47, 75);
+            ILocateable locationFour = new TestLocation(6, 1);
+            ILocateable locationFive = new TestLocation(7, 8);
+            ILocateable locationSix = new TestLocation(9, 5);
+
+            ImmutableList<ILocateable> locationListOne = ImmutableList<ILocateable>.Empty;
+            locationListOne = locationListOne.Add(locationOne);
+            locationListOne = locationListOne.Add(locationTwo);
+            locationListOne = locationListOne.Add(locationThree);
+            locationListOne = locationListOne.Add(locationFour);
+
+            ImmutableList<ILocateable> locationListTwo = ImmutableList<ILocateable>.Empty;
+            locationListTwo = locationListTwo.Add(locationFive);
+            locationListTwo = locationListTwo.Add(locationSix);
+
+            AdjacencyMatrix tempOne = new AdjacencyMatrix(locationListOne, _testDistanceCalculator);
+            AdjacencyMatrix tempTwo = new AdjacencyMatrix(locationListTwo, _testDistanceCalculator);
+            Graph graphOne = tempOne.ToGraph();
+            Graph graphTwo = tempTwo.ToGraph();
+            
+            Graph combinedGraph = graphOne.CombineGraph(graphTwo);
+
+            Assert.AreEqual(graphOne.Edges.Count + graphTwo.Edges.Count, combinedGraph.Edges.Count);
+        }
+
+        [TestMethod]
+        public void CombineGraphWeightsTest()
+        {
+            ILocateable locationOne = new TestLocation(732, 327);
+            ILocateable locationTwo = new TestLocation(75, 3);
+            ILocateable locationThree = new TestLocation(47, 75);
+            ILocateable locationFour = new TestLocation(6, 1);
+            ILocateable locationFive = new TestLocation(7, 8);
+            ILocateable locationSix = new TestLocation(9, 5);
+
+            ImmutableList<ILocateable> locationListOne = ImmutableList<ILocateable>.Empty;
+            locationListOne = locationListOne.Add(locationOne);
+            locationListOne = locationListOne.Add(locationTwo);
+            locationListOne = locationListOne.Add(locationThree);
+            locationListOne = locationListOne.Add(locationFour);
+
+            ImmutableList<ILocateable> locationListTwo = ImmutableList<ILocateable>.Empty;
+            locationListTwo = locationListTwo.Add(locationFive);
+            locationListTwo = locationListTwo.Add(locationSix);
+
+            AdjacencyMatrix tempOne = new AdjacencyMatrix(locationListOne, _testDistanceCalculator);
+            AdjacencyMatrix tempTwo = new AdjacencyMatrix(locationListTwo, _testDistanceCalculator);
+            Graph graphOne = tempOne.ToGraph();
+            Graph graphTwo = tempTwo.ToGraph();
+            
+            Graph combinedGraph = graphOne.CombineGraph(graphTwo);
+
+            Assert.AreEqual(graphOne.Weights.Count + graphTwo.Weights.Count, combinedGraph.Weights.Count);
+        }
+
     }
 }

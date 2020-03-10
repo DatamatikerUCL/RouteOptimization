@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using RouteOptimization.RoutePlanner.Datastructures;
@@ -16,17 +17,21 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
         {
             Graph minimumRouteTree = CreateMinimumSpanningTree(route);
+            Graph perfectMatching = CalculatePerfectMatching(minimumRouteTree);
+            
+            Graph multiGraph = minimumRouteTree.CombineGraph(perfectMatching);
 
+            throw new System.NotImplementedException();
+        }
+
+        private Graph CalculatePerfectMatching(Graph minimumRouteTree)
+        {
             List<ILocateable> oddDegreeLocations = minimumRouteTree.GetVertexesWithOddDegrees();
-
-            // Find a way to avoid having to recalculate the weights.
             AdjacencyMatrix subAdjacencyMatrix = new AdjacencyMatrix(oddDegreeLocations.ToImmutableList(), _calculator);
 
             Graph subGraph = subAdjacencyMatrix.ToGraph();
 
-            Graph perfectMatching = subGraph.ToMinimumWeightPerfectMatching();
-
-            throw new System.NotImplementedException();
+            return subGraph.ToMinimumWeightPerfectMatching();
         }
 
         private Graph CreateMinimumSpanningTree(IPlannable route)

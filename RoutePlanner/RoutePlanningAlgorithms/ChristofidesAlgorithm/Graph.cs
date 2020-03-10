@@ -141,5 +141,18 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
             tempEdge = edgesToMatch[minWeightIndex];
             tempWeight = minWeight;
         }
+
+        public Graph CombineGraph(Graph graphTwo)
+        {
+            Graph graphToReturn = new Graph();
+
+            graphToReturn.Edges.AddRange(this.Edges);
+            graphToReturn.Edges.AddRange(graphTwo.Edges);
+
+            graphToReturn.Weights.AddRange(this.Weights);
+            graphToReturn.Weights.AddRange(graphTwo.Weights);
+
+            return graphToReturn;
+        }
     }
 }
