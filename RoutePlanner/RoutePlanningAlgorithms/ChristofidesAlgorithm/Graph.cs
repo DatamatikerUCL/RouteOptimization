@@ -57,5 +57,10 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
             return distinctLocations;
         }
+
+        public Graph ToMinimumWeightPerfectMatching()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

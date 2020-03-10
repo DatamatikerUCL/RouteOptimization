@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanner.Interfaces;
 using RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm;
 using RoutePlannerTest.InterfaceImplementations;
 
@@ -9,6 +11,7 @@ namespace RoutePlannerTest
     [TestClass]
     public class MinimumSpanningTreeTest
     {
+        IDistanceCalculator _testDistanceCalculator = new TestDistanceCalculator();
         [TestMethod]
         public void CreationTest()
         {
@@ -105,6 +108,57 @@ namespace RoutePlannerTest
             List<ILocateable> edgesWithOddDegrees = temp.GetVertexesWithOddDegrees();
 
             Assert.AreEqual(0, edgesWithOddDegrees.Count % 2);
+        }
+
+        [TestMethod]
+        public void PerfectMatchingWithMinimumWeightTest()
+        {
+            ILocateable locationOne = new TestLocation(1, 37);
+            ILocateable locationTwo = new TestLocation(4, 57);
+            ILocateable locationThree = new TestLocation(675, 637);
+            ILocateable locationFour = new TestLocation(75, 63);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            newGraph = newGraph.ToMinimumWeightPerfectMatching();
+
+            Assert.AreEqual(2, newGraph.Edges.Count);
+        }
+
+        [TestMethod]
+        public void PerfectMatchingWithMinimumWeightTest2()
+        {
+            ILocateable locationOne = new TestLocation(1, 37);
+            ILocateable locationTwo = new TestLocation(4, 57);
+            ILocateable locationThree = new TestLocation(675, 637);
+            ILocateable locationFour = new TestLocation(75, 63);
+            ILocateable locationFive = new TestLocation(74,67);
+            ILocateable locationSix = new TestLocation(3, 67);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+            locations = locations.Add(locationFive);
+            locations = locations.Add(locationSix);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            newGraph = newGraph.ToMinimumWeightPerfectMatching();
+
+            Assert.AreEqual(3, newGraph.Edges.Count);
+
         }
 
     }
