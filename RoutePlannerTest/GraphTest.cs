@@ -9,7 +9,7 @@ using RoutePlannerTest.InterfaceImplementations;
 namespace RoutePlannerTest
 {
     [TestClass]
-    public class MinimumSpanningTreeTest
+    public class GraphTest
     {
         IDistanceCalculator _testDistanceCalculator = new TestDistanceCalculator();
         [TestMethod]
@@ -159,6 +159,52 @@ namespace RoutePlannerTest
 
             Assert.AreEqual(3, newGraph.Edges.Count);
 
+        }
+
+        [TestMethod]
+        public void PerfectMatchingWithMinimumWeightWeightTest()
+        {
+            ILocateable locationOne = new TestLocation(1, 37);
+            ILocateable locationTwo = new TestLocation(4, 57);
+            ILocateable locationThree = new TestLocation(675, 637);
+            ILocateable locationFour = new TestLocation(75, 63);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            newGraph = newGraph.ToMinimumWeightPerfectMatching();
+
+            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenLocations(locationOne, locationTwo), newGraph.Weights[0]);
+        }
+
+        [TestMethod]
+        public void FirstWeightSmallestWeight()
+        {
+            ILocateable locationOne = new TestLocation(23, 5672);
+            ILocateable locationTwo = new TestLocation(15, 1800);
+            ILocateable locationThree = new TestLocation(801, 1024);
+            ILocateable locationFour = new TestLocation(1, 0);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            newGraph = newGraph.ToMinimumWeightPerfectMatching();
+
+            Assert.IsTrue(newGraph.Weights[0] < newGraph.Weights[1]);
         }
 
     }

@@ -24,6 +24,8 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
             Graph subGraph = subAdjacencyMatrix.ToGraph();
 
+            Graph perfectMatching = subGraph.ToMinimumWeightPerfectMatching();
+
             throw new System.NotImplementedException();
         }
 
