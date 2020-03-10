@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Plugin.Geolocator;
 using static Xamarin.Essentials.Permissions;
 
 namespace HPlusSports
@@ -16,20 +17,6 @@ namespace HPlusSports
         public LocationPage()
         {
             InitializeComponent();
-        }
-
-        protected override async void OnAppearing()
-        {
-            var location = GetLocationAsync();
-
-            if (location == null)
-            {
-                await DisplayAlert("Location is not turned on", "sad", "OK");
-            }
-            else
-            {
-                await DisplayAlert("Location", $"your current location is {location.Result.Latitude} ,  {location.Result.Longitude}", "OK");
-            }
         }
 
         public async Task<PermissionStatus> CheckAndRequestPermissionAsync<T>(T permission)
@@ -45,19 +32,49 @@ namespace HPlusSports
 
         }
 
+
         public async Task<Location> GetLocationAsync()
         {
             var status = await CheckAndRequestPermissionAsync(new Permissions.LocationWhenInUse());
             if (status != PermissionStatus.Granted)
-            {
-                await GetLocationAsync();
+            {                
                 return null;
             }
-
-            DependencyService.Get<ITurnOnGPS>().turnOnGPS();
-
-            var location = await Geolocation.GetLastKnownLocationAsync();
+            //Geolocator geolocator = new Geolocator();
+            //DependencyService.Get<ITurnOnGPS>().turnOnGPS();
+            var request = new GeolocationRequest(GeolocationAccuracy.Medium, new TimeSpan(0, 0, 3));
+            var location = await Geolocation.GetLocationAsync(request);
+            //var location = await Geolocation.GetLastKnownLocationAsync();
             return location;
+        }
+
+        private async void Location_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<ITurnOnGPS>().turnOnGPS();
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium, new TimeSpan(0, 0, 3));
+                var location = await Geolocation.GetLocationAsync(request);
+                //var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    lblLatitude.Text = "Latitude: " + location.Latitude.ToString();
+                    lblLongitude.Text = "Longitude:" + location.Longitude.ToString();
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                await DisplayAlert("Faild", fnsEx.Message, "OK");
+            }
+            catch (PermissionException pEx)
+            {
+                await DisplayAlert("Faild", pEx.Message, "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Faild", ex.Message, "OK");
+            }
         }
     }
 }

@@ -7,6 +7,10 @@
              x:Class="HPlusSports.LocationPage">
     <ContentPage.Content>
         <StackLayout>
+            <Button x:Name="Location" Text="Location" Clicked="Location_Clicked"></Button>
+
+            <Label x:Name="lblLatitude"></Label>
+            <Label x:Name="lblLongitude"></Label>
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
