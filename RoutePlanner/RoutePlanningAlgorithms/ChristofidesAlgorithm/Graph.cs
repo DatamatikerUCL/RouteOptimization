@@ -78,6 +78,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
                                               weightsToMatch,
                                               out edgesToMatch,
                                               out weightsToMatch);
+
                 RemoveEdgesAndWeightsFromNode(tempEdge.End,
                                               edgesToMatch,
                                               weightsToMatch,
@@ -99,21 +100,21 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
         {
             int index = 0;
             List<Edge> tempEdges = new List<Edge>(edgesToMatch);
-            List<double> tempWeights = new List<double>(weightsToMatch);
+            List<double> tempWeights = new List<double>();
 
             foreach (var item in edgesToMatch)
             {
                 if (item.Start == point || item.End == point)
                 {
                     tempEdges.Remove(item);
-                    tempWeights.RemoveAt(index);
+                    tempWeights.Add(weightsToMatch[index]);
                 }
 
                 index++;
             }
 
             returnEdges = tempEdges;
-            returnWeights = tempWeights;
+            returnWeights = weightsToMatch.Except(tempWeights).ToList();
 
         }
 
