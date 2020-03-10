@@ -60,7 +60,32 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
         public Graph GetMinimumWeightPerfectMatching()
         {
+            Graph tempGraph = ToGraph();
+
+            
+
             throw new NotImplementedException();
+        }
+
+        private Graph ToGraph()
+        {
+            Graph returnGraph = new Graph();
+            List<Edge> edges = new List<Edge>();
+            List<double> weights = new List<double>();
+
+            for (int i = 0; i < _matrix.Count; i++)
+            {
+                for (int j = i + 1; j < _matrix[i].Count; j++)
+                {
+                    edges.Add(new Edge(_locations[i], _locations[j]));
+                    weights.Add(_matrix[i][j]);
+                }
+                
+            }
+            returnGraph.Edges = edges;
+            returnGraph.Weights = weights;
+
+            return returnGraph;
         }
     }
 
