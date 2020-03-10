@@ -115,6 +115,27 @@ namespace RoutePlannerTest
 
             Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenLocations(locationOne, locationTwo), newGraph.Weights[0]);
         }
+
+        [TestMethod]
+        public void ToGraphSizeTest()
+        {
+            ILocateable locationOne = new TestLocation(1, 37);
+            ILocateable locationTwo = new TestLocation(4, 57);
+            ILocateable locationThree = new TestLocation(675, 637);
+            ILocateable locationFour = new TestLocation(75, 63);
+
+            ImmutableList<ILocateable> locations = ImmutableList<ILocateable>.Empty;
+            locations = locations.Add(locationOne);
+            locations = locations.Add(locationTwo);
+            locations = locations.Add(locationThree);
+            locations = locations.Add(locationFour);
+
+            AdjacencyMatrix temp = new AdjacencyMatrix(locations, _testDistanceCalculator);
+            
+            Graph newGraph = temp.ToGraph();
+
+            Assert.AreEqual(6, newGraph.Weights.Count);
+        }
     }
     
 }

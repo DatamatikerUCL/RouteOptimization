@@ -60,7 +60,66 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
         public Graph ToMinimumWeightPerfectMatching()
         {
-            throw new NotImplementedException();
+            List<Edge> edgesToMatch = Edges;
+            List<double> weightsToMatch = Weights;
+            List<Edge> matching = new List<Edge>();
+            List<double> matchingWeight = new List<double>();
+            Graph returnGraph = new Graph();
+
+            while (edgesToMatch.Count > 0)
+            {
+                FindLightestEdge(edgesToMatch, weightsToMatch, out Edge tempEdge, out double tempWeight);
+                
+                matching.Add(tempEdge);
+                matchingWeight.Add(tempWeight);
+
+                edgesToMatch = RemoveEdgesFromNode(tempEdge.Start, edgesToMatch);
+                edgesToMatch = RemoveEdgesFromNode(tempEdge.End, edgesToMatch);
+
+                weightsToMatch.Remove(tempWeight);
+            }
+
+            returnGraph.Edges = matching;
+            returnGraph.Weights = matchingWeight;
+        
+            return returnGraph;
+        }
+
+        private static List<Edge> RemoveEdgesFromNode(ILocateable point, List<Edge> edgesToMatch)
+        {
+            List<Edge> tempList = new List<Edge>(edgesToMatch);
+            foreach (var item in edgesToMatch)
+            {
+                if (item.Start == point || item.End == point)
+                {
+                    tempList.Remove(item);
+                }
+            }
+            
+            return tempList;
+        }
+
+        private void FindLightestEdge(List<Edge> edgesToMatch,
+                                      List<double> weightsToMatch,
+                                      out Edge tempEdge,
+                                      out double tempWeight)
+        {
+            int index = 0;
+            int minWeightIndex = 0;
+            double minWeight = int.MaxValue;
+            
+            foreach (double weight in weightsToMatch)
+            {
+                if (weight < minWeight)
+                {
+                    minWeight = weight;
+                    minWeightIndex = index;
+                }
+                index++;
+            }
+
+            tempEdge = edgesToMatch[minWeightIndex];
+            tempWeight = minWeight;
         }
     }
 }
