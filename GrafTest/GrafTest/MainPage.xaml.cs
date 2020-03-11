@@ -46,7 +46,6 @@ namespace GrafTest
             Chart4.Chart = new Microcharts.PointChart { Entries = entries };
             Chart5.Chart = new Microcharts.RadarChart { Entries = entries };
             Chart6.Chart = new Microcharts.LineChart { Entries = entries };
-            Chart7.Chart = new Microcharts.CanvasExtensions { Entries = entries };
 
             Chart1.Chart.LabelTextSize = 30;
            Chart2.Chart.LabelTextSize = 30;
@@ -54,7 +53,6 @@ namespace GrafTest
            Chart4.Chart.LabelTextSize = 30;
             Chart5.Chart.LabelTextSize = 30;
             Chart6.Chart.LabelTextSize = 30;
-            Chart7.Chart.LabelTextSize = 30;
         }
 
     }
