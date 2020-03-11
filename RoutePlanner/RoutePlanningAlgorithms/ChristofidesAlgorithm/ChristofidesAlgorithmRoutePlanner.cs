@@ -31,7 +31,7 @@ namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlg
 
             Graph subGraph = subAdjacencyMatrix.ToGraph();
 
-            return subGraph.ToMinimumWeightPerfectMatching();
+            return PerfectMatching.BlossomLeastWeight(subGraph);
         }
 
         private Graph CreateMinimumSpanningTree(IPlannable route)
