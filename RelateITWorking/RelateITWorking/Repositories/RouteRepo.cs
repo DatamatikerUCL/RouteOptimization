@@ -1,7 +1,9 @@
 ﻿using RelateIT.Interfaces;
 using RelateIT.Models;
+using RouteOptimization.RoutePlanner.Datastructures;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 
 namespace RelateIT.Repositories
@@ -30,7 +32,7 @@ namespace RelateIT.Repositories
             }
         }
 
-        public List<Route> GetRoutes()
+        public ImmutableList<IPlannable> GetRoutes()
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,9 @@
 ﻿using RelateIT.Models;
 using RelateIT.Repositories;
+using RouteOptimization.RoutePlanner.Datastructures;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 
 namespace RelateITWorking.ViewModel
@@ -9,10 +11,10 @@ namespace RelateITWorking.ViewModel
     public class RouteViewModel
     {
         private RouteRepo routeRepo = RouteRepo.GetInstance;
-        private List<Route> routes = new List<Route>();
+        private ImmutableList<IPlannable> routes = ImmutableList<IPlannable>.Empty;
 
 
-        public List<Route> GetRoutes()
+        public ImmutableList<IPlannable> GetRoutes()
         {
             return routes = routeRepo.GetRoutes();
         }

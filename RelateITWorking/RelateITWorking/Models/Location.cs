@@ -9,7 +9,7 @@ using System.Text;
 namespace RelateIT.Models
 {
 
-    public class Location : ILocateable, ISerializable
+    public class Location : ILocateable
     {
         public double Latitude { get; }
 
@@ -36,9 +36,5 @@ namespace RelateIT.Models
 
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
