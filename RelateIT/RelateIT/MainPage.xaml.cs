@@ -1,19 +1,14 @@
-﻿using Android;
-using AngleSharp.Dom;
-using Plugin.Permissions;
+﻿using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Geolocator;
-using RelateIT.Models;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using RelateIT.Interfaces;
-using System.Threading;
 
 namespace RelateIT
 {
@@ -34,19 +29,20 @@ namespace RelateIT
             {
                 PhoneView.IsVisible = true;
                 TabletView.IsVisible = false;
+                Task.Factory.StartNew(CheckLocationPermission);
 
             }
             else
             {
                 PhoneView.IsVisible = false;
                 TabletView.IsVisible = true;
+                Task.Factory.StartNew(CheckLocationPermission);
 
             }
 
 
 
-            Task.Factory.StartNew(CheckLocationPermission);
-            CenterOnUserLocation();
+         
         }
 
 
@@ -138,11 +134,14 @@ namespace RelateIT
 
 
                     p = new Models.Location(position.Latitude, position.Longitude);
+
+                    CenterOnUserLocation();
+
                 }
                 else
                 {
                     await DisplayAlert("Message", "GPS not enabled", "OK");
-                    CenterOnUserLocation();
+                    
                 }
             }
             else
