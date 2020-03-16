@@ -1,10 +1,12 @@
-﻿using System;
+﻿using RelateIT.Interfaces;
+using RelateIT.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RelateIT.Repositories
 {
-    public class RouteRepo
+    public class RouteRepo : IDataAccessable
     {
         public RouteRepo()
         {
@@ -13,7 +15,7 @@ namespace RelateIT.Repositories
 
         private static readonly object padLock = new object();
         private static RouteRepo instance = null;
-        public static RouteRepo Instance
+        public static RouteRepo GetInstance
         {
             get
             {
@@ -28,6 +30,9 @@ namespace RelateIT.Repositories
             }
         }
 
-
+        public List<Route> GetRoutes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

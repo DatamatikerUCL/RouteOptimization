@@ -13,7 +13,7 @@ namespace RelateITWorking.Repositories
 
         private static readonly object padLock = new object();
         private static LocationRepo instance = null;
-        public static LocationRepo Instance
+        public static LocationRepo GetInstance
         {
             get
             {

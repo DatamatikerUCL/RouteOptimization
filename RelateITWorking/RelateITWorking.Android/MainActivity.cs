@@ -38,7 +38,7 @@ namespace RelateIT.Droid
 
             if (savedInstanceState != null)
             {
-                location = savedInstanceState.GetSerializable("lastKnownLocation");
+
             }
             
         }
@@ -116,7 +116,7 @@ namespace RelateIT.Droid
         protected override void OnSaveInstanceState(Bundle savedInstanceState)
         {
             base.OnSaveInstanceState(savedInstanceState);
-            savedInstanceState.PutBundle("lastKnownLocation",);
+     
 
         }
     }
