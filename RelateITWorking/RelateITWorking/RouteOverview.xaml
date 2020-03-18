@@ -8,7 +8,7 @@
              x:Class="RelateIT.RouteOverview">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding Routes}">
+            <ListView ItemsSource="{Binding}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -22,11 +22,11 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="1"
-                           Text="{Binding Name}"
+                           Text="{Binding Path=Name}"
                            FontAttributes="Bold" />
                                 <Label Grid.Row="1"
                            Grid.Column="1"
-                           Text="{Binding EstimatedTime>}"
+                           Text="{Binding Path=EstimatedCompletionTime}"
                            VerticalOptions="End" />
                             </Grid>
                         </ViewCell>

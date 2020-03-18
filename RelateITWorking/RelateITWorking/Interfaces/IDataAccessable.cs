@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RelateIT.Interfaces
 {
-    interface IDataAccessable
+    public interface IDataAccessable
     {
 
         ImmutableList<IPlannable> GetRoutes();

@@ -5,36 +5,41 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
+using RelateITWorking;
 
 namespace RelateIT.Repositories
 {
     public class RouteRepo : IDataAccessable
     {
-        public RouteRepo()
+        private readonly IDataAccessable _dataAcesser;
+        private ImmutableList<IPlannable> routes;
+        private RouteRepo(IDataAccessable dataAccesser)
         {
-
+            _dataAcesser = dataAccesser;
+            routes = _dataAcesser.GetRoutes();
         }
 
         private static readonly object padLock = new object();
         private static RouteRepo instance = null;
-        public static RouteRepo GetInstance
+        public static RouteRepo GetInstance(IDataAccessable dataAcesser = null)
         {
-            get
+            lock (padLock)
             {
-                lock (padLock)
+                if (dataAcesser == null && instance == null)
                 {
-                    if( instance == null)
-                    {
-                        instance = new RouteRepo();
-                    }
-                    return instance;
+                    throw new NullReferenceException();
                 }
+                if (instance == null)
+                {
+                    instance = new RouteRepo(dataAcesser);
+                }
+                return instance;
             }
         }
 
         public ImmutableList<IPlannable> GetRoutes()
         {
-            throw new NotImplementedException();
+            return routes;
         }
     }
 }

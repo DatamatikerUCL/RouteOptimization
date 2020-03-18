@@ -10,7 +10,7 @@ namespace RelateITWorking.ViewModel
 {
     public class RouteViewModel
     {
-        private RouteRepo routeRepo = RouteRepo.GetInstance;
+        private RouteRepo routeRepo = RouteRepo.GetInstance();
         private ImmutableList<IPlannable> routes = ImmutableList<IPlannable>.Empty;
 
 

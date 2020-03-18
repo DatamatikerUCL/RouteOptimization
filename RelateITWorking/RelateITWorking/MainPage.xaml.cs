@@ -10,6 +10,8 @@ using RelateIT.Interfaces;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using RelateIT.Models;
+using RelateIT.Repositories;
+using RelateITWorking;
 using Permission = Plugin.Permissions.Abstractions.Permission;
 using Xamarin.Forms.Maps;
 using Position = Xamarin.Forms.Maps.Position;
@@ -26,7 +28,7 @@ namespace RelateIT
         public MainPage()
         {
             InitializeComponent();
-           
+
             // GetDeviceLocationAsync();
 
             if (Device.Idiom == TargetIdiom.Phone)
@@ -48,7 +50,7 @@ namespace RelateIT
 
 
 
-         
+
         }
 
 
@@ -81,12 +83,12 @@ namespace RelateIT
 
         public async void CenterOnUserLocation()
         {
-           // var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
-           // if (status.Equals(PermissionStatus.Granted))
-           // {
+            // var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            // if (status.Equals(PermissionStatus.Granted))
+            // {
             var position = await GetPosition();
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude), Distance.FromKilometers(5)));
-          //  }
+            //  }
             /* else
               {
                   var requestPermission = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
@@ -145,7 +147,7 @@ namespace RelateIT
                 else
                 {
                     await DisplayAlert("Message", "GPS not enabled", "OK");
-                    
+
                 }
             }
             else
@@ -173,7 +175,10 @@ namespace RelateIT
 
         private async void RouteOverviewButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new RouteOverview());
+            IDataAccessable dataAccesser = new MockRouteData();
+            // MockData
+            RouteRepo tempRepo = RouteRepo.GetInstance(dataAccesser);
+            await Navigation.PushAsync(new RouteOverview(tempRepo));
         }
 
 

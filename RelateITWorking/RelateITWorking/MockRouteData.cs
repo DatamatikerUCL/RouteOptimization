@@ -15,21 +15,21 @@ namespace RelateITWorking
         ImmutableList<ILocateable> locations;
 
 
-        public MockRouteData() 
+        public MockRouteData()
         {
-           routes = ImmutableList<IPlannable>.Empty;
-           locations = ImmutableList<ILocateable>.Empty;
+            routes = ImmutableList<IPlannable>.Empty;
+            locations = ImmutableList<ILocateable>.Empty;
         }
 
         public Route CreateRoute(string _name)
         {
 
-            Location location1 = new Location( 55.499680, 10.096780, "Bogensevej 105");
+            Location location1 = new Location(55.499680, 10.096780, "Bogensevej 105");
             Location location2 = new Location(55.416680, 10.361320, "Næsby skovvænge 7");
             Location location3 = new Location(55.403450, 10.379370, "Seebladsgade 1");
-            locations.Add(location1);
-            locations.Add(location2);
-            locations.Add(location3);
+            locations = locations.Add(location1);
+            locations = locations.Add(location2);
+            locations = locations.Add(location3);
 
 
             Route route = new Route(_name, locations, locations.Count, locations[0], DateTime.Now, 5.0);
@@ -38,7 +38,7 @@ namespace RelateITWorking
         }
         public ImmutableList<IPlannable> GetRoutes()
         {
-            routes.Add(CreateRoute("HomeToSchool"));
+            routes = routes.Add(CreateRoute("HomeToSchool"));
             return routes;
 
         }
