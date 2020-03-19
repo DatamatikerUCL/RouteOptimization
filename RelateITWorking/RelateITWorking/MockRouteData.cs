@@ -24,9 +24,9 @@ namespace RelateITWorking
         public Route CreateRoute(string _name)
         {
 
-            Location location1 = new Location(55.499680, 10.096780, "Bogensevej 105");
-            Location location2 = new Location(55.416680, 10.361320, "Næsby skovvænge 7");
-            Location location3 = new Location(55.403450, 10.379370, "Seebladsgade 1");
+            RelateIT.Models.Location location1 = new RelateIT.Models.Location(55.499680, 10.096780, "Bogensevej 105");
+            RelateIT.Models.Location location2 = new RelateIT.Models.Location(55.416680, 10.361320, "Næsby skovvænge 7");
+            RelateIT.Models.Location location3 = new RelateIT.Models.Location(55.403450, 10.379370, "Seebladsgade 1");
             locations = locations.Add(location1);
             locations = locations.Add(location2);
             locations = locations.Add(location3);

@@ -14,6 +14,7 @@ using RelateIT.Repositories;
 using RelateITWorking;
 using Permission = Plugin.Permissions.Abstractions.Permission;
 using Xamarin.Forms.Maps;
+using Xamarin.Forms.Xaml;
 using Position = Xamarin.Forms.Maps.Position;
 
 namespace RelateIT
@@ -24,12 +25,20 @@ namespace RelateIT
 
         double width = 0;
         double height = 0;
+        private readonly IDataAccessable _dataAccesser;
 
         public MainPage()
         {
             InitializeComponent();
 
             // GetDeviceLocationAsync();
+
+            _dataAccesser = new MockRouteData();
+
+            for (int i = 0; i < _dataAccesser.GetRoutes()[i].Locations.Count; i++)
+            {
+                PlacePins(i);
+            }
 
             if (Device.Idiom == TargetIdiom.Phone)
             {
@@ -175,10 +184,23 @@ namespace RelateIT
 
         private async void RouteOverviewButtonClicked(object sender, EventArgs e)
         {
-            IDataAccessable dataAccesser = new MockRouteData();
             // MockData
-            RouteRepo tempRepo = RouteRepo.GetInstance(dataAccesser);
+            RouteRepo tempRepo = RouteRepo.GetInstance(_dataAccesser);
             await Navigation.PushAsync(new RouteOverview(tempRepo));
+        }
+
+        //place pins for a location in a route
+        private void PlacePins(int index)
+        {
+
+            Pin pin = new Pin
+            {
+                Label = _dataAccesser.GetRoutes()[index].,
+                Address = _dataAccesser.GetRoutes()[index].Locations[index].,
+                Type = PinType.Place,
+                Position = new Position(_dataAccesser.GetRoutes()[index].Locations[index].Latitude, _dataAccesser.GetRoutes()[index].Locations[index].Longtitude)
+            };
+            map.Pins.Add(pin);
         }
 
 

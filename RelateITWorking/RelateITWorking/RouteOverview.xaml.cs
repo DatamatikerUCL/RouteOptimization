@@ -16,23 +16,12 @@ namespace RelateIT
     public partial class RouteOverview : ContentPage
     {
 
-        public IList<Route> Routes;
         public RouteOverview(IDataAccessable dataAccesser)
         {
-            List<IPlannable> tempList = dataAccesser.GetRoutes().ToList();
-            BindingContext = dataAccesser.GetRoutes().ToList();
-            Routes = new List<Route>();
             InitializeComponent();
-            PopulateListView();
-
-
+            BindingContext = dataAccesser.GetRoutes().ToList();
         }
 
-        public void PopulateListView()
-        {
 
-
-            BindingContext = this;
-        }
     }
 }
