@@ -10,6 +10,6 @@ namespace RelateIT.Interfaces
     public interface IDataAccessable
     {
 
-        ImmutableList<IPlannable> GetRoutes();
+        ImmutableList<Route> GetRoutes();
     }
 }

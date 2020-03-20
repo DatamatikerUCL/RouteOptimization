@@ -9,13 +9,14 @@ namespace RelateIT.Models
 {
     public class Route : IPlannable
     {
+        public int Id { get; }
         public string Name { get; set; }
 
         public ImmutableList<ILocateable> Locations { get; }
 
-        public int LocationCount { get => Locations.Count;}
+        public int LocationCount { get => Locations.Count; }
 
-        public ILocateable StartLocation {get => Locations[0]; }
+        public ILocateable StartLocation { get => Locations[0]; }
 
         public DateTime DateOfExecution { get; set; }
 

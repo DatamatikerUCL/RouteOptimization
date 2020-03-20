@@ -15,7 +15,6 @@ namespace RelateIT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage
     {
-
         public RouteOverview(IDataAccessable dataAccesser)
         {
             InitializeComponent();

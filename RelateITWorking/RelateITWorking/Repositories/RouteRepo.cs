@@ -12,15 +12,15 @@ namespace RelateIT.Repositories
     public class RouteRepo : IDataAccessable
     {
         private readonly IDataAccessable _dataAcesser;
-        private ImmutableList<IPlannable> routes;
+        private ImmutableList<Route> routes;
         private RouteRepo(IDataAccessable dataAccesser)
         {
             _dataAcesser = dataAccesser;
-            routes = _dataAcesser.GetRoutes();
+            routes = (ImmutableList<Route>)_dataAcesser.GetRoutes();
         }
 
         private static readonly object padLock = new object();
-        private static RouteRepo instance = null;
+        private static RouteRepo instance;
         public static RouteRepo GetInstance(IDataAccessable dataAcesser = null)
         {
             lock (padLock)
@@ -37,9 +37,14 @@ namespace RelateIT.Repositories
             }
         }
 
-        public ImmutableList<IPlannable> GetRoutes()
+        public ImmutableList<Route> GetRoutes()
         {
             return routes;
+        }
+
+        internal Route GetRoute(int id)
+        {
+            return routes.Find(route => route.Id == id);
         }
     }
 }

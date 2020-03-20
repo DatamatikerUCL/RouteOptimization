@@ -12,6 +12,7 @@ using Plugin.Permissions.Abstractions;
 using RelateIT.Models;
 using RelateIT.Repositories;
 using RelateITWorking;
+using RelateITWorking.ViewModel;
 using Permission = Plugin.Permissions.Abstractions.Permission;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -25,17 +26,24 @@ namespace RelateIT
 
         double width = 0;
         double height = 0;
-        private readonly IDataAccessable _dataAccesser;
-
+        private readonly RouteViewModel _routeViewModel;
+        private readonly RouteOverviewViewModel _routeOverviewViewModel;
+        private readonly RouteRepo _routeRepo;
+        private IDataAccessable _dataAcesser;
         public MainPage()
         {
             InitializeComponent();
-
+            _dataAcesser = new MockRouteData();
             // GetDeviceLocationAsync();
+            _routeRepo = RouteRepo.GetInstance(_dataAcesser);
 
-            _dataAccesser = new MockRouteData();
+            _routeViewModel = new RouteViewModel();
+            _routeOverviewViewModel = new RouteOverviewViewModel();
 
-            for (int i = 0; i < _dataAccesser.GetRoutes()[i].Locations.Count; i++)
+
+
+
+            for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
             {
                 PlacePins(i);
             }
@@ -185,20 +193,20 @@ namespace RelateIT
         private async void RouteOverviewButtonClicked(object sender, EventArgs e)
         {
             // MockData
-            RouteRepo tempRepo = RouteRepo.GetInstance(_dataAccesser);
+            RouteRepo tempRepo = RouteRepo.GetInstance();
             await Navigation.PushAsync(new RouteOverview(tempRepo));
         }
 
         //place pins for a location in a route
-        private void PlacePins(int index)
+        private void PlacePins(int routeId)
         {
 
             Pin pin = new Pin
             {
-                Label = _dataAccesser.GetRoutes()[index].,
-                Address = _dataAccesser.GetRoutes()[index].Locations[index].,
+                Label = _routeViewModel.GetRouteName(),
+                Address = _routeViewModel.GetRouteAdress(routeId),
                 Type = PinType.Place,
-                Position = new Position(_dataAccesser.GetRoutes()[index].Locations[index].Latitude, _dataAccesser.GetRoutes()[index].Locations[index].Longtitude)
+                Position = new Position(_routeViewModel.GetRouteLatitude(routeId), _routeViewModel.GetRouteLongitude(routeId))
             };
             map.Pins.Add(pin);
         }

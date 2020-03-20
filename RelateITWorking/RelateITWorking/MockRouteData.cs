@@ -11,22 +11,22 @@ namespace RelateITWorking
     public class MockRouteData : IDataAccessable
     {
 
-        ImmutableList<IPlannable> routes;
+        ImmutableList<Route> routes;
         ImmutableList<ILocateable> locations;
 
 
         public MockRouteData()
         {
-            routes = ImmutableList<IPlannable>.Empty;
+            routes = ImmutableList<Route>.Empty;
             locations = ImmutableList<ILocateable>.Empty;
         }
 
         public Route CreateRoute(string _name)
         {
 
-            RelateIT.Models.Location location1 = new RelateIT.Models.Location(55.499680, 10.096780, "Bogensevej 105");
-            RelateIT.Models.Location location2 = new RelateIT.Models.Location(55.416680, 10.361320, "Næsby skovvænge 7");
-            RelateIT.Models.Location location3 = new RelateIT.Models.Location(55.403450, 10.379370, "Seebladsgade 1");
+            Location location1 = new Location(55.499680, 10.096780, "Bogensevej 105");
+            Location location2 = new Location(55.416680, 10.361320, "Næsby skovvænge 7");
+            Location location3 = new Location(55.403450, 10.379370, "Seebladsgade 1");
             locations = locations.Add(location1);
             locations = locations.Add(location2);
             locations = locations.Add(location3);
@@ -36,7 +36,7 @@ namespace RelateITWorking
 
             return route;
         }
-        public ImmutableList<IPlannable> GetRoutes()
+        public ImmutableList<Route> GetRoutes()
         {
             routes = routes.Add(CreateRoute("HomeToSchool"));
             return routes;
