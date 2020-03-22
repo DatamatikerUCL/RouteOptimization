@@ -8,7 +8,7 @@
              x:Class="RelateIT.RouteOverview">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding}">
+            <ListView ItemsSource="{Binding}" x:Name="routeListview">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -27,7 +27,7 @@
                                 <Label Grid.Column="1"
                            Text="{Binding Path=Name}"
                            FontAttributes="Bold" />
-                                <Label Grid.Column="2">Estimated Time: </Label>
+                                <Label Grid.Column="2">Estimated Time:</Label>
                                 <Label
                                     Grid.Column="3"
                            Text= "{Binding Path=EstimatedCompletionTime}"

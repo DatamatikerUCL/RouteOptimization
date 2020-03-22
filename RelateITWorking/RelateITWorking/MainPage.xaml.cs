@@ -46,10 +46,8 @@ namespace RelateIT
                 {
                     PlacePins(k);
                 }
-
-
-
             }
+
 
             if (Device.Idiom == TargetIdiom.Phone)
             {
