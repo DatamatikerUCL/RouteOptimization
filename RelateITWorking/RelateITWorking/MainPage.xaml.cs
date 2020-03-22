@@ -36,19 +36,19 @@ namespace RelateIT
             _dataAcesser = new MockRouteData();
             // GetDeviceLocationAsync();
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
-
-
-
             _routeOverviewViewModel = new RouteOverviewViewModel();
-
-
-
 
             for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
             {
                 // måske ændres
                 _routeViewModel = new RouteViewModel(i);
-                PlacePins(i);
+                for (int k = 0; k < _routeViewModel.GetRoute().Locations.Count; k++)
+                {
+                    PlacePins(k);
+                }
+
+
+
             }
 
             if (Device.Idiom == TargetIdiom.Phone)
@@ -107,7 +107,7 @@ namespace RelateIT
             // if (status.Equals(PermissionStatus.Granted))
             // {
             var position = await GetPosition();
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude), Distance.FromKilometers(5)));
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude), Distance.FromKilometers(1)));
             //  }
             /* else
               {
