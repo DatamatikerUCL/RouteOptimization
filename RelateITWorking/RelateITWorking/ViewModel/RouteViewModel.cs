@@ -19,13 +19,15 @@ namespace RelateITWorking.ViewModel
 
         public RouteViewModel(int routeId)
         {
-            _route = _routeRepo.GetRoute(routeId);
             _routeRepo = RouteRepo.GetInstance();
+            _route = _routeRepo.GetRoute(routeId);
+
 
         }
 
         public RouteViewModel()
         {
+
         }
 
         public Route GetRoute()
@@ -58,6 +60,11 @@ namespace RelateITWorking.ViewModel
             }
 
             throw new InvalidDataException("Not the right data");
+        }
+
+        public int GetRouteId()
+        {
+            return _route.Id;
         }
     }
 }

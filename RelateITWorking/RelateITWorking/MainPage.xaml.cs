@@ -37,7 +37,8 @@ namespace RelateIT
             // GetDeviceLocationAsync();
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
 
-            _routeViewModel = new RouteViewModel();
+
+
             _routeOverviewViewModel = new RouteOverviewViewModel();
 
 
@@ -45,6 +46,8 @@ namespace RelateIT
 
             for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
             {
+                // måske ændres
+                _routeViewModel = new RouteViewModel(i);
                 PlacePins(i);
             }
 
