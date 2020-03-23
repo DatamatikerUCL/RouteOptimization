@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning.Datastructures;
 using System.Linq;
 
-namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
     public class Graph
     {

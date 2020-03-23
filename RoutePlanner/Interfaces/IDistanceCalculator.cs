@@ -1,6 +1,6 @@
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning.Datastructures;
 
-namespace RouteOptimization.RoutePlanner.Interfaces
+namespace RouteOptimization.RoutePlanning.Interfaces
 {
     public interface IDistanceCalculator
     {

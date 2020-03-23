@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RouteOptimization.RoutePlanner;
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning;
+using RouteOptimization.RoutePlanning.Datastructures;
 using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest

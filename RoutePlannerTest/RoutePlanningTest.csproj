@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RoutePlanner\RoutePlanner.csproj" />
+    <ProjectReference Include="..\RoutePlanner\RoutePlanning.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using RouteOptimization.RoutePlanner.Datastructures;
-using RouteOptimization.RoutePlanner.Interfaces;
+using RouteOptimization.RoutePlanning.Datastructures;
+using RouteOptimization.RoutePlanning.Interfaces;
 
-namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
     public class ChristofidesAlgorithmRoutePlanner : IRoutePlanner
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
     public class PerfectMatching
     {

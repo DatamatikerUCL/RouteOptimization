@@ -1,9 +1,9 @@
-using RouteOptimization.RoutePlanner.Datastructures;
-using RouteOptimization.RoutePlanner.Interfaces;
+using RouteOptimization.RoutePlanning.Datastructures;
+using RouteOptimization.RoutePlanning.Interfaces;
 using System;
 using System.Collections.Immutable;
 
-namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 {
     public class NearestNeighbourRoutePlanner : IRoutePlanner
     {

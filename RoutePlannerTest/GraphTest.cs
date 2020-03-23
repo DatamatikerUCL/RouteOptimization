@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RouteOptimization.RoutePlanner.Datastructures;
-using RouteOptimization.RoutePlanner.Interfaces;
-using RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm;
+using RouteOptimization.RoutePlanning.Datastructures;
+using RouteOptimization.RoutePlanning.Interfaces;
+using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm;
 using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest

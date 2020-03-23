@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace RouteOptimization.RoutePlanner.Datastructures
+namespace RouteOptimization.RoutePlanning.Datastructures
 {
     public interface IPlannable
     {

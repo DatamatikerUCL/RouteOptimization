@@ -1,6 +1,6 @@
 using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning.Datastructures;
 using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest

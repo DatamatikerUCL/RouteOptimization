@@ -1,4 +1,4 @@
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning.Datastructures;
 
 namespace RoutePlannerTest.InterfaceImplementations
 {

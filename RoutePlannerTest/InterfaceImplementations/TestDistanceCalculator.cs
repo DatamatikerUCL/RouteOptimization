@@ -1,6 +1,6 @@
 using System;
-using RouteOptimization.RoutePlanner.Datastructures;
-using RouteOptimization.RoutePlanner.Interfaces;
+using RouteOptimization.RoutePlanning.Datastructures;
+using RouteOptimization.RoutePlanning.Interfaces;
 
 namespace RoutePlannerTest.InterfaceImplementations
 {

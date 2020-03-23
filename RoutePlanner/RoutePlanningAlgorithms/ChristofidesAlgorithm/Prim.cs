@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
-using RouteOptimization.RoutePlanner.Datastructures;
+using RouteOptimization.RoutePlanning.Datastructures;
 
-namespace RouteOptimization.RoutePlanner.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
 {
     public static class Prim
     {

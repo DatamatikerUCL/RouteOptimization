@@ -1,4 +1,4 @@
-namespace RouteOptimization.RoutePlanner.Datastructures
+namespace RouteOptimization.RoutePlanning.Datastructures
 {
     public interface ILocateable
     {
