@@ -6,7 +6,7 @@ using RouteOptimization.RoutePlanning;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RoutePlannerTest.InterfaceImplementations;
 
-namespace RoutePlannerTest
+namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
     public class RouteTest

@@ -4,7 +4,7 @@ using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm;
 using RoutePlannerTest.InterfaceImplementations;
 
-namespace RoutePlannerTest
+namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
     public class EdgeTest

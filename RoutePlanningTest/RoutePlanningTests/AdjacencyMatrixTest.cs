@@ -5,7 +5,7 @@ using RouteOptimization.RoutePlanning.Interfaces;
 using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm;
 using RoutePlannerTest.InterfaceImplementations;
 
-namespace RoutePlannerTest
+namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
     public class AdjacencyMatrixTest
