@@ -41,7 +41,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
             foreach (var location in remaining)
             {
-                double tempDistance = _distanceCalculator.CalculateDistanceBetweenLocations(current, location);
+                double tempDistance = _distanceCalculator.CalculateDistanceBetweenILocateables(current, location);
                 if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < tolerance)
                 {
                     smallestDistance = tempDistance;

@@ -4,6 +4,6 @@ namespace RouteOptimization.RoutePlanning.Interfaces
 {
     public interface IDistanceCalculator
     {
-        double CalculateDistanceBetweenLocations(ILocateable firstLocation, ILocateable secondLocation);
+        double CalculateDistanceBetweenILocateables(ILocateable firstLocateable, ILocateable secondLocateable);
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using RouteOptimization.RoutePlanner.Input;
+using System;
 
 namespace RouteOptimization.RoutePlanner
 {
-    public class Planner
+    public class Planner : IRouteInputBoundary
     {
     }
 }

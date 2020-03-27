@@ -54,7 +54,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAl
             }
             else
             {
-                return _calculator.CalculateDistanceBetweenLocations(locateable1, locateable2);
+                return _calculator.CalculateDistanceBetweenILocateables(locateable1, locateable2);
             }
         }
         public Graph ToGraph()
