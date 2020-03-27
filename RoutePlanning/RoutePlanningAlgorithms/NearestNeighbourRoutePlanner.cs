@@ -14,7 +14,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
             _distanceCalculator = calculator;
         }
 
-        public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
+        public IPlannable PlanIPlannable(IPlannable route, IPlannableFactory factory)
         {
             var current = route.StartLocation;
             var remaining = route.Locations.Remove(route.StartLocation);

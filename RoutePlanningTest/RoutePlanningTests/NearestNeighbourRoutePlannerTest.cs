@@ -52,7 +52,7 @@ namespace RoutePlannerTest.RoutePlanningTest
 
             IPlannable routeToOrder = new TestPlannable(_startLocation, _locations);
 
-            IPlannable route = temp.PlanRoute(routeToOrder, _testFactory);
+            IPlannable route = temp.PlanIPlannable(routeToOrder, _testFactory);
 
             Assert.AreEqual(route.Locations[2], _orderedRoute.Locations[2]);
 
