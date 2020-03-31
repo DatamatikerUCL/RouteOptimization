@@ -16,9 +16,22 @@ namespace RelateIT.Views
         public LoginPage()
         {
             InitializeComponent();
+            Init();
         }
 
-        private async void Btn_Signin_Clicked(object sender, EventArgs e)
+        private void Init()
+        {
+            BackgroundColor = Constants.BackgroundColor;
+            lbl_Username.TextColor = Constants.MainTextColor;
+            lbl_Password.TextColor = Constants.MainTextColor;
+            ActivitySpinner.IsVisible = false;
+            LoginIcon.HeightRequest = Constants.LoginIconHeigth;
+
+            Entry_Username.Completed += (s, e) => Entry_Password.Focus();
+            Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
+        }
+
+        async void Btn_Signin_Clicked(object sender, EventArgs e)
         {
             User user = new User(Entry_Username.Text, Entry_Password.Text);
             if (user.CheckInformation())

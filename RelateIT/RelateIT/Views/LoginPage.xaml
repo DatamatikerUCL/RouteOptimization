@@ -1,15 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="RelateIT.Views.LoginPage">
-    <StackLayout>
-        <Label x:Name="lbl_Username" Text="Username"></Label>
-        <Entry x:Name="Entry_Username" Placeholder="Username"></Entry>
-        <Label x:Name="lbl_Password" Text="Password"></Label>
-        <Entry x:Name="Entry_Password" Placeholder="Password"></Entry>
-        <Button x:Name="Btn_Signin" Text="Sign in" Clicked="Btn_Signin_Clicked"></Button>
+    
+    <StackLayout x:Name="MasterLayout">
+
+        <StackLayout x:Name="LogoStack">
+            <Image x:Name="LoginIcon" Source="LoginIcon.png" Margin="0,80,0,0"></Image>
+        </StackLayout>
+
+        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness" Phone="40,0,40,0" Tablet="140,150,140,0"></OnIdiom>
+            </StackLayout.Padding>
+
+            <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="True"></ActivityIndicator>
+            
+            <Label x:Name="lbl_Username" Text="Username"></Label>
+            <Entry x:Name="Entry_Username" Placeholder="Username"></Entry>
+            <Label x:Name="lbl_Password" Text="Password"></Label>
+            <Entry x:Name="Entry_Password" Placeholder="Password"></Entry>
+            <Button x:Name="Btn_Signin" Text="Sign in" Clicked="Btn_Signin_Clicked"></Button>
+        </StackLayout>
     </StackLayout>
 </ContentPage>
