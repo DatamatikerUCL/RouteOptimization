@@ -34,6 +34,7 @@ namespace RelateIT.Views
         async void Btn_Signin_Clicked(object sender, EventArgs e)
         {
             User user = new User(Entry_Username.Text, Entry_Password.Text);
+            await App.Database.SaveItemAsync(user);
             if (user.CheckInformation())
             {
                 await DisplayAlert("Login", "Login Success", "OK");

@@ -8,7 +8,18 @@ namespace RelateIT
 {
     public partial class App : Application
     {
-
+        private static UserDateBase database;
+        public static UserDateBase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new UserDateBase();
+                }
+                return database;
+            }
+        }
         public App()
         {
             InitializeComponent();
