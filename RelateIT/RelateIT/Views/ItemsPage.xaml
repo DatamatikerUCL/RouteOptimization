@@ -12,6 +12,7 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
+        <Label x:Name="Lbl_tempuser"></Label>
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"

@@ -24,6 +24,9 @@ namespace RelateIT.Views
         {
             InitializeComponent();
 
+            User tempuser = App.UserDatebase.GetUser();
+            Lbl_tempuser.Text = tempuser.Username;
+
             BindingContext = viewModel = new ItemsViewModel();
         }
 
