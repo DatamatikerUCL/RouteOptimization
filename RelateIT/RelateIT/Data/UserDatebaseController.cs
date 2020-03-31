@@ -16,7 +16,7 @@ namespace RelateIT.Data
             database.CreateTable<User>();
         }
 
-        public User GetUser()
+        public User GetUser(int id)
         {
             lock (locker)
             {
@@ -26,7 +26,7 @@ namespace RelateIT.Data
                 }
                 else
                 {
-                    return database.Table<User>().First();
+                    return database.Table<User>().Where(user => user.ID == id).FirstOrDefault();
                 }
             }
         }
