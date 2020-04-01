@@ -14,7 +14,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
             _distanceCalculator = calculator;
         }
 
-        public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
+        public IPlannable PlanIPlannable(IPlannable route, IPlannableFactory factory)
         {
             var current = route.StartLocation;
             var remaining = route.Locations.Remove(route.StartLocation);
@@ -41,7 +41,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
             foreach (var location in remaining)
             {
-                double tempDistance = _distanceCalculator.CalculateDistanceBetweenLocations(current, location);
+                double tempDistance = _distanceCalculator.CalculateDistanceBetweenILocateables(current, location);
                 if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < tolerance)
                 {
                     smallestDistance = tempDistance;

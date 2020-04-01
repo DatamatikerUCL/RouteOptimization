@@ -60,7 +60,7 @@ namespace RoutePlannerTest.RoutePlanningTest
 
             Assert.AreEqual(
                 temp.Matrix[1][0],
-                _testDistanceCalculator.CalculateDistanceBetweenLocations(
+                _testDistanceCalculator.CalculateDistanceBetweenILocateables(
                     _testRoute.Locations[1],
                     _testRoute.Locations[0]));
         }
@@ -113,7 +113,7 @@ namespace RoutePlannerTest.RoutePlanningTest
             
             Graph newGraph = temp.ToGraph();
 
-            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenLocations(locationOne, locationTwo), newGraph.Weights[0]);
+            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationTwo), newGraph.Weights[0]);
         }
 
         [TestMethod]

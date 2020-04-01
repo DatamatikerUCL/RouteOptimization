@@ -6,7 +6,7 @@ namespace RoutePlannerTest.InterfaceImplementations
 {
     public class TestDistanceCalculator : IDistanceCalculator
     {
-        public double CalculateDistanceBetweenLocations(ILocateable firstLocation, ILocateable secondLocation)
+        public double CalculateDistanceBetweenILocateables(ILocateable firstLocation, ILocateable secondLocation)
         {
             double firstDistance = CalculateDistanceFromZero(firstLocation.Longtitude, firstLocation.Latitude);
             double secondDistance = CalculateDistanceFromZero(secondLocation.Longtitude, secondLocation.Latitude);

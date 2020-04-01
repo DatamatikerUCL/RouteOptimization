@@ -14,7 +14,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAl
             _calculator = calculator;
         }
 
-        public IPlannable PlanRoute(IPlannable route, IPlannableFactory factory)
+        public IPlannable PlanIPlannable(IPlannable route, IPlannableFactory factory)
         {
             Graph minimumRouteTree = CreateMinimumSpanningTree(route);
             Graph perfectMatching = CalculatePerfectMatching(minimumRouteTree);
