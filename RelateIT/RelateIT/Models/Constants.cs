@@ -17,7 +17,6 @@ namespace RelateIT.Models
 
         public static int LoginIconHeigth = 120;
 
-
         public const string DatabaseFilename = "TestDB.db3";
 
         public const SQLite.SQLiteOpenFlags Flags =
@@ -27,14 +26,5 @@ namespace RelateIT.Models
             SQLite.SQLiteOpenFlags.Create |
             // enable multi-threaded database access
             SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DatabasePath
-        {
-            get
-            {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                return Path.Combine(basePath, DatabaseFilename);
-            }
-        }
     }
 }
