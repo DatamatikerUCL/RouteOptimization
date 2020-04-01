@@ -16,13 +16,13 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
         public IPlannable PlanIPlannable(IPlannable route, IPlannableFactory factory)
         {
-            var current = route.StartLocation;
-            var remaining = route.Locations.Remove(route.StartLocation);
-            var path = ImmutableList<ILocateable>.Empty.Add(route.StartLocation);
+            ILocateable current = route.StartLocation;
+            ImmutableList<ILocateable> remaining = route.Locations.Remove(route.StartLocation);
+            ImmutableList<ILocateable> path = ImmutableList<ILocateable>.Empty.Add(route.StartLocation);
 
             while (!remaining.IsEmpty) 
             {
-                var next = Closest(current, remaining);
+                ILocateable next = Closest(current, remaining);
                 path = path.Add(next);
 
                 remaining = remaining.Remove(next);
@@ -39,7 +39,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
             double smallestDistance = 0;
             ILocateable nextLocation = current;
 
-            foreach (var location in remaining)
+            foreach (ILocateable location in remaining)
             {
                 double tempDistance = _distanceCalculator.CalculateDistanceBetweenILocateables(current, location);
                 if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < tolerance)

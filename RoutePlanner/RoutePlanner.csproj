@@ -8,4 +8,8 @@
     <Folder Include="Output\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RoutePlanning\RoutePlanning.csproj" />
+  </ItemGroup>
+
 </Project>

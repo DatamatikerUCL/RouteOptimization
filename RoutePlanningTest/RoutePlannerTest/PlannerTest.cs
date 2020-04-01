@@ -28,11 +28,5 @@ namespace RoutePlanningTest.RoutePlannerTest
 
             Assert.IsInstanceOfType(temp, typeof(IRouteInputBoundary));
         }
-
-        [TestMethod]
-        public void GetAvailableLocations()
-        {
-
-        }
     }
 }
