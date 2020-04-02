@@ -19,7 +19,7 @@ namespace RelateIT.iOS
             UIApplication.Main(args, null, "AppDelegate");
 
             PromptLocationPermission();
-           
+
         }
 
         public static async void PromptLocationPermission()
@@ -38,7 +38,8 @@ namespace RelateIT.iOS
                     }
 
                     var alert = UIAlertController.Create("Need Location", "We need your location", UIAlertControllerStyle.Alert);
-                    alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Destructive, (action) => {
+                    alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Destructive, (action) =>
+                    {
                         // otherTitle();
                     }));
                     alert.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null));
@@ -48,6 +49,11 @@ namespace RelateIT.iOS
                 var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
                 status = results[Permission.Location];
             }
+        }
+
+        public void OnSaveInstance(NSBundle savedInstance)
+        {
+
         }
     }
 }

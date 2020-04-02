@@ -32,11 +32,28 @@ namespace RelateIT
         private IDataAccessable _dataAcesser;
         public MainPage()
         {
-            InitializeComponent();
             _dataAcesser = new MockRouteData();
-            // GetDeviceLocationAsync();
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
             _routeOverviewViewModel = new RouteOverviewViewModel();
+            InitializeComponent();
+
+
+
+            if (Device.Idiom == TargetIdiom.Phone)
+            {
+                PhoneView.IsVisible = true;
+                TabletView.IsVisible = false;
+                Task.Factory.StartNew(CheckLocationPermission);
+
+            }
+            else
+            {
+                PhoneView.IsVisible = false;
+                TabletView.IsVisible = true;
+                Task.Factory.StartNew(CheckLocationPermission);
+
+            }
+
 
             for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
             {
@@ -48,26 +65,9 @@ namespace RelateIT
                 }
             }
 
-
-            if (Device.Idiom == TargetIdiom.Phone)
-            {
-                PhoneView.IsVisible = true;
-                TabletView.IsVisible = false;
-                Task.Factory.StartNew(CheckLocationPermission);
-                CenterOnUserLocation();
-
-            }
-            else
-            {
-                PhoneView.IsVisible = false;
-                TabletView.IsVisible = true;
-                Task.Factory.StartNew(CheckLocationPermission);
-                CenterOnUserLocation();
-
-            }
-
-
-
+            CenterOnRoute();
+            // GetDeviceLocationAsync();
+            //CenterOnUserLocation();
 
         }
 
@@ -112,6 +112,13 @@ namespace RelateIT
                   var requestPermission = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
               }*/
 
+        }
+
+
+        public async void CenterOnRoute()
+        {
+            var routePosition = new Position(55.4211854, 10.3507287);
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(routePosition, Distance.FromKilometers(2)));
         }
 
         public async void CheckLocationPermission()
