@@ -2,7 +2,10 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Vml;
+using Org.Apache.Http.Client.Methods;
 using Plugin.Geolocator;
 using Xamarin.Forms;
 using RelateIT.Interfaces;
@@ -13,11 +16,10 @@ using RelateIT.Models;
 using RelateIT.Repositories;
 using RelateITWorking;
 using RelateITWorking.ViewModel;
-using Xamarin.Forms.GoogleMaps;
 using Permission = Plugin.Permissions.Abstractions.Permission;
-using Xamarin.Forms.Xaml;
 using Distance = Xamarin.Forms.Maps.Distance;
 using MapSpan = Xamarin.Forms.Maps.MapSpan;
+using Xamarin.Forms.Maps;
 using Pin = Xamarin.Forms.Maps.Pin;
 using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
@@ -34,7 +36,8 @@ namespace RelateIT
         private readonly RouteOverviewViewModel _routeOverviewViewModel;
         private readonly RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
-        internal static string _googleDirectionApiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=src_locn&destination=dest_lcn&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
+
+
         public MainPage()
         {
             _dataAcesser = new MockRouteData();
@@ -89,14 +92,17 @@ namespace RelateIT
                     PhoneView.RowDefinitions.Clear();
                     PhoneView.ColumnDefinitions.Clear();
                     PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2.5, GridUnitType.Star) });
-                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition
+                    { Width = new GridLength(1, GridUnitType.Star) });
+                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition
+                    { Width = new GridLength(1, GridUnitType.Star) });
                 }
                 else
                 {
                     PhoneView.RowDefinitions.Clear();
                     PhoneView.ColumnDefinitions.Clear();
-                    PhoneView.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) });
+                    PhoneView.ColumnDefinitions.Add(
+                        new ColumnDefinition { Width = new GridLength(10, GridUnitType.Star) });
                     PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(4, GridUnitType.Star) });
                     PhoneView.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
@@ -110,7 +116,8 @@ namespace RelateIT
             // if (status.Equals(PermissionStatus.Granted))
             // {
             var position = await GetPosition();
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude), Distance.FromKilometers(1)));
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude),
+                Distance.FromKilometers(1)));
             //  }
             /* else
               {
@@ -219,7 +226,8 @@ namespace RelateIT
                 Label = _routeViewModel.GetRouteName(),
                 Address = _routeViewModel.GetRouteAdress(routeId),
                 Type = PinType.Place,
-                Position = new Position(_routeViewModel.GetRouteLatitude(routeId), _routeViewModel.GetRouteLongitude(routeId))
+                Position = new Position(_routeViewModel.GetLocationLatitude(routeId),
+                    _routeViewModel.GetLocationLongitude(routeId))
             };
             map.Pins.Add(pin);
         }
@@ -229,6 +237,17 @@ namespace RelateIT
 
         }
 
+        private void DrawPath()
+        {
+            Polyline polyline = new Polyline
+            {
+                StrokeColor = Color.Aqua,
+                StrokeWidth = 10,
+                Geopath =
+                {
 
+                }
+            };
+        }
     }
 }

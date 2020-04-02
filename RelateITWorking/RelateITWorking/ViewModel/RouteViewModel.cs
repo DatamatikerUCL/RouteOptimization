@@ -35,12 +35,12 @@ namespace RelateITWorking.ViewModel
             return _route;
         }
 
-        public Double GetRouteLatitude(int routeId)
+        public Double GetLocationLatitude(int routeId)
         {
             return _route.Locations[routeId].Latitude;
         }
 
-        public Double GetRouteLongitude(int routeId)
+        public Double GetLocationLongitude(int routeId)
         {
             return _route.Locations[routeId].Longtitude;
         }
