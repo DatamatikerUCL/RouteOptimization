@@ -13,9 +13,13 @@ using RelateIT.Models;
 using RelateIT.Repositories;
 using RelateITWorking;
 using RelateITWorking.ViewModel;
+using Xamarin.Forms.GoogleMaps;
 using Permission = Plugin.Permissions.Abstractions.Permission;
-using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using Distance = Xamarin.Forms.Maps.Distance;
+using MapSpan = Xamarin.Forms.Maps.MapSpan;
+using Pin = Xamarin.Forms.Maps.Pin;
+using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
 
 namespace RelateIT
@@ -30,6 +34,7 @@ namespace RelateIT
         private readonly RouteOverviewViewModel _routeOverviewViewModel;
         private readonly RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
+        internal static string _googleDirectionApiUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=src_locn&destination=dest_lcn&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
         public MainPage()
         {
             _dataAcesser = new MockRouteData();
@@ -217,6 +222,11 @@ namespace RelateIT
                 Position = new Position(_routeViewModel.GetRouteLatitude(routeId), _routeViewModel.GetRouteLongitude(routeId))
             };
             map.Pins.Add(pin);
+        }
+
+        private void UpdateCameraPosition(Location position)
+        {
+
         }
 
 
