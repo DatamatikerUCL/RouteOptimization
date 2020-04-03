@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
@@ -76,6 +77,7 @@ namespace RelateIT
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
+            DrawPath();
 
         }
 
@@ -239,15 +241,30 @@ namespace RelateIT
 
         private void DrawPath()
         {
+            List<Location> locations = new List<Location>();
+            foreach (Location location in _routeViewModel.GetRoute().Locations)
+            {
+                locations.Add(location);
+            }
+
+            List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
+
+
+
             Polyline polyline = new Polyline
             {
-                StrokeColor = Color.Aqua,
+                StrokeColor = Color.Red,
                 StrokeWidth = 10,
-                Geopath =
-                {
 
-                }
             };
+
+            foreach (Position p in positions)
+            {
+                polyline.Geopath.Add(p);
+            }
+
+            map.MapElements.Add(polyline);
         }
+
     }
 }
