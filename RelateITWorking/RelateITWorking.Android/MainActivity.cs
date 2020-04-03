@@ -9,6 +9,9 @@ using Plugin.Permissions;
 using Position = Xamarin.Forms.Maps.Position;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+/*using TK.CustomMap.Api.Google;
+using TK.CustomMap.Droid;*/
+
 
 namespace RelateIT.Droid
 {
@@ -25,13 +28,14 @@ namespace RelateIT.Droid
             ToolbarResource = Resource.Layout.Toolbar;*/
 
             base.OnCreate(savedInstanceState);
-
+            //GmsDirection.Init("AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM");
+            //TKGoogleMaps.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            location = new Location(); 
+            location = new Location();
 
 
             location = GetLastKnownLocation().Result;
@@ -40,12 +44,12 @@ namespace RelateIT.Droid
             {
 
             }
-            
+
         }
 
         public void OnMapReady(GoogleMap map)
         {
-         
+
             // Do something with the map, i.e. add markers, move to a specific location, etc.
             map.MapType = GoogleMap.MapTypeNormal;
             map.UiSettings.ZoomControlsEnabled = true;
@@ -62,21 +66,21 @@ namespace RelateIT.Droid
              Manifest.Permission.AccessFineLocation
          };*/
 
-        public Task<Location>GetLastKnownLocation()
+        public Task<Location> GetLastKnownLocation()
         {
             var location = Geolocation.GetLastKnownLocationAsync();
-            
+
 
             return location;
         }
 
-        
-       protected override void OnStart()
-       {
-           base.OnStart();
 
-       }
-        
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+        }
+
         /*
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
@@ -111,12 +115,12 @@ namespace RelateIT.Droid
                 base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }*/
-       
-       
+
+
         protected override void OnSaveInstanceState(Bundle savedInstanceState)
         {
             base.OnSaveInstanceState(savedInstanceState);
-     
+
 
         }
     }

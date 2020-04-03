@@ -234,11 +234,6 @@ namespace RelateIT
             map.Pins.Add(pin);
         }
 
-        private void UpdateCameraPosition(Location position)
-        {
-
-        }
-
         private void DrawPath()
         {
             List<Location> locations = new List<Location>();

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             xmlns:tk="clr-namespace:TK.CustomMap;assembly=TK.CustomMap" 
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
              mc:Ignorable="d"
              Title="RelateIT"
@@ -21,7 +22,24 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <maps:Map x:Name="map" MapType="Street" IsShowingUser="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" />
-            
+            <!--<tk:TKCustomMap MapRegion="{Binding MapRegion}"
+                            IsShowingUser="{Binding IsShowingUser}"
+                            IsClusteringEnabled="{Binding IsClusteringEnabled}"
+                            Pins="{Binding Pins}"
+                            PinSelectedCommand="{Binding PinSelectedCommand}"
+                            PinDragEndCommand="{Binding PinDragEndCommand}"
+                            Routes="{Binding Routes}"
+                            RouteClickedCommand="{Binding RouteClickedCommand}"
+                            Polylines="{Binding Polylines}"
+                            Polygons="{Binding Polygons}"
+                            Circles="{Binding Circles}"
+                            TilesUrlOptions="{Binding TileOptions}"
+                            MapFunctions="{Binding MapFunctions}"
+                            SelectedPin="{Binding SelectedPin}"
+                            MapClickedCommand="{Binding MapClickedCommand}"
+                            MapLongPressCommand="{Binding MapLongPressCommand}"
+                            CalloutClickedCommand="{Binding CalloutClickedCommand}" 
+                            x:Name="map"/> -->
             <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0"  HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
         </Grid>
 
