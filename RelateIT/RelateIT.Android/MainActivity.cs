@@ -16,10 +16,11 @@ using RelateIT.Droid;
 using Android.Gms.Maps.Model;
 using Xamarin.Forms.Maps;
 using RelateIT;
+using Plugin.Permissions;
 
 namespace RelateIT.Droid
 {
-    [Activity(Label = "RelateIT", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "RelateIT", Icon = "@mipmap/icon", Theme = "@style/AppTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
 
@@ -28,17 +29,19 @@ namespace RelateIT.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+            
         }
 
         public void OnMapReady(GoogleMap map)
         {
+         
             // Do something with the map, i.e. add markers, move to a specific location, etc.
             map.MapType = GoogleMap.MapTypeNormal;
             map.UiSettings.ZoomControlsEnabled = true;
@@ -48,47 +51,24 @@ namespace RelateIT.Droid
 
         const int RequestLocationId = 0;
 
-        readonly string[] LocationPermissions =
-        {
-            Manifest.Permission.AccessCoarseLocation,
-            Manifest.Permission.AccessFineLocation
-        };
 
-        protected override void OnStart()
-        {
-            base.OnStart();
+        /* readonly string[] LocationPermissions =
+         {
+             Manifest.Permission.AccessCoarseLocation,
+             Manifest.Permission.AccessFineLocation
+         };*/
 
-            if ((int)Build.VERSION.SdkInt >= 23)
-            {
-                if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted)
-                {
+        
+       protected override void OnStart()
+       {
+           base.OnStart();
 
-                    RequestPermissions(LocationPermissions, RequestLocationId);
-                    //Position position = new Position(LocationHelper.OnGetDeviceLastLocation().Result.Latitude, LocationHelper.OnGetDeviceLastLocation().Result.Longitude);
-                    //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-                    //Map map = new Map(mapSpan);
-                }
-                else
-                {
-                    //Position position = new Position(LocationHelper.OnGetCurrentLocation().Result.Latitude, LocationHelper.OnGetCurrentLocation().Result.Longitude);
-                    //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-                    //Map map = new Map(mapSpan);
-
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    AlertDialog alert = dialog.Create();
-                    alert.SetTitle("Adgang allerede givet");
-                    alert.SetMessage("Adgang er givet til lokationen");
-                    alert.Show();
-                }
-            }
-        }
-
+       }
+        
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
 
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             if (requestCode == RequestLocationId)
             {
