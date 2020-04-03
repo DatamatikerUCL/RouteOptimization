@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="RelateITWorking.View.LoginPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Margin="10">Username</Label>
+            <Entry x:Name="usernameTextbox" Margin="10"></Entry>
+            <Label Margin="10">Password</Label>
+            <Entry x:Name="passwordTextbox" Margin="10"></Entry>
+            <Button x:Name="loginButton" Text="Login"></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
