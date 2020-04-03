@@ -9,5 +9,6 @@ namespace RouteOptimization.RoutePlanning.Datastructures
         public ILocateable StartLocation { get; }
 
         public int LocationCount { get; }
+        public double TotalLength();
     }
 }

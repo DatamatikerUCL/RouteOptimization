@@ -6,5 +6,6 @@ namespace RouteOptimization.RoutePlanning.Interfaces
     public interface IPlannableFactory
     {
         IPlannable NewIPlannable(ImmutableList<ILocateable> path);
+        IPlannable NewIPlannable(ImmutableList<ILocateable> path, IDistanceCalculator distanceCalculator);
     }
 }

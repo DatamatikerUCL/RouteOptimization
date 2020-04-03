@@ -1,6 +1,7 @@
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
@@ -16,11 +17,35 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
         public IPlannable PlanIPlannable(IPlannable route, IPlannableFactory factory)
         {
-            ILocateable current = route.StartLocation;
+            List<IPlannable> plannables = new List<IPlannable>();
+
+            foreach (ILocateable locateable in route.Locations)
+            {
+                IPlannable tempPlannable = Plan(locateable, route, factory);
+
+                plannables.Add(tempPlannable);
+            }
+
+            IPlannable shortestPath = plannables[0];
+
+            foreach (IPlannable plannable in plannables)
+            {
+                if (plannable.TotalLength() < shortestPath.TotalLength())
+                {
+                    shortestPath = plannable;
+                }
+            }
+
+            return shortestPath;
+        }
+
+        private IPlannable Plan(ILocateable locateable, IPlannable route, IPlannableFactory factory)
+        {
+            ILocateable current = locateable;
             ImmutableList<ILocateable> remaining = route.Locations.Remove(route.StartLocation);
             ImmutableList<ILocateable> path = ImmutableList<ILocateable>.Empty.Add(route.StartLocation);
 
-            while (!remaining.IsEmpty) 
+            while (!remaining.IsEmpty)
             {
                 ILocateable next = Closest(current, remaining);
                 path = path.Add(next);
@@ -30,7 +55,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
                 current = next;
             }
 
-            return factory.NewIPlannable(path);
+            return factory.NewIPlannable(path, _distanceCalculator);
         }
 
         private ILocateable Closest(ILocateable current, ImmutableList<ILocateable> remaining)

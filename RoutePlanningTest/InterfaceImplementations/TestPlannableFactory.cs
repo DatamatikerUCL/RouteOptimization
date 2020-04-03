@@ -10,5 +10,10 @@ namespace RoutePlannerTest.InterfaceImplementations
         {
             return new TestPlannable(path);
         }
+
+        public IPlannable NewIPlannable(ImmutableList<ILocateable> path, IDistanceCalculator distanceCalculator)
+        {
+            return new TestPlannable(path, distanceCalculator);
+        }
     }
 }
