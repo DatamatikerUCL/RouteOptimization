@@ -13,5 +13,16 @@ namespace RelateITUnitTest
         {
 
         }
+        [TestMethod]
+        public void TestPassword()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestSuccessfullLogin()
+        {
+
+        }
     }
 }

@@ -8,5 +8,24 @@ namespace RelateITUnitTest
     [TestClass]
     public class TestPolyline
     {
+        [TestMethod]
+        public void TestEndDestination()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestLineDrawn()
+        {
+
+        }
+
+        [TestMethod]
+        public void TestGeoPath()
+        {
+
+        }
+
+
     }
 }
