@@ -27,6 +27,12 @@
     <Reference Include="RelateIT.Android">
       <HintPath>..\RelateIT\RelateIT.Android\bin\Debug\RelateIT.Android.dll</HintPath>
     </Reference>
+    <Reference Include="RelateITWorking">
+      <HintPath>..\RelateITWorking\RelateITWorking\bin\Debug\netstandard2.0\ref\RelateITWorking.dll</HintPath>
+    </Reference>
+    <Reference Include="RelateITWorking.Android">
+      <HintPath>..\RelateITWorking\RelateITWorking.Android\bin\Debug\RelateITWorking.Android.dll</HintPath>
+    </Reference>
     <Reference Include="RoutePlanner">
       <HintPath>..\RoutePlanner\obj\Debug\netcoreapp3.1\RoutePlanner.dll</HintPath>
     </Reference>
