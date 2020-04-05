@@ -8,5 +8,10 @@ namespace RelateITUnitTest
     [TestClass]
     public class TestLogin
     {
+        [TestMethod]
+        public void TestEmail()
+        {
+
+        }
     }
 }
