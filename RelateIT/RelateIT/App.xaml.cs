@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using RelateIT.Services;
+
 using RelateIT.Views;
 using RelateIT.Data;
 
@@ -13,9 +13,7 @@ namespace RelateIT
         static UserDatebaseController userDatebase;
         public App()
         {
-            InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            InitializeComponent();           
             MainPage = new NavigationPage(new LoginPage());
         }
 

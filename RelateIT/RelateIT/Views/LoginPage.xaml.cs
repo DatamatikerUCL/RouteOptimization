@@ -38,7 +38,7 @@ namespace RelateIT.Views
             if (user.CheckInformation())
             {
                 await DisplayAlert("Login", "Login Success", "OK");
-                Application.Current.MainPage = new AppShell();
+                Application.Current.MainPage = new MainPage(user.ID);
             }
             else
             {
