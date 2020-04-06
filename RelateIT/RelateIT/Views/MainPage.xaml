@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              x:Class="RelateIT.Views.MainPage">
     <Grid>
-        <map:Map MapType="Street" HasZoomEnabled="True">            
+        <map:Map x:Name="Map" MapType="Street" HasZoomEnabled="True" IsShowingUser="True">            
         </map:Map>
     </Grid>
 </ContentPage>
