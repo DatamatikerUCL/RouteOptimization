@@ -24,5 +24,11 @@ namespace RelateITUnitTest
         {
 
         }
+
+        [TestMethod]
+        public void TestDatabaseContent()
+        {
+
+        }
     }
 }
