@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Froms.Maps;
+using Xamarin.Forms.Maps;
 
 namespace RelateIT.Models
 {
