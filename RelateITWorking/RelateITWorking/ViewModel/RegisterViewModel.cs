@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using RelateITWorking.Models;
 using Xamarin.Forms;
 
 namespace RelateITWorking.ViewModel
 {
-    class LoginViewmodel : INotifyPropertyChanged
+    class RegisterViewModel
     {
-        public Action DisplayInvalidLoginPrompt;
+
+        public Action DisplayInvalidRegistrationPrompt;
+        public Action DisplayValidRegistrationPrompt;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public User user;
         private string email;
@@ -34,19 +37,29 @@ namespace RelateITWorking.ViewModel
             }
         }
 
-        public ICommand SubmitCommand { protected set; get; }
+        public ICommand RegisterCommand { protected set; get; }
 
-        public LoginViewmodel()
+        public RegisterViewModel()
         {
-            SubmitCommand = new Command(OnSubmit);
+            RegisterCommand = new Command(OnRegister);
         }
 
-        public void OnSubmit()
+        public void OnRegister()
         {
-            if (Email != "kasper-hoffmann@hotmail.com" || Password != "!QAZ2wsx")
+            if (!Email.Contains("@") || IsPassStrongEnough(Password))
             {
-                DisplayInvalidLoginPrompt();
+                DisplayInvalidRegistrationPrompt();
             }
+            else
+            {
+                DisplayValidRegistrationPrompt();
+            }
+        }
+
+        //will check if the password is atleast 6 characters long, has one digit, and one non-alphanumerical character
+        public bool IsPassStrongEnough(string password)
+        {
+            return Regex.IsMatch(password, @"^.{6,}(?<=\d.*)(?<=[^a-zA-Z0-9].*)$");
         }
     }
 }

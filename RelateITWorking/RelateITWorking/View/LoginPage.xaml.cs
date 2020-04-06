@@ -35,6 +35,11 @@ namespace RelateITWorking.View
             await Navigation.PushAsync(new MainPage());
         }
 
+        private async void RegisterButton_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
+        }
+
 
     }
 }
