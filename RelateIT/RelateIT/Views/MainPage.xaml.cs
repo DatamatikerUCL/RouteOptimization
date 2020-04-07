@@ -20,5 +20,15 @@ namespace RelateIT.Views
         {
             InitializeComponent();
         }
+
+        private void Btn_RouteOverView_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_CreateNewRoute_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
