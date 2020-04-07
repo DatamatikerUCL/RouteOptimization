@@ -26,21 +26,22 @@ namespace RelateITWorking.View
             vm.DisplayValidRegistrationPrompt += () => DisplayAlert("Success", "Registration completed", "OK");
             InitializeComponent();
 
-            Email.Completed += (object sender, EventArgs e) =>
-            {
-                Password.Focus();
-            };
 
-            Password.Completed += (object sender, EventArgs e) =>
-            {
-                vm.RegisterCommand.Execute(null);
-            };
         }
 
-        public async void RegisterButton_OnClicked(object sender, EventArgs e)
+        public void InsertUser()
         {
-            await databaseAccess.SaveItemAsync(user);
-            await Navigation.PushAsync(new MainPage());
+            user = new User();
+            databaseAccess = new DatabaseAccess();
+            user.Email = Email.Text;
+            user.Password = Password.Text;
+            databaseAccess.AddUser(user);
+        }
+
+        public async void RegisterPageButton_OnClicked(object sender, EventArgs e)
+        {
+            InsertUser();
+            await Navigation.PushAsync(new LoginPage());
 
         }
     }

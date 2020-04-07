@@ -15,7 +15,7 @@ namespace RelateITWorking.ViewModel
         public Action DisplayInvalidRegistrationPrompt;
         public Action DisplayValidRegistrationPrompt;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        public User user;
+        public User user = new User();
         private string email;
         public string Email
         {

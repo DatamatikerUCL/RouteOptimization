@@ -3,73 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Office2010.PowerPoint;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using RelateITWorking.ExtensionClasses;
+using RelateITWorking.Interfaces;
 using RelateITWorking.Models;
 using SQLite;
+using Xamarin.Forms;
 
 namespace RelateITWorking
 {
     public class DatabaseAccess
     {
-        private static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
-        {
 
-            return new SQLiteAsyncConnection(DatabaseConn.DatabasePath, DatabaseConn.Flags);
-        });
+        private SQLiteConnection connection;
 
-        static SQLiteAsyncConnection Database => lazyInitializer.Value;
-        static bool initialized = false;
-
+        //CREATE  
         public DatabaseAccess()
         {
-            InitializeAsync().SafeFireAndForget(false);
+            connection = DependencyService.Get<ISQLite>().GetConnection();
+            connection.CreateTable<User>();
         }
 
-        async Task InitializeAsync()
+        //READ  
+        public IEnumerable<User> GetUsers()
         {
-            if (!initialized)
-            {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(DatabaseAccess).Name))
-                {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(DatabaseAccess)).ConfigureAwait(false);
-                    initialized = true;
-                }
-            }
+            var users = (from user in connection.Table<User>() select user);
+            return users.ToList();
+        }
+
+        //READ
+        public User GetUser(string email)
+        {
+            var user = (from tempUser in connection.Table<User>().Where(x => x.Email == email).Take(1) select tempUser);
+            return (User)user;
         }
 
 
-        public Task<List<User>> GetItemsAsync()
+        //INSERT  
+        public string AddUser(User user)
         {
-            return Database.Table<User>().ToListAsync();
+            connection.Insert(user);
+            return "success";
         }
-
-        public Task<List<User>> GetItemsNotDoneAsync()
+        //DELETE  
+        public string DeleteUser(int id)
         {
-            // SQL queries are also possible
-            return Database.QueryAsync<User>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-        }
-
-        public Task<User> GetItemAsync(int id)
-        {
-            return Database.Table<User>().Where(i => i.Id == id).FirstOrDefaultAsync();
-        }
-
-        public Task<int> SaveItemAsync(User item)
-        {
-            if (item.Id != 0)
-            {
-                return Database.UpdateAsync(item);
-            }
-            else
-            {
-                return Database.InsertAsync(item);
-            }
-        }
-
-        public Task<int> DeleteItemAsync(User item)
-        {
-            return Database.DeleteAsync(item);
+            connection.Delete<User>(id);
+            return "success";
         }
     }
 }

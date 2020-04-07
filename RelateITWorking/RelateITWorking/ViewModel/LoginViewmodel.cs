@@ -12,7 +12,7 @@ namespace RelateITWorking.ViewModel
     {
         public Action DisplayInvalidLoginPrompt;
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        public User user;
+        public User user = new User();
         private string email;
         public string Email
         {
