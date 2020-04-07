@@ -33,10 +33,10 @@ namespace RelateITWorking
         }
 
         //READ
-        public User GetUser(string email)
+        public IEnumerable<User> GetUser(string email)
         {
             var user = (from tempUser in connection.Table<User>().Where(x => x.Email == email).Take(1) select tempUser);
-            return (User)user;
+            return user;
         }
 
 

@@ -38,7 +38,7 @@ namespace RelateITWorking.View
 
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
-            user = databaseAccess.GetUser(registerVM.user.Email);
+            user = (User)databaseAccess.GetUser(registerVM.user.Email);
             if (user.Email.Equals(Email.Text) && user.Password == Password.Text)
             {
                 await Navigation.PushAsync(new MainPage());
