@@ -1,5 +1,6 @@
 ﻿using System;
 using RelateIT;
+using RelateITWorking.Models;
 using RelateITWorking.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,31 +10,43 @@ namespace RelateITWorking.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private DatabaseAccess databaseAccess;
+        private User user;
+        private RegisterViewModel registerVM;
+        private LoginViewmodel lVM;
 
         public LoginPage()
         {
-            var vm = new LoginViewmodel();
-            this.BindingContext = vm;
-            vm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
+            databaseAccess = new DatabaseAccess();
+            lVM = new LoginViewmodel();
+            registerVM = new RegisterViewModel();
+            this.BindingContext = lVM;
             InitializeComponent();
+            user = lVM.GetLatestRegistration();
 
-            Email.Completed += (object sender, EventArgs e) =>
-            {
-                Password.Focus();
-            };
-
-            Password.Completed += (object sender, EventArgs e) =>
-            {
-                vm.SubmitCommand.Execute(null);
-            };
 
         }
-
 
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+
+            if (user.Email.Equals(Email.Text) && user.Password.Equals(Password.Text))
+            {
+                await Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                DisplayAlert("Error", "Username or Password was wrong try again", "OK");
+            }
+
         }
+
+        private async void RegisterButton_OnClicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new RegisterPage());
+        }
+
 
 
     }

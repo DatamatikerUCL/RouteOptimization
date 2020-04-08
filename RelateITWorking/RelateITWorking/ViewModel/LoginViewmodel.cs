@@ -3,48 +3,38 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
+using RelateITWorking.Models;
 using Xamarin.Forms;
 
 namespace RelateITWorking.ViewModel
 {
-    class LoginViewmodel : INotifyPropertyChanged
+    class LoginViewmodel
     {
-        public Action DisplayInvalidLoginPrompt;
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Email"));
-            }
-        }
-        private string password;
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Password"));
-            }
-        }
+        private User user;
+        private DatabaseAccess databaseAccess;
+        private RegisterViewModel rVM;
 
-        public ICommand SubmitCommand { protected set; get; }
+
 
         public LoginViewmodel()
         {
-            SubmitCommand = new Command(OnSubmit);
+            databaseAccess = new DatabaseAccess();
+            rVM = new RegisterViewModel();
+
         }
 
-        public void OnSubmit()
+        public User GetUserFromDB(string email)
         {
-            if (email != "kasper-hoffmann@hotmail.com" || password != "!QAZ2wsx")
-            {
-                DisplayInvalidLoginPrompt();
-            }
+            user = databaseAccess.GetUser(email);
+            return user;
         }
+
+        public User GetLatestRegistration()
+        {
+            user = databaseAccess.GetLatestRegistration();
+            return user;
+        }
+
+
     }
 }
