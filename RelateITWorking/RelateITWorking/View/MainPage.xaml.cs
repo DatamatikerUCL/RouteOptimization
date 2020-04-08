@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Vml;
+using Newtonsoft.Json;
 using Org.Apache.Http.Client.Methods;
 using Plugin.Geolocator;
 using Xamarin.Forms;
@@ -37,6 +38,7 @@ namespace RelateIT
         private readonly RouteOverviewViewModel _routeOverviewViewModel;
         private readonly RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
+        private string directionsAPIURL = "";
 
 
         public MainPage()
@@ -236,6 +238,25 @@ namespace RelateIT
 
         private void DrawPath()
         {
+            GetJSON();
+
+            //Polyline polyline = new Polyline
+            //{
+            //    StrokeColor = Color.Red,
+            //    StrokeWidth = 10,
+
+            //};
+
+            //foreach (Position p in positions)
+            //{
+            //    polyline.Geopath.Add(p);
+            //}
+
+            //map.MapElements.Add(polyline);
+        }
+
+        public async void GetJSON()
+        {
             List<Location> locations = new List<Location>();
             foreach (Location location in _routeViewModel.GetRoute().Locations)
             {
@@ -244,21 +265,19 @@ namespace RelateIT
 
             List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
 
+            directionsAPIURL =
+                "https://maps.googleapis.com/maps/api/directions/json?origin=" + positions[0].Latitude + "," + positions[0].Longitude + "&destination=" + positions[2].Latitude + "," + positions[2].Longitude + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
-
-            Polyline polyline = new Polyline
+            var client = new System.Net.Http.HttpClient();
+            var response = await client.GetAsync(directionsAPIURL);
+            string directionsJSON = await response.Content.ReadAsStringAsync();
+            Route route = new Route();
+            if (directionsJSON != "")
             {
-                StrokeColor = Color.Red,
-                StrokeWidth = 10,
-
-            };
-
-            foreach (Position p in positions)
-            {
-                polyline.Geopath.Add(p);
+                route = JsonConvert.DeserializeObject<Route>(directionsJSON);
             }
 
-            map.MapElements.Add(polyline);
+
         }
 
     }

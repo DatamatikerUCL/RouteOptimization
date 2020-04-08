@@ -31,5 +31,10 @@ namespace RelateIT.Models
             EstimatedCompletionTime = _estimatedCompletionTime;
 
         }
+
+        public Route()
+        {
+
+        }
     }
 }
