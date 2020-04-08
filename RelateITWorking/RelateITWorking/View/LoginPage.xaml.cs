@@ -13,33 +13,24 @@ namespace RelateITWorking.View
         private DatabaseAccess databaseAccess;
         private User user;
         private RegisterViewModel registerVM;
+        private LoginViewmodel lVM;
 
         public LoginPage()
         {
             databaseAccess = new DatabaseAccess();
-            var LoginVm = new LoginViewmodel();
+            lVM = new LoginViewmodel();
             registerVM = new RegisterViewModel();
-            this.BindingContext = LoginVm;
-            LoginVm.DisplayInvalidLoginPrompt += () => DisplayAlert("Error", "Invalid Login, try again", "OK");
+            this.BindingContext = lVM;
             InitializeComponent();
+            user = lVM.GetLatestRegistration();
 
-            Email.Completed += (object sender, EventArgs e) =>
-            {
-                Password.Focus();
-            };
-
-            Password.Completed += (object sender, EventArgs e) =>
-            {
-                LoginVm.SubmitCommand.Execute(null);
-            };
 
         }
 
-
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
-            user = (User)databaseAccess.GetUser(registerVM.user.Email);
-            if (user.Email.Equals(Email.Text) && user.Password == Password.Text)
+
+            if (user.Email.Equals(Email.Text) && user.Password.Equals(Password.Text))
             {
                 await Navigation.PushAsync(new MainPage());
             }
@@ -55,6 +46,7 @@ namespace RelateITWorking.View
 
             await Navigation.PushAsync(new RegisterPage());
         }
+
 
 
     }
