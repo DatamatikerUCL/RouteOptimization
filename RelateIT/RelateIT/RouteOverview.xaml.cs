@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RelateIT.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,21 @@ namespace RelateIT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage
     {
+        public IList<Route> Routes;
         public RouteOverview()
         {
+            Routes = new List<Route>();
             InitializeComponent();
+            PopulateListView();
+            
+
+        }
+
+        public void PopulateListView()
+        {
+
+
+            BindingContext = this;
         }
     }
 }
