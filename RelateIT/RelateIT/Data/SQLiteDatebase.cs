@@ -13,8 +13,7 @@ namespace RelateIT.Data
         //SQLiteConnection GetConnection();
         public static SQLite.SQLiteConnection GetConnection()
         {
-            var sqliteFileName = "TestDB.db3";
-            string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var sqliteFileName = "TestDB.db3";           
             var path = Path.Combine(FileSystem.AppDataDirectory, sqliteFileName);
             var conn = new SQLite.SQLiteConnection(path);
             return conn;

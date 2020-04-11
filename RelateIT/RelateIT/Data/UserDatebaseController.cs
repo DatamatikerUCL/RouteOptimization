@@ -30,6 +30,20 @@ namespace RelateIT.Data
                 }
             }
         }
+        public User GetUser(string name)
+        {
+            lock (locker)
+            {
+                if (database.Table<User>().Count() == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return database.Table<User>().Where(user => user.Username == name).FirstOrDefault();
+                }
+            }
+        }
 
         public int SaveUser(User user)
         {
