@@ -6,6 +6,6 @@ namespace RelateITWorking.Interfaces
 {
     public interface IHelperConverter
     {
-        public string ConvertKommaToDot(double value);
+        string ConvertKommaToDots(double value);
     }
 }

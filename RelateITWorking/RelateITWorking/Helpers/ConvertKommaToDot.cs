@@ -8,13 +8,13 @@ namespace RelateITWorking.Helpers
     public class ConvertKommaToDot : IHelperConverter
     {
 
-        public string IHelperConverter.ConvertKommaToDot(double value)
+        public string ConvertKommaToDots(double value)
         {
             string tempDouble = "";
-       
+
             tempDouble = value.ToString();
             tempDouble = tempDouble.Replace(",", ".");
-          
+
 
             return tempDouble;
         }
