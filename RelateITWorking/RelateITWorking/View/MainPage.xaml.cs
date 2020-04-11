@@ -25,6 +25,7 @@ using Xamarin.Forms.Maps;
 using Pin = Xamarin.Forms.Maps.Pin;
 using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
+using RelateITWorking.Helpers;
 
 namespace RelateIT
 {
@@ -39,6 +40,7 @@ namespace RelateIT
         private readonly RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
         private string directionsAPIURL = "";
+        private ConvertKommaToDot _convertKomma;
 
 
         public MainPage()
@@ -46,6 +48,7 @@ namespace RelateIT
             _dataAcesser = new MockRouteData();
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
             _routeOverviewViewModel = new RouteOverviewViewModel();
+            _convertKomma = new ConvertKommaToDot();
             InitializeComponent();
 
 
@@ -266,7 +269,7 @@ namespace RelateIT
             List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
 
             directionsAPIURL =
-                "https://maps.googleapis.com/maps/api/directions/json?origin=" + positions[0].Latitude + "," + positions[0].Longitude + "&destination=" + positions[2].Latitude + "," + positions[2].Longitude + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
+                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma positions[0].Latitude + "," + positions[0].Longitude + "&destination=" + positions[2].Latitude + "," + positions[2].Longitude + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
             var client = new System.Net.Http.HttpClient();
             var response = await client.GetAsync(directionsAPIURL);

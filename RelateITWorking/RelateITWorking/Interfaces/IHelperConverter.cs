@@ -4,7 +4,8 @@ using System.Text;
 
 namespace RelateITWorking.Interfaces
 {
-    interface IHelperConverter
+    public interface IHelperConverter
     {
+        public string ConvertKommaToDot(double value);
     }
 }
