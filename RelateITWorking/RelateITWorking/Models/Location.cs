@@ -11,9 +11,11 @@ namespace RelateIT.Models
 
     public class Location : ILocateable
     {
-        public double Latitude { get; }
+        //Spørg de andre om dette!!
+        public double Latitude { get; set; }
 
-        public double Longtitude { get; }
+        //Spørg de andre om dette!!
+        public double Longtitude { get; set; }
 
         public string Adress { get; set; }
 

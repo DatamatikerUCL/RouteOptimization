@@ -19,7 +19,7 @@ using RelateIT.Repositories;
 using RelateITWorking;
 using RelateITWorking.ViewModel;
 using Permission = Plugin.Permissions.Abstractions.Permission;
-using Distance = Xamarin.Forms.Maps.Distance;
+
 using MapSpan = Xamarin.Forms.Maps.MapSpan;
 using Xamarin.Forms.Maps;
 using Pin = Xamarin.Forms.Maps.Pin;
@@ -28,6 +28,8 @@ using Position = Xamarin.Forms.Maps.Position;
 using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using Route = RelateIT.Models.Route;
+using Distance = Xamarin.Forms.Maps.Distance;
+using RelateIT.Repositories;
 
 namespace RelateIT
 {
@@ -43,6 +45,7 @@ namespace RelateIT
         private IDataAccessable _dataAcesser;
         private string directionsAPIURL = "";
         public ConvertKommaToDot _convertKomma;
+        private RootObject rootObject;
 
 
         public MainPage()
@@ -51,6 +54,7 @@ namespace RelateIT
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
             _routeOverviewViewModel = new RouteOverviewViewModel();
             _convertKomma = new ConvertKommaToDot();
+            rootObject = new RootObject();
             InitializeComponent();
 
 
@@ -245,19 +249,6 @@ namespace RelateIT
         {
             GetJSON();
 
-            //Polyline polyline = new Polyline
-            //{
-            //    StrokeColor = Color.Red,
-            //    StrokeWidth = 10,
-
-            //};
-
-            //foreach (Position p in positions)
-            //{
-            //    polyline.Geopath.Add(p);
-            //}
-
-            //map.MapElements.Add(polyline);
         }
 
         public async void GetJSON()
@@ -276,14 +267,75 @@ namespace RelateIT
             var client = new System.Net.Http.HttpClient();
             var response = await client.GetAsync(directionsAPIURL);
             string directionsJSON = await response.Content.ReadAsStringAsync();
-            Direction direction = new Direction();
+
             if (directionsJSON != "")
             {
-                direction = JsonConvert.DeserializeObject<Direction>(directionsJSON);
+                rootObject = JsonConvert.DeserializeObject<RootObject>(directionsJSON);
+
             }
 
 
         }
+
+        public List<Location> DecodePolylinePoints(string encodedPoints)
+        {
+            if (encodedPoints == null || encodedPoints == "") return null;
+            List<Location> poly = new List<Location>();
+            char[] polylinechars = encodedPoints.ToCharArray();
+            int index = 0;
+
+            int currentLat = 0;
+            int currentLng = 0;
+            int next5bits;
+            int sum;
+            int shifter;
+
+            try
+            {
+                while (index < polylinechars.Length)
+                {
+                    // calculate next latitude
+                    sum = 0;
+                    shifter = 0;
+                    do
+                    {
+                        next5bits = (int)polylinechars[index++] - 63;
+                        sum |= (next5bits & 31) << shifter;
+                        shifter += 5;
+                    } while (next5bits >= 32 && index < polylinechars.Length);
+
+                    if (index >= polylinechars.Length)
+                        break;
+
+                    currentLat += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+
+                    //calculate next longitude
+                    sum = 0;
+                    shifter = 0;
+                    do
+                    {
+                        next5bits = (int)polylinechars[index++] - 63;
+                        sum |= (next5bits & 31) << shifter;
+                        shifter += 5;
+                    } while (next5bits >= 32 && index < polylinechars.Length);
+
+                    if (index >= polylinechars.Length && next5bits >= 32)
+                        break;
+
+                    currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+                    Location p = new Location();
+                    p.Latitude = Convert.ToDouble(currentLat) / 100000.0;
+                    p.Longtitude = Convert.ToDouble(currentLng) / 100000.0;
+                    poly.Add(p);
+                }
+            }
+            catch (Exception ex)
+            {
+                // logo it
+            }
+            return poly;
+        }
+
 
     }
 }
