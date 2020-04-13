@@ -33,7 +33,7 @@ namespace RelateITWorking.View
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
 
-            if (user.Email.Equals(Email.Text) && hashing.ValidateSHA1Hash(Password.Text, user.Password))
+            if (user.Email.Equals(Email.Text) && hashing.ValidateMD5Hash(Password.Text, user.Password))
             {
                 await Navigation.PushAsync(new MainPage());
             }

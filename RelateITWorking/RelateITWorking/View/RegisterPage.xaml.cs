@@ -57,23 +57,27 @@ namespace RelateITWorking.View
             user.Email = EmailEntry.Text;
             email = user.Email;
             user.Password = PasswordEntry.Text;
-            if (IsPassStrongEnough(user.Password))
+            password = user.Password;
+            if (IsPassStrongEnough(password))
             {
-                hashing.ComputeSHA1Hash(user.Password);
+                string hashedPassword = hashing.ComputeMD5Hash(password);
+                user.Password = hashedPassword;
             }
             else
             {
                 DisplayAlert("Error", "Password is not strong enough, try using a symbol, numbers and letters", "OK");
             }
-            password = user.Password;
-            vm.RegisterUser(user);
+
+
             if (!email.Contains("@"))
             {
                 DisplayAlert("Error", "Email og password in wrong format", "OK");
             }
             else
             {
+                vm.RegisterUser(user);
                 DisplayAlert("Success", "User Registeret correctly", "OK");
+
             }
         }
     }
