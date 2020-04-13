@@ -41,7 +41,7 @@ namespace RelateIT.Services
 
             string key = mapKey;
 
-            string url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + key;
+            string url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&&" + mode + "&key=" + key;
 
             string json = "";
 

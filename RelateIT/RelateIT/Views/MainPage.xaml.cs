@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using RelateIT.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace RelateIT.Views
         public MainPage()
         {
             InitializeComponent();
-            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Map.VisibleRegion.Radius));
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(1)));
         }
             
         public MainPage(int id)
@@ -38,7 +37,7 @@ namespace RelateIT.Views
         }
         public void DrawTripOnMap(string json)
         {
-            var directionData = JsonConvert.DeserializeObject<RootObject>(json);
+            var directionData = JsonConvert.DeserializeObject<Services.RootObject>(json);
 
             var route = new List<Position>();
 
@@ -50,23 +49,18 @@ namespace RelateIT.Views
                 route.Add(tempStart);
                 route.Add(tempEnd);
             }
-
-
-            Xamarin.Forms.Maps.Polyline polyline = new Xamarin.Forms.Maps.Polyline
+            Polyline a = new Polyline
             {
                 StrokeColor = Color.Blue,
                 StrokeWidth = 12,
                 Geopath =
-                {
-                    new List<Position> = route
-                }
-                        
-
+                    {
+                        route
+                    }
             };
-            
-            ;
 
-            Map.MapElements.Add(polyline);
+            Map.MapElements.Add(a);           
+                    
 
 
         }
