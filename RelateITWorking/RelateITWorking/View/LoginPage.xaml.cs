@@ -16,6 +16,8 @@ namespace RelateITWorking.View
         private RegisterViewModel registerVM;
         private LoginViewmodel lVM;
         private Hashing hashing;
+        private string userEmail;
+        private string userPassword;
 
         public LoginPage()
         {
@@ -23,17 +25,23 @@ namespace RelateITWorking.View
             lVM = new LoginViewmodel();
             registerVM = new RegisterViewModel();
             hashing = new Hashing();
+            userEmail = "";
+
             this.BindingContext = lVM;
             InitializeComponent();
-            user = lVM.GetLatestRegistration();
+
+
 
 
         }
 
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
+            userEmail = LoginEmailEntry.Text;
+            userPassword = LoginPasswordEntry.Text;
+            user = lVM.GetUserFromDB(userEmail);
 
-            if (user.Email.Equals(Email.Text) && hashing.ValidateMD5Hash(Password.Text, user.Password))
+            if (user.Email.Equals(userEmail) && hashing.ValidateMD5Hash(userPassword, user.Password))
             {
                 await Navigation.PushAsync(new MainPage());
             }

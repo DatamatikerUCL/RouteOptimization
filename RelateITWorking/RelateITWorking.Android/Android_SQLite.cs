@@ -23,7 +23,7 @@ namespace RelateITWorking.Droid
         public SQLiteConnection GetConnection()
         {
             var dbName = "UsersAndroid.db";
-            var dbPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+            var dbPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = System.IO.Path.Combine(dbPath, dbName);
             var conn = new SQLite.SQLiteConnection(path);
             return conn;

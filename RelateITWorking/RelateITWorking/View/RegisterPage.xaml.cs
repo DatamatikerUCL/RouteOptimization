@@ -59,6 +59,7 @@ namespace RelateITWorking.View
             user.Password = PasswordEntry.Text;
             password = user.Password;
             if (IsPassStrongEnough(password))
+
             {
                 string hashedPassword = hashing.ComputeMD5Hash(password);
                 user.Password = hashedPassword;
