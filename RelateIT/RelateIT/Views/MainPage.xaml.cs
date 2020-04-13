@@ -18,6 +18,7 @@ namespace RelateIT.Views
         public MainPage()
         {
             InitializeComponent();
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Map.VisibleRegion.Radius));
         }
             
         public MainPage(int id)
@@ -39,19 +40,28 @@ namespace RelateIT.Views
         {
             var directionData = JsonConvert.DeserializeObject<RootObject>(json);
 
+            var route = new List<Position>();
+
+            foreach (var item in directionData.routes[0].legs[0].steps)
+            {
+                Position tempStart = new Position(item.start_location.lat, item.start_location.lng);
+                Position tempEnd = new Position(item.end_location.lat, item.end_location.lng);
+
+                route.Add(tempStart);
+                route.Add(tempEnd);
+            }
+
+
             Xamarin.Forms.Maps.Polyline polyline = new Xamarin.Forms.Maps.Polyline
             {
                 StrokeColor = Color.Blue,
                 StrokeWidth = 12,
                 Geopath =
                 {
-                   new Position(directionData.routes[0].legs[0].steps[0].start_location.lat, directionData.routes[0].legs[0].steps[0].start_location.lng),
-                   new Position(directionData.routes[0].legs[0].steps[0].end_location.lat, directionData.routes[0].legs[0].steps[0].end_location.lng)
+
                 }
+                        
 
-
-                
-                
             };
             
             ;
