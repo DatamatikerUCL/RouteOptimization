@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Vml;
+using Newtonsoft.Json;
 using Org.Apache.Http.Client.Methods;
 using Plugin.Geolocator;
 using Xamarin.Forms;
@@ -18,12 +19,16 @@ using RelateIT.Repositories;
 using RelateITWorking;
 using RelateITWorking.ViewModel;
 using Permission = Plugin.Permissions.Abstractions.Permission;
-using Distance = Xamarin.Forms.Maps.Distance;
+
 using MapSpan = Xamarin.Forms.Maps.MapSpan;
 using Xamarin.Forms.Maps;
 using Pin = Xamarin.Forms.Maps.Pin;
 using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
+using RelateITWorking.Helpers;
+using RelateITWorking.Models;
+using Route = RelateIT.Models.Route;
+using Distance = Xamarin.Forms.Maps.Distance;
 
 namespace RelateIT
 {
@@ -37,6 +42,9 @@ namespace RelateIT
         private readonly RouteOverviewViewModel _routeOverviewViewModel;
         private readonly RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
+        private string directionsAPIURL = "";
+        public ConvertKommaToDot _convertKomma;
+        private RootObject rootObject;
 
 
         public MainPage()
@@ -44,6 +52,8 @@ namespace RelateIT
             _dataAcesser = new MockRouteData();
             _routeRepo = RouteRepo.GetInstance(_dataAcesser);
             _routeOverviewViewModel = new RouteOverviewViewModel();
+            _convertKomma = new ConvertKommaToDot();
+            rootObject = new RootObject();
             InitializeComponent();
 
 
@@ -236,6 +246,24 @@ namespace RelateIT
 
         private void DrawPath()
         {
+            GetJSON();
+
+            List<Location> lines = DecodePolylinePoints(rootObject.routes[0].overview_polyline.points);
+            var polylineOptions = new PolylineOptions()
+                .InvokeColor(Android.Graphics.Color.Blue)
+                .InvokeWidth(4);
+
+            foreach (Location line in lines)
+            {
+                polylineOptions.Add(line);
+            }
+
+            Map.AddPolyline(polylineOptions);
+
+        }
+
+        public async void GetJSON()
+        {
             List<Location> locations = new List<Location>();
             foreach (Location location in _routeViewModel.GetRoute().Locations)
             {
@@ -244,22 +272,81 @@ namespace RelateIT
 
             List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
 
+            directionsAPIURL =
+                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions[2].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[2].Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
+            var client = new System.Net.Http.HttpClient();
+            var response = await client.GetAsync(directionsAPIURL);
+            string directionsJSON = await response.Content.ReadAsStringAsync();
 
-            Polyline polyline = new Polyline
+            if (directionsJSON != "")
             {
-                StrokeColor = Color.Red,
-                StrokeWidth = 10,
+                rootObject = JsonConvert.DeserializeObject<RootObject>(directionsJSON);
 
-            };
-
-            foreach (Position p in positions)
-            {
-                polyline.Geopath.Add(p);
             }
 
-            map.MapElements.Add(polyline);
+
         }
+
+        private List<Location> DecodePolylinePoints(string encodedPoints)
+        {
+            if (encodedPoints == null || encodedPoints == "") return null;
+            List<Location> poly = new List<Location>();
+            char[] polylinechars = encodedPoints.ToCharArray();
+            int index = 0;
+
+            int currentLat = 0;
+            int currentLng = 0;
+            int next5bits;
+            int sum;
+            int shifter;
+
+            try
+            {
+                while (index < polylinechars.Length)
+                {
+                    // calculate next latitude
+                    sum = 0;
+                    shifter = 0;
+                    do
+                    {
+                        next5bits = (int)polylinechars[index++] - 63;
+                        sum |= (next5bits & 31) << shifter;
+                        shifter += 5;
+                    } while (next5bits >= 32 && index < polylinechars.Length);
+
+                    if (index >= polylinechars.Length)
+                        break;
+
+                    currentLat += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+
+                    //calculate next longitude
+                    sum = 0;
+                    shifter = 0;
+                    do
+                    {
+                        next5bits = (int)polylinechars[index++] - 63;
+                        sum |= (next5bits & 31) << shifter;
+                        shifter += 5;
+                    } while (next5bits >= 32 && index < polylinechars.Length);
+
+                    if (index >= polylinechars.Length && next5bits >= 32)
+                        break;
+
+                    currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+                    Location p = new Location();
+                    p.Latitude = Convert.ToDouble(currentLat) / 100000.0;
+                    p.Longtitude = Convert.ToDouble(currentLng) / 100000.0;
+                    poly.Add(p);
+                }
+            }
+            catch (Exception ex)
+            {
+                // logo it
+            }
+            return poly;
+        }
+
 
     }
 }

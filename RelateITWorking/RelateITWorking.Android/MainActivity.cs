@@ -9,6 +9,10 @@ using Plugin.Permissions;
 using Position = Xamarin.Forms.Maps.Position;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Android.Gms.Maps.Model;
+using RelateITWorking.Models;
+
 /*using TK.CustomMap.Api.Google;
 using TK.CustomMap.Droid;*/
 
@@ -19,6 +23,8 @@ namespace RelateIT.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
         Location location;
+        MainPage mainpage = new MainPage();
+        private RootObject rootObject;
 
         //MapView mapView;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -36,7 +42,7 @@ namespace RelateIT.Droid
             LoadApplication(new App());
 
             location = new Location();
-
+            rootObject = new RootObject();
 
             location = GetLastKnownLocation().Result;
 
@@ -81,40 +87,6 @@ namespace RelateIT.Droid
 
         }
 
-        /*
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-        {
-
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            if (requestCode == RequestLocationId)
-            {
-                if ((grantResults.Length == 1) && (grantResults[0] == (int)Permission.Granted))
-                {
-                    // Permissions granted - display a message.
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    AlertDialog alert = dialog.Create();
-                    alert.SetTitle("Adgang givet");
-                    alert.SetMessage("Adgang er givet til lokation");
-                    alert.Show();
-                }
-
-                else
-                {
-                    // Permissions denied - display a message.
-                    AlertDialog.Builder dialog2 = new AlertDialog.Builder(this);
-                    AlertDialog alert2 = dialog2.Create();
-                    alert2.SetTitle("Adgang ikke givet");
-                    alert2.SetMessage("Adgang blokeret, da tilladelse ikke blev givet");
-                    alert2.Show();
-                }
-
-            }
-            else
-            {
-                base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            }
-        }*/
 
 
         protected override void OnSaveInstanceState(Bundle savedInstanceState)
