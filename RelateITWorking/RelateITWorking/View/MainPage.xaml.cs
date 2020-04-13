@@ -288,6 +288,26 @@ namespace RelateIT
 
         }
 
+        public void DrawPath()
+        {
+            GetJSON();
+
+            List<Position> positions = new List<Position>();
+            Position startPosition = new Position();
+            Position endPosition = new Position();
+
+            foreach (var item in rootObject.routes[0].legs[0].steps)
+            {
+                startPosition.Latitude = item.start_location.lat;
+                startPosition.Longitude = item.start_location.lng;
+                endPosition.Latitude = item.end_location.lat;
+                endPosition.Longitude = item.end_location.lng;
+                positions.Add(startPosition);
+                positions.Add(endPosition);
+            }
+        }
+        /*
+
         private List<Location> DecodePolylinePoints(string encodedPoints)
         {
             if (encodedPoints == null || encodedPoints == "") return null;
@@ -346,7 +366,7 @@ namespace RelateIT
             }
             return poly;
         }
-
+        */
 
     }
 }

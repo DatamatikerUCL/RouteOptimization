@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,11 +8,15 @@ using Android;
 using Android.Gms.Maps;
 using Plugin.Permissions;
 using Position = Xamarin.Forms.Maps.Position;
-using Xamarin.Essentials;
+using RelateIT.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
+using Newtonsoft.Json;
+using RelateITWorking.Helpers;
 using RelateITWorking.Models;
+using RelateITWorking.ViewModel;
+using Windows.Web.Http;
 
 /*using TK.CustomMap.Api.Google;
 using TK.CustomMap.Droid;*/
@@ -22,9 +27,12 @@ namespace RelateIT.Droid
     [Activity(Label = "RelateIT", Icon = "@mipmap/icon", Theme = "@style/AppTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
-        Location location;
+        Xamarin.Essentials.Location location;
         private MainPage mainpage;
+        private string directionsAPIURL = "";
+        public ConvertKommaToDot _convertKomma;
         private RootObject rootObject;
+        private RouteViewModel _routeViewModel;
 
         //MapView mapView;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,9 +46,11 @@ namespace RelateIT.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             //GmsDirection.Init("AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM");
             //TKGoogleMaps.Init(this, savedInstanceState);
-            location = new Location();
+            location = new Xamarin.Essentials.Location();
+            _convertKomma = new ConvertKommaToDot();
             rootObject = new RootObject();
             mainpage = new MainPage();
+            _routeViewModel = new RouteViewModel();
 
 
             LoadApplication(new App());
@@ -74,9 +84,9 @@ namespace RelateIT.Droid
              Manifest.Permission.AccessFineLocation
          };*/
 
-        public Task<Location> GetLastKnownLocation()
+        public Task<Xamarin.Essentials.Location> GetLastKnownLocation()
         {
-            var location = Geolocation.GetLastKnownLocationAsync();
+            var location = Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync();
 
 
             return location;
