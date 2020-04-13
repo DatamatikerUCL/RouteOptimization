@@ -29,7 +29,6 @@ using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using Route = RelateIT.Models.Route;
 using Distance = Xamarin.Forms.Maps.Distance;
-using RelateIT.Repositories;
 
 namespace RelateIT
 {
@@ -249,6 +248,18 @@ namespace RelateIT
         {
             GetJSON();
 
+            List<Location> lines = DecodePolylinePoints(rootObject.routes[0].overview_polyline.points);
+            var polylineOptions = new PolylineOptions()
+                .InvokeColor(Android.Graphics.Color.Blue)
+                .InvokeWidth(4);
+
+            foreach (Location line in lines)
+            {
+                polylineOptions.Add(line);
+            }
+
+            Map.AddPolyline(polylineOptions);
+
         }
 
         public async void GetJSON()
@@ -277,7 +288,7 @@ namespace RelateIT
 
         }
 
-        public List<Location> DecodePolylinePoints(string encodedPoints)
+        private List<Location> DecodePolylinePoints(string encodedPoints)
         {
             if (encodedPoints == null || encodedPoints == "") return null;
             List<Location> poly = new List<Location>();
