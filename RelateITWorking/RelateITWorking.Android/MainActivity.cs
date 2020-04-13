@@ -23,7 +23,7 @@ namespace RelateIT.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
         Location location;
-        MainPage mainpage = new MainPage();
+        private MainPage mainpage;
         private RootObject rootObject;
 
         //MapView mapView;
@@ -32,17 +32,19 @@ namespace RelateIT.Droid
             /*
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;*/
-
             base.OnCreate(savedInstanceState);
-            //GmsDirection.Init("AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM");
-            //TKGoogleMaps.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
-
+            //GmsDirection.Init("AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM");
+            //TKGoogleMaps.Init(this, savedInstanceState);
             location = new Location();
             rootObject = new RootObject();
+            mainpage = new MainPage();
+
+
+            LoadApplication(new App());
+
 
             location = GetLastKnownLocation().Result;
 

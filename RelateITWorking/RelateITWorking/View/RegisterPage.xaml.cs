@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RelateIT;
+using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using RelateITWorking.ViewModel;
 using Xamarin.Forms;
@@ -18,12 +19,14 @@ namespace RelateITWorking.View
         public DatabaseAccess databaseAccess;
         public User user;
         public RegisterViewModel vm;
+        private Hashing hashing;
         private string email;
         private string password;
         public RegisterPage()
         {
 
             vm = new RegisterViewModel();
+            hashing = new Hashing();
             this.BindingContext = vm;
 
             vm.DisplayInvalidRegistrationPrompt += () => DisplayAlert("Error", "Invalid Register, try again", "OK");
@@ -54,9 +57,17 @@ namespace RelateITWorking.View
             user.Email = EmailEntry.Text;
             email = user.Email;
             user.Password = PasswordEntry.Text;
+            if (IsPassStrongEnough(user.Password))
+            {
+                hashing.ComputeSHA1Hash(user.Password);
+            }
+            else
+            {
+                DisplayAlert("Error", "Password is not strong enough, try using a symbol, numbers and letters", "OK");
+            }
             password = user.Password;
             vm.RegisterUser(user);
-            if (!email.Contains("@") || IsPassStrongEnough(password))
+            if (!email.Contains("@"))
             {
                 DisplayAlert("Error", "Email og password in wrong format", "OK");
             }

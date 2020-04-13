@@ -1,5 +1,6 @@
 ﻿using System;
 using RelateIT;
+using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using RelateITWorking.ViewModel;
 using Xamarin.Forms;
@@ -14,12 +15,14 @@ namespace RelateITWorking.View
         private User user;
         private RegisterViewModel registerVM;
         private LoginViewmodel lVM;
+        private Hashing hashing;
 
         public LoginPage()
         {
             databaseAccess = new DatabaseAccess();
             lVM = new LoginViewmodel();
             registerVM = new RegisterViewModel();
+            hashing = new Hashing();
             this.BindingContext = lVM;
             InitializeComponent();
             user = lVM.GetLatestRegistration();
@@ -30,7 +33,7 @@ namespace RelateITWorking.View
         private async void LoginButton_OnClicked(object sender, EventArgs e)
         {
 
-            if (user.Email.Equals(Email.Text) && user.Password.Equals(Password.Text))
+            if (user.Email.Equals(Email.Text) && hashing.ValidateSHA1Hash(Password.Text, user.Password))
             {
                 await Navigation.PushAsync(new MainPage());
             }

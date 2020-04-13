@@ -87,7 +87,7 @@ namespace RelateIT
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
-            DrawPath();
+            //DrawPath();
 
         }
 
@@ -244,23 +244,23 @@ namespace RelateIT
             map.Pins.Add(pin);
         }
 
-        private void DrawPath()
-        {
-            GetJSON();
+        /*  private void DrawPath()
+          {
+              GetJSON();
 
-            List<Location> lines = DecodePolylinePoints(rootObject.routes[0].overview_polyline.points);
-            var polylineOptions = new PolylineOptions()
-                .InvokeColor(Android.Graphics.Color.Blue)
-                .InvokeWidth(4);
+              List<Location> lines = DecodePolylinePoints(rootObject.routes[0].overview_polyline.points);
+              var polylineOptions = new PolylineOptions()
+                  .InvokeColor(Android.Graphics.Color.Blue)
+                  .InvokeWidth(4);
 
-            foreach (Location line in lines)
-            {
-                polylineOptions.Add(line);
-            }
+              foreach (Location line in lines)
+              {
+                  polylineOptions.Add(line);
+              }
 
-            Map.AddPolyline(polylineOptions);
+              Map.AddPolyline(polylineOptions);
 
-        }
+          }*/
 
         public async void GetJSON()
         {

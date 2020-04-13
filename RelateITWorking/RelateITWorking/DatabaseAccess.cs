@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Office2010.PowerPoint;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using RelateITWorking.ExtensionClasses;
 using RelateITWorking.Interfaces;
 using RelateITWorking.Models;
 using SQLite;
