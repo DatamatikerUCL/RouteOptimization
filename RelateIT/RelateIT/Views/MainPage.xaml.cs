@@ -58,7 +58,7 @@ namespace RelateIT.Views
                 StrokeWidth = 12,
                 Geopath =
                 {
-
+                    new List<Position> = route
                 }
                         
 
