@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Vml;
 using Newtonsoft.Json;
 using Org.Apache.Http.Client.Methods;
+using Org.Apache.Http.Protocol;
 using Plugin.Geolocator;
 using Xamarin.Forms;
 using RelateIT.Interfaces;
@@ -89,7 +91,7 @@ namespace RelateIT
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
-            GetJSON();
+            //GetJSON();
             DrawPath();
 
         }
@@ -265,7 +267,7 @@ namespace RelateIT
 
           }*/
 
-        public async void GetJSON()
+        public string MakeURL()
         {
             List<Location> locations = new List<Location>();
             foreach (Location location in _routeViewModel.GetRoute().Locations)
@@ -275,30 +277,54 @@ namespace RelateIT
 
             List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
 
+
             directionsAPIURL =
-                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions[2].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[2].Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
+                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + ","
+                + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions.Last().Latitude) + ","
+                + _convertKomma.ConvertKommaToDots(positions.Last().Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
-            var client = new System.Net.Http.HttpClient();
-            HttpResponseMessage response = await client.GetAsync(directionsAPIURL);
+            return directionsAPIURL;
+        }
 
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new NullReferenceException();
-            }
+        public async Task<string> GetJSONAsync(string url)
+        {
+            var handler = new HttpClientHandler();
+            HttpClient client = new HttpClient(handler);
+            string response = await client.GetStringAsync(url);
+            return response;
+        }
+        /*
+        public async void GetJSON()
+        {
+            
+            
+            var client = new HttpClient();
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = await client.GetAsync(directionsAPIURL);
+
+  
             string directionsJSON = await response.Content.ReadAsStringAsync();
 
-            if (directionsJSON != "")
+            var handler = new HttpClientHandler();
+            HttpClient client = new HttpClient(handler);
+            string response = await client.GetStringAsync(directionsAPIURL);
+
+            if (response != "")
             {
-                rootObject = JsonConvert.DeserializeObject<RootObject>(directionsJSON);
+                rootObject = JsonConvert.DeserializeObject<RootObject>(response);
 
             }
 
 
         }
+        */
 
-        public void DrawPath()
+        public async void DrawPath()
         {
 
+            string jsonElement = await GetJSONAsync(MakeURL());
+
+            rootObject = JsonConvert.DeserializeObject<RootObject>(jsonElement);
 
             List<Position> positions = new List<Position>();
 
