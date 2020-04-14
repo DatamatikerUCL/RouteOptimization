@@ -49,19 +49,16 @@ namespace RelateIT.Views
                 route.Add(tempStart);
                 route.Add(tempEnd);
             }
-            Polyline a = new Polyline
+            Polyline polyline = new Polyline();
+
+            polyline.StrokeColor = Color.Blue;
+            polyline.StrokeWidth = 12;
+            for (int i = 0; i < route.Count; i++)
             {
-                StrokeColor = Color.Blue,
-                StrokeWidth = 12,
-                Geopath =
-                    {
-                        route
-                    }
-            };
+                polyline.Geopath.Add(route[i]);                
+            }           
 
-            Map.MapElements.Add(a);           
-                    
-
+            Map.MapElements.Add(polyline);                
 
         }
     }

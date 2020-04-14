@@ -41,11 +41,9 @@ namespace RelateIT.Services
 
             string key = mapKey;
 
-            string url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&&" + mode + "&key=" + key;
+            string url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&&" + mode + "&key=" + key;           
 
-            string json = "";
-
-            json = await GetGeoJsonAsync(url);
+            string json = await GetGeoJsonAsync(url);
 
             return json;
         }
