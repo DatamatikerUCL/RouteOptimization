@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Vml;
 using Newtonsoft.Json;
@@ -29,6 +30,7 @@ using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using Route = RelateIT.Models.Route;
 using Distance = Xamarin.Forms.Maps.Distance;
+using Polyline = Xamarin.Forms.Maps.Polyline;
 
 namespace RelateIT
 {
@@ -87,7 +89,8 @@ namespace RelateIT
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
-            //DrawPath();
+            GetJSON();
+            DrawPath();
 
         }
 
@@ -276,7 +279,12 @@ namespace RelateIT
                 "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions[2].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[2].Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
             var client = new System.Net.Http.HttpClient();
-            var response = await client.GetAsync(directionsAPIURL);
+            HttpResponseMessage response = await client.GetAsync(directionsAPIURL);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new NullReferenceException();
+            }
             string directionsJSON = await response.Content.ReadAsStringAsync();
 
             if (directionsJSON != "")
@@ -290,21 +298,30 @@ namespace RelateIT
 
         public void DrawPath()
         {
-            GetJSON();
+
 
             List<Position> positions = new List<Position>();
-            Position startPosition = new Position();
-            Position endPosition = new Position();
+
 
             foreach (var item in rootObject.routes[0].legs[0].steps)
             {
-                startPosition.Latitude = item.start_location.lat;
-                startPosition.Longitude = item.start_location.lng;
-                endPosition.Latitude = item.end_location.lat;
-                endPosition.Longitude = item.end_location.lng;
+
+                Position startPosition = new Position(item.start_location.lat, item.start_location.lng);
+                Position endPosition = new Position(item.end_location.lat, item.end_location.lng);
                 positions.Add(startPosition);
                 positions.Add(endPosition);
             }
+
+            Polyline polyline = new Polyline();
+            polyline.StrokeColor = Color.Red;
+            polyline.StrokeWidth = 12;
+            for (int i = 0; i < positions.Count; i++)
+            {
+                polyline.Geopath.Add(positions[i]);
+            }
+
+
+            map.MapElements.Add(polyline);
         }
         /*
 
