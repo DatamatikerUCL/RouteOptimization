@@ -1,6 +1,6 @@
 using RouteOptimization.RoutePlanning.Datastructures;
 
-namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
 {
     public class Edge
     {

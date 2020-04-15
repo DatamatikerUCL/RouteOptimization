@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RouteOptimization.RoutePlanning.Datastructures;
 using System.Linq;
 
-namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm
+namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
 {
     public class Graph
     {

@@ -2,6 +2,7 @@ using System.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm;
+using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs;
 using RoutePlannerTest.InterfaceImplementations;
 
 namespace RoutePlannerTest.RoutePlanningTest
