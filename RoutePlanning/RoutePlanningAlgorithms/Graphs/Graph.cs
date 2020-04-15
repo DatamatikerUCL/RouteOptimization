@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using RouteOptimization.RoutePlanning.Datastructures;
 using System.Linq;
+using System.Collections.Immutable;
 
 namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
 {
@@ -57,6 +58,12 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
 
             return distinctLocations;
         }
+
+        internal ImmutableList<ILocateable> GetOrderedLocations()
+        {
+            throw new NotImplementedException();
+        }
+
         public Graph CombineGraph(Graph graphTwo)
         {
             Graph graphToReturn = new Graph();
