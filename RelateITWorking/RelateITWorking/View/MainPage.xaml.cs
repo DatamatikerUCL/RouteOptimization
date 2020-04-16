@@ -30,6 +30,7 @@ using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
 using RelateITWorking.Helpers;
 using RelateITWorking.Models;
+using RelateITWorking.View;
 using Route = RelateIT.Models.Route;
 using Distance = Xamarin.Forms.Maps.Distance;
 using Polyline = Xamarin.Forms.Maps.Polyline;
@@ -42,9 +43,9 @@ namespace RelateIT
 
         double width = 0;
         double height = 0;
-        private readonly RouteViewModel _routeViewModel;
-        private readonly RouteOverviewViewModel _routeOverviewViewModel;
-        private readonly RouteRepo _routeRepo;
+        private RouteViewModel _routeViewModel;
+        private RouteOverviewViewModel _routeOverviewViewModel;
+        private RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
         private string directionsAPIURL = "";
         public ConvertKommaToDot _convertKomma;
@@ -78,21 +79,13 @@ namespace RelateIT
             }
 
 
-            for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
-            {
-                // måske ændres
-                _routeViewModel = new RouteViewModel(i);
-                for (int k = 0; k < _routeViewModel.GetRoute().Locations.Count; k++)
-                {
-                    PlacePins(k);
-                }
-            }
+
 
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
             //GetJSON();
-            DrawPath();
+            //DrawPath();
 
         }
 
@@ -322,28 +315,40 @@ namespace RelateIT
         public async void DrawPath()
         {
 
+            for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
+            {
+                // måske ændres
+                _routeViewModel = new RouteViewModel(i);
+                for (int k = 0; k < _routeViewModel.GetRoute().Locations.Count; k++)
+                {
+                    PlacePins(k);
+                }
+            }
+
+
             string jsonElement = await GetJSONAsync(MakeURL());
 
             rootObject = JsonConvert.DeserializeObject<RootObject>(jsonElement);
 
-            List<Position> positions = new List<Position>();
+            var locations = DecodePolyline.Decode(rootObject.routes[0].overview_polyline.points);
 
+            var route = locations.Select(location => new Position(location.Latitude, location.Longtitude)).ToList();
 
-            foreach (var item in rootObject.routes[0].legs[0].steps)
-            {
+            /*  foreach (var item in rootObject.routes[0].legs[0].steps)
+              {
 
-                Position startPosition = new Position(item.start_location.lat, item.start_location.lng);
-                Position endPosition = new Position(item.end_location.lat, item.end_location.lng);
-                positions.Add(startPosition);
-                positions.Add(endPosition);
-            }
+                  Position startPosition = new Position(item.start_location.lat, item.start_location.lng);
+                  Position endPosition = new Position(item.end_location.lat, item.end_location.lng);
+                  positions.Add(startPosition);
+                  positions.Add(endPosition);
+              }*/
 
             Polyline polyline = new Polyline();
             polyline.StrokeColor = Color.Red;
             polyline.StrokeWidth = 12;
-            for (int i = 0; i < positions.Count; i++)
+            foreach (var item in route)
             {
-                polyline.Geopath.Add(positions[i]);
+                polyline.Geopath.Add(item);
             }
 
 
@@ -410,6 +415,13 @@ namespace RelateIT
             return poly;
         }
         */
+
+        private async void LogoutButton_OnClicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new LoginPage());
+
+        }
 
     }
 }

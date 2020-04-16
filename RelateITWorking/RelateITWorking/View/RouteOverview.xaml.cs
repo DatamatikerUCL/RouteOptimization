@@ -18,9 +18,11 @@ namespace RelateIT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage
     {
+        MainPage _mainPage;
 
         public RouteOverview(IDataAccessable dataAccesser)
         {
+            _mainPage = new MainPage();
             InitializeComponent();
             BindingContext = dataAccesser.GetRoutes().ToList();
 
@@ -33,7 +35,9 @@ namespace RelateIT
                 }
                 else
                 {
-                    await this.Navigation.PushAsync(new MainPage());
+                    _mainPage.DrawPath();
+                    await this.Navigation.PushAsync(_mainPage);
+
                 }
 
 
