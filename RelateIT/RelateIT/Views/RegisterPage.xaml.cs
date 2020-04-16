@@ -11,16 +11,11 @@ using Xamarin.Forms.Xaml;
 namespace RelateIT.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class RegisterPage : ContentPage
     {
-        public LoginPage()
+        public RegisterPage()
         {
             InitializeComponent();
-            Init();
-        }
-
-        private void Init()
-        {
             BackgroundColor = Constants.BackgroundColor;
             lbl_Username.TextColor = Constants.MainTextColor;
             lbl_Password.TextColor = Constants.MainTextColor;
@@ -28,27 +23,24 @@ namespace RelateIT.Views
             LoginIcon.HeightRequest = Constants.LoginIconHeigth;
 
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
-            //Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
+            //Entry_Password.Completed +=  (s, e) => Btn_Create_Clicked(s, e);
         }
 
-        async void Btn_Signin_Clicked(object sender, EventArgs e)
+        async void Btn_Create_Clicked(object sender, EventArgs e)
         {
             User user = new User(Entry_Username.Text, Entry_Password.Text);
             User tempUser = App.UserDatebase.GetUser(user.Username);
-            if (tempUser != null && tempUser.Username == user.Username && tempUser.Password == user.Password)
+            if (tempUser == null)
             {
-                await DisplayAlert("Login", "Login Success", "OK");
-                Application.Current.MainPage = new MainPage(user.ID);
+                await DisplayAlert("Succes", "Account succesful created", "OK");
+                App.UserDatebase.SaveUser(user);
+                await Navigation.PopAsync();            
             }
             else
             {
-               await DisplayAlert("Login", "Login failed, Password or Username is not correct", "OK");
+                await DisplayAlert("Unsuccesful", "User already exist in the system try another username", "OK");
             }
-        }
-
-        private void Btn_Register_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegisterPage());
+            
         }
     }
 }

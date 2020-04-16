@@ -13,9 +13,11 @@ namespace RelateIT.Data
         //SQLiteConnection GetConnection();
         public static SQLite.SQLiteConnection GetConnection()
         {
-            var sqliteFileName = "TestDB.db3";           
+           
+            var sqliteFileName = "TestDB.db3";
             var path = Path.Combine(FileSystem.AppDataDirectory, sqliteFileName);
-            var conn = new SQLite.SQLiteConnection(path);
+           // File.Delete(sqliteFileName);
+            var conn = new SQLite.SQLiteConnection(path);            
             return conn;
         }
         

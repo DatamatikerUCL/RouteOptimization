@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RelateIT.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,12 @@ namespace RelateIT.Views
         public MainPage(int id)
         {
             InitializeComponent();
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(1)));
         }
 
-        private void Btn_RouteOverView_Clicked(object sender, EventArgs e)
+        private async void Btn_RouteOverView_Clicked(object sender, EventArgs e)
         {
-
+            await DisplayAlert("Not implemetet", "asdad", "OK");
         }
 
         private async void Btn_CreateNewRoute_Clicked(object sender, EventArgs e)
@@ -39,23 +41,17 @@ namespace RelateIT.Views
         {
             var directionData = JsonConvert.DeserializeObject<Services.RootObject>(json);
 
-            var route = new List<Position>();
 
-            foreach (var item in directionData.routes[0].legs[0].steps)
-            {
-                Position tempStart = new Position(item.start_location.lat, item.start_location.lng);
-                Position tempEnd = new Position(item.end_location.lat, item.end_location.lng);
-
-                route.Add(tempStart);
-                route.Add(tempEnd);
-            }
+            var route = Services.GooglePoints.Decode(directionData.routes[0].overview_polyline.points);     
+           
             Polyline polyline = new Polyline();
 
             polyline.StrokeColor = Color.Blue;
             polyline.StrokeWidth = 12;
-            for (int i = 0; i < route.Count; i++)
+
+            foreach (var item in route)
             {
-                polyline.Geopath.Add(route[i]);                
+                polyline.Geopath.Add(item);
             }           
 
             Map.MapElements.Add(polyline);                
