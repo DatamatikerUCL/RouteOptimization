@@ -67,8 +67,8 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
             {
                 for (int j = i + 1; j < _matrix[i].Count; j++)
                 {
-                    edges.Add(new Edge(_locations[i], _locations[j]));
-                    weights.Add(_matrix[i][j]);
+                    edges.Add(new Edge(_locations[i], _locations[j], _matrix[i][j]));
+
                 }
                 
             }

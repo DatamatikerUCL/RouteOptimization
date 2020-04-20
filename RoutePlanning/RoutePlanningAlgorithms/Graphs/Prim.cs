@@ -42,11 +42,10 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
                 ILocateable startLocation = locations[parent[i]];
                 ILocateable endLocation = locations[i];
 
-                Edge newEdge = new Edge(startLocation, endLocation);
-                double newWeight = key[i];
+                Edge newEdge = new Edge(startLocation, endLocation, key[i]);
+
 
                 returnTree.Edges.Add(newEdge);
-                returnTree.Weights.Add(newWeight);
 
             }
 

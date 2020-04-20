@@ -1,3 +1,4 @@
+using RouteOptimization.RoutePlanning.Interfaces;
 using System.Collections.Immutable;
 
 namespace RouteOptimization.RoutePlanning.Datastructures
@@ -9,6 +10,6 @@ namespace RouteOptimization.RoutePlanning.Datastructures
         public ILocateable StartLocation { get; }
 
         public int LocationCount { get; }
-        public double TotalLength();
+        public double TotalLength(IDistanceCalculator distanceCalculator);
     }
 }

@@ -114,7 +114,7 @@ namespace RoutePlannerTest.RoutePlanningTest
             
             Graph newGraph = temp.ToGraph();
 
-            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationTwo), newGraph.Weights[0]);
+            Assert.AreEqual(_testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationTwo), newGraph.Edges[0].Weight);
         }
 
         [TestMethod]
@@ -135,7 +135,7 @@ namespace RoutePlannerTest.RoutePlanningTest
             
             Graph newGraph = temp.ToGraph();
 
-            Assert.AreEqual(6, newGraph.Weights.Count);
+            Assert.AreEqual(6, newGraph.Edges.Count);
         }
     }
     

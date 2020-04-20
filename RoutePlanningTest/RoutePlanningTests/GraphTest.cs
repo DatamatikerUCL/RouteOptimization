@@ -68,10 +68,10 @@ namespace RoutePlannerTest.RoutePlanningTest
             Graph temp = new Graph();
 
             List<Edge> edges = new List<Edge>();
-            Edge edgeOne = new Edge(locationOne, locationTwo);
-            Edge edgeTwo = new Edge(locationOne, locationThree);
-            Edge edgeThree = new Edge(locationFive, locationThree);
-            Edge edgeFour = new Edge(locationFive, locationFour);
+            Edge edgeOne = new Edge(locationOne, locationTwo, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationTwo));
+            Edge edgeTwo = new Edge(locationOne, locationThree, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationThree));
+            Edge edgeThree = new Edge(locationFive, locationThree, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationFive, locationThree));
+            Edge edgeFour = new Edge(locationFive, locationFour, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationFive, locationFour));
             
             edges.Add(edgeOne);
             edges.Add(edgeTwo);
@@ -98,10 +98,10 @@ namespace RoutePlannerTest.RoutePlanningTest
 
             List<Edge> edges = new List<Edge>()
             {
-                new Edge(locationOne, locationThree),
-                new Edge(locationTwo, locationThree),
-                new Edge(locationThree, locationFour),
-                new Edge(locationFour, locationFive)
+                new Edge(locationOne, locationThree, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationOne, locationThree)),
+                new Edge(locationTwo, locationThree, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationTwo, locationThree)),
+                new Edge(locationThree, locationFour, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationThree, locationFour)),
+                new Edge(locationFour, locationFive, _testDistanceCalculator.CalculateDistanceBetweenILocateables(locationFour, locationFive))
             };
 
             temp.Edges = edges;

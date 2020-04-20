@@ -61,7 +61,34 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.Graphs
 
         internal ImmutableList<ILocateable> GetOrderedLocations()
         {
-            throw new NotImplementedException();
+            //OrderEdgesByWeight();
+
+            ImmutableList<ILocateable> orderedLocations = ImmutableList<ILocateable>.Empty;
+            foreach (Edge edge in Edges)
+            {
+                orderedLocations = AddDistinctLocationsInEdge(orderedLocations, edge);
+            }
+
+            return orderedLocations;
+        }
+
+        private void OrderEdgesByWeight()
+        {
+            Edges = Edges.OrderBy(e => e.Weight).ToList();
+        }
+
+        private ImmutableList<ILocateable> AddDistinctLocationsInEdge(ImmutableList<ILocateable> orderedLocations, Edge edge)
+        {
+            if (!orderedLocations.Contains(edge.Start))
+            {
+                orderedLocations = orderedLocations.Add(edge.Start);
+            }
+            if (!orderedLocations.Contains(edge.End))
+            {
+                orderedLocations = orderedLocations.Add(edge.End);
+            }
+
+            return orderedLocations;
         }
 
         public Graph CombineGraph(Graph graphTwo)

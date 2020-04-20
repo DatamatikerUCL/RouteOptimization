@@ -30,7 +30,7 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
             foreach (IPlannable plannable in plannables)
             {
-                if (plannable.TotalLength() < shortestPath.TotalLength())
+                if (plannable.TotalLength(_distanceCalculator) < shortestPath.TotalLength(_distanceCalculator))
                 {
                     shortestPath = plannable;
                 }

@@ -35,14 +35,16 @@ namespace RoutePlannerTest.InterfaceImplementations
         public ILocateable StartLocation { get => Locations[0]; }
         public int LocationCount { get => Locations.Count; }
 
-        public double TotalLength()
+        public double TotalLength(IDistanceCalculator distanceCalculator)
         {
             double totalLength = 0;
 
             for (int i = 0; i < Locations.Count-1; i++)
             {
-                totalLength += _distanceCalculator.CalculateDistanceBetweenILocateables(Locations[i], Locations[i + 1]);
+                totalLength += distanceCalculator.CalculateDistanceBetweenILocateables(Locations[i], Locations[i + 1]);
             }
+
+            totalLength += distanceCalculator.CalculateDistanceBetweenILocateables(Locations[^1], StartLocation);
 
             return totalLength;
         }

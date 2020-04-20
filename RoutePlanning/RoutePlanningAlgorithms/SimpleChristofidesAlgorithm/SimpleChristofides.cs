@@ -17,10 +17,7 @@ namespace RoutePlanning.RoutePlanningAlgorithms.SimpleChristofidesAlgorithm
         }
         public IPlannable PlanIPlannable(IPlannable plannable, IPlannableFactory factory)
         {
-            // Select Root vertex
-            ILocateable root = GetRoot(plannable);
-
-            // Compute minnimum spanning tree T for G with root r using Prim's.
+            // Compute minnimum spanning tree T for G using Prim's.
             Graph minimumSpanningTree = GetMinimumSpanningTree(plannable);
 
 
@@ -48,11 +45,6 @@ namespace RoutePlanning.RoutePlanningAlgorithms.SimpleChristofidesAlgorithm
             Graph minimumSpanningTree = Prim.PrimMinimumSpanningTree(matrix, plannable.LocationCount, plannable.Locations);
 
             return minimumSpanningTree;
-        }
-
-        private ILocateable GetRoot(IPlannable plannable)
-        {
-            return plannable.StartLocation;
         }
     }
 }
