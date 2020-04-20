@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RoutePlannerTest.InterfaceImplementations;
@@ -6,6 +7,7 @@ using RoutePlannerTest.InterfaceImplementations;
 namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class LocationTest
     {
         [TestMethod]

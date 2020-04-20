@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
 
 namespace RoutePlannerTest.InterfaceImplementations
 {
+    [ExcludeFromCodeCoverage]
     public class TestDistanceCalculator : IDistanceCalculator
     {
         public double CalculateDistanceBetweenILocateables(ILocateable firstLocation, ILocateable secondLocation)

@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
 
 namespace RoutePlannerTest.InterfaceImplementations
 {
+    [ExcludeFromCodeCoverage]
     public class TestPlannable : IPlannable
     {
         private readonly IDistanceCalculator _distanceCalculator;

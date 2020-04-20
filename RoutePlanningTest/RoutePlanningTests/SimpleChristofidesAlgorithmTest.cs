@@ -7,11 +7,13 @@ using RoutePlanning.RoutePlanningAlgorithms.SimpleChristofidesAlgorithm;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class SimpleChristofidesAlgorithmTest
     {
         private readonly IDistanceCalculator _testCalculator = new TestDistanceCalculator();

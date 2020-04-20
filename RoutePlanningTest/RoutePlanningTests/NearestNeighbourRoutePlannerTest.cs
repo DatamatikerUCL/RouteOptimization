@@ -5,10 +5,12 @@ using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
 using RoutePlannerTest.InterfaceImplementations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class NearestNeighbourRoutePlannerTest
     {
         private readonly IDistanceCalculator _testCalculator = new TestDistanceCalculator();

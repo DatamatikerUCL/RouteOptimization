@@ -3,10 +3,12 @@ using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
 using RouteOptimization.RoutePlanning.RoutePlanningAlgorithms.ChristofidesAlgorithm;
 using RoutePlannerTest.InterfaceImplementations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ChristofidesAlgorithmRoutePlannerTest
     {
         

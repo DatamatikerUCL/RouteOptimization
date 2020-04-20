@@ -3,11 +3,13 @@ using RouteOptimization.RoutePlanner;
 using RouteOptimization.RoutePlanner.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace RoutePlanningTest.RoutePlannerTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class PlannerTest
     {
         [TestInitialize]

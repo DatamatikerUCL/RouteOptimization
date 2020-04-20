@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RouteOptimization.RoutePlanning.Datastructures;
 using RouteOptimization.RoutePlanning.Interfaces;
@@ -9,6 +10,7 @@ using RoutePlannerTest.InterfaceImplementations;
 namespace RoutePlannerTest.RoutePlanningTest
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class AdjacencyMatrixTest
     {
         private IPlannable _testRoute;
