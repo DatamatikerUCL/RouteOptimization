@@ -31,11 +31,19 @@ namespace RelateITWorking
             return users.ToList();
         }
 
+        //READ UNSAFE
+        public IEnumerable<User> GetUsersUnSafe(string input)
+        {
+            var users = connection.Query<User>("SELECT * FROM User WHERE Email = '" + input + "'");
+
+            return users;
+        }
+
         //READ
         public User GetUser(string email)
         {
-            var user = (from tempUser in connection.Table<User>().Where(x => x.Email == email) select tempUser);
-            return user.FirstOrDefault();
+            var users = (from tempUser in connection.Table<User>().Where(x => x.Email == email) select tempUser);
+            return users.FirstOrDefault();
         }
 
         public User GetLatestRegistration()

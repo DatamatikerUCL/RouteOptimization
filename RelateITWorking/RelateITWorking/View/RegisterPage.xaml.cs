@@ -61,8 +61,18 @@ namespace RelateITWorking.View
             if (IsPassStrongEnough(password))
 
             {
-                string hashedPassword = hashing.ComputeMD5Hash(password);
-                user.Password = hashedPassword;
+                if (!email.Contains("@"))
+                {
+                    DisplayAlert("Error", "Email og password in wrong format", "OK");
+                }
+                else
+                {
+                    string hashedPassword = hashing.ComputeMD5Hash(password);
+                    user.Password = hashedPassword;
+                    vm.RegisterUser(user);
+                    DisplayAlert("Success", "User Registeret correctly", "OK");
+
+                }
             }
             else
             {
@@ -70,16 +80,7 @@ namespace RelateITWorking.View
             }
 
 
-            if (!email.Contains("@"))
-            {
-                DisplayAlert("Error", "Email og password in wrong format", "OK");
-            }
-            else
-            {
-                vm.RegisterUser(user);
-                DisplayAlert("Success", "User Registeret correctly", "OK");
 
-            }
         }
     }
 }

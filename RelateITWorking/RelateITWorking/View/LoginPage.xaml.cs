@@ -44,6 +44,11 @@ namespace RelateITWorking.View
 
             try
             {
+                if (userEmail.Equals("search"))
+                {
+                    await Navigation.PushAsync(new SearchSQLPage());
+                }
+
                 if (user.Email.Equals(userEmail) && hashing.ValidateMD5Hash(userPassword, user.Password))
                 {
                     await Navigation.PushAsync(new MainPage());
