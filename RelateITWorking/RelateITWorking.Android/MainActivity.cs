@@ -6,9 +6,6 @@ using Android.Runtime;
 using Android.OS;
 using Android;
 using Android.Gms.Maps;
-using Plugin.Permissions;
-using Position = Xamarin.Forms.Maps.Position;
-using RelateIT.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
@@ -16,7 +13,7 @@ using Newtonsoft.Json;
 using RelateITWorking.Helpers;
 using RelateITWorking.Models;
 using RelateITWorking.ViewModel;
-using Windows.Web.Http;
+
 
 /*using TK.CustomMap.Api.Google;
 using TK.CustomMap.Droid;*/
@@ -28,7 +25,6 @@ namespace RelateIT.Droid
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnMapReadyCallback
     {
         Xamarin.Essentials.Location location;
-        private MainPage mainpage;
         private string directionsAPIURL = "";
         public ConvertKommaToDot _convertKomma;
         private RootObject rootObject;
@@ -49,7 +45,6 @@ namespace RelateIT.Droid
             location = new Xamarin.Essentials.Location();
             _convertKomma = new ConvertKommaToDot();
             rootObject = new RootObject();
-            mainpage = new MainPage();
             _routeViewModel = new RouteViewModel();
 
 

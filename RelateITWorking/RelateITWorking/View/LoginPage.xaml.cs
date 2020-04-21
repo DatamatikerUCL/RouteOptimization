@@ -21,6 +21,7 @@ namespace RelateITWorking.View
 
         public LoginPage()
         {
+            NavigationPage.SetHasBackButton(this, false);
             databaseAccess = new DatabaseAccess();
             lVM = new LoginViewmodel();
             registerVM = new RegisterViewModel();
@@ -41,14 +42,23 @@ namespace RelateITWorking.View
             userPassword = LoginPasswordEntry.Text;
             user = lVM.GetUserFromDB(userEmail);
 
-            if (user.Email.Equals(userEmail) && hashing.ValidateMD5Hash(userPassword, user.Password))
+            try
             {
-                await Navigation.PushAsync(new MainPage());
+                if (user.Email.Equals(userEmail) && hashing.ValidateMD5Hash(userPassword, user.Password))
+                {
+                    await Navigation.PushAsync(new MainPage());
+                }
+                else
+                {
+                    DisplayAlert("Error", "Username or Password was wrong try again", "OK");
+                }
             }
-            else
+            catch (NullReferenceException exception)
             {
-                DisplayAlert("Error", "Username or Password was wrong try again", "OK");
+                Console.WriteLine(exception.Message);
+                await DisplayAlert("Error", "Email is wrong please try with another", "OK");
             }
+
 
         }
 

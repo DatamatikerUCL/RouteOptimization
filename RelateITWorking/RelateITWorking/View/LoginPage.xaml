@@ -14,16 +14,16 @@
                            PlaceholderColor="White" HeightRequest="40"   
                            Keyboard="Email"  
                            TextColor="White"/>
-                    <Entry x:Name="LoginPasswordEntry" Text="{Binding Password}" Placeholder="Password"   
+                    <Entry x:Name="LoginPasswordEntry" Text="{Binding Password}" Placeholder="Adgangskode"   
                            PlaceholderColor="White" HeightRequest="40"   
                            IsPassword="True"  
                            TextColor="White"/>
                 </StackLayout>
             </Frame>
-            <Button Command="{Binding SubmitCommand}" Text="Login" TextColor="White"  
+            <Button Command="{Binding SubmitCommand}" Text="Log ind" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="LoginButton_OnClicked"/>
-            <Button Text="Register" TextColor="White"  
+            <Button Text="Registrer" TextColor="White"  
                     FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
                     BackgroundColor="#088da5" Clicked="RegisterButton_OnClicked"></Button>
         </StackLayout>

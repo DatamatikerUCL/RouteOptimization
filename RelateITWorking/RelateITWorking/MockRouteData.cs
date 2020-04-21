@@ -25,10 +25,8 @@ namespace RelateITWorking
         {
 
             Location location1 = new Location(55.4211854, 10.3507287, "Bogensevej 105");
-            Location location2 = new Location(55.416680, 10.361320, "Næsby skovvænge 7");
-            Location location3 = new Location(55.403450, 10.379370, "Seebladsgade 1");
+            Location location3 = new Location(55.473220, 10.330290, "Lufthavnvej 130");
             locations = locations.Add(location1);
-            locations = locations.Add(location2);
             locations = locations.Add(location3);
 
 
@@ -38,7 +36,7 @@ namespace RelateITWorking
         }
         public ImmutableList<Route> GetRoutes()
         {
-            routes = routes.Add(CreateRoute("HomeToSchool"));
+            routes = routes.Add(CreateRoute("firstRoute"));
             return routes;
 
         }

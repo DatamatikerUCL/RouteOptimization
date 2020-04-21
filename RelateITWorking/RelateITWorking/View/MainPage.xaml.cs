@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using DocumentFormat.OpenXml.Presentation;
 using DocumentFormat.OpenXml.Vml;
 using Newtonsoft.Json;
 using Org.Apache.Http.Client.Methods;
+using Org.Apache.Http.Protocol;
 using Plugin.Geolocator;
 using Xamarin.Forms;
 using RelateIT.Interfaces;
@@ -27,8 +30,10 @@ using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
 using RelateITWorking.Helpers;
 using RelateITWorking.Models;
+using RelateITWorking.View;
 using Route = RelateIT.Models.Route;
 using Distance = Xamarin.Forms.Maps.Distance;
+using Polyline = Xamarin.Forms.Maps.Polyline;
 
 namespace RelateIT
 {
@@ -38,9 +43,9 @@ namespace RelateIT
 
         double width = 0;
         double height = 0;
-        private readonly RouteViewModel _routeViewModel;
-        private readonly RouteOverviewViewModel _routeOverviewViewModel;
-        private readonly RouteRepo _routeRepo;
+        private RouteViewModel _routeViewModel;
+        private RouteOverviewViewModel _routeOverviewViewModel;
+        private RouteRepo _routeRepo;
         private IDataAccessable _dataAcesser;
         private string directionsAPIURL = "";
         public ConvertKommaToDot _convertKomma;
@@ -74,19 +79,12 @@ namespace RelateIT
             }
 
 
-            for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
-            {
-                // måske ændres
-                _routeViewModel = new RouteViewModel(i);
-                for (int k = 0; k < _routeViewModel.GetRoute().Locations.Count; k++)
-                {
-                    PlacePins(k);
-                }
-            }
+
 
             CenterOnRoute();
             // GetDeviceLocationAsync();
             //CenterOnUserLocation();
+            //GetJSON();
             //DrawPath();
 
         }
@@ -262,7 +260,7 @@ namespace RelateIT
 
           }*/
 
-        public async void GetJSON()
+        public string MakeURL()
         {
             List<Location> locations = new List<Location>();
             foreach (Location location in _routeViewModel.GetRoute().Locations)
@@ -272,39 +270,89 @@ namespace RelateIT
 
             List<Position> positions = locations.ConvertAll(l => new Position(l.Latitude, l.Longtitude));
 
-            directionsAPIURL =
-                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions[2].Latitude) + "," + _convertKomma.ConvertKommaToDots(positions[2].Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
 
-            var client = new System.Net.Http.HttpClient();
-            var response = await client.GetAsync(directionsAPIURL);
+            directionsAPIURL =
+                "https://maps.googleapis.com/maps/api/directions/json?origin=" + _convertKomma.ConvertKommaToDots(positions[0].Latitude) + ","
+                + _convertKomma.ConvertKommaToDots(positions[0].Longitude) + "&destination=" + _convertKomma.ConvertKommaToDots(positions.Last().Latitude) + ","
+                + _convertKomma.ConvertKommaToDots(positions.Last().Longitude) + "&key=AIzaSyAr5VXtkDkCSpG3BvQVynoiFL-rvmZtxoM";
+
+            return directionsAPIURL;
+        }
+
+        public async Task<string> GetJSONAsync(string url)
+        {
+            var handler = new HttpClientHandler();
+            HttpClient client = new HttpClient(handler);
+            string response = await client.GetStringAsync(url);
+            return response;
+        }
+        /*
+        public async void GetJSON()
+        {
+            
+            
+            var client = new HttpClient();
+            HttpResponseMessage response = new HttpResponseMessage();
+            response = await client.GetAsync(directionsAPIURL);
+
+  
             string directionsJSON = await response.Content.ReadAsStringAsync();
 
-            if (directionsJSON != "")
+            var handler = new HttpClientHandler();
+            HttpClient client = new HttpClient(handler);
+            string response = await client.GetStringAsync(directionsAPIURL);
+
+            if (response != "")
             {
-                rootObject = JsonConvert.DeserializeObject<RootObject>(directionsJSON);
+                rootObject = JsonConvert.DeserializeObject<RootObject>(response);
 
             }
 
 
         }
+        */
 
-        public void DrawPath()
+        public async void DrawPath()
         {
-            GetJSON();
 
-            List<Position> positions = new List<Position>();
-            Position startPosition = new Position();
-            Position endPosition = new Position();
-
-            foreach (var item in rootObject.routes[0].legs[0].steps)
+            for (int i = 0; i < _routeOverviewViewModel.GetRoutes().Count; i++)
             {
-                startPosition.Latitude = item.start_location.lat;
-                startPosition.Longitude = item.start_location.lng;
-                endPosition.Latitude = item.end_location.lat;
-                endPosition.Longitude = item.end_location.lng;
-                positions.Add(startPosition);
-                positions.Add(endPosition);
+                // måske ændres
+                _routeViewModel = new RouteViewModel(i);
+                for (int k = 0; k < _routeViewModel.GetRoute().Locations.Count; k++)
+                {
+                    PlacePins(k);
+                }
             }
+
+
+            string jsonElement = await GetJSONAsync(MakeURL());
+
+            rootObject = JsonConvert.DeserializeObject<RootObject>(jsonElement);
+
+            var locations = DecodePolyline.Decode(rootObject.routes[0].overview_polyline.points);
+
+            var route = locations.Select(location => new Position(location.Latitude, location.Longtitude)).ToList();
+
+            /*  foreach (var item in rootObject.routes[0].legs[0].steps)
+              {
+
+                  Position startPosition = new Position(item.start_location.lat, item.start_location.lng);
+                  Position endPosition = new Position(item.end_location.lat, item.end_location.lng);
+                  positions.Add(startPosition);
+                  positions.Add(endPosition);
+              }*/
+
+            Polyline polyline = new Polyline();
+            polyline.StrokeColor = Color.Red;
+            polyline.StrokeWidth = 12;
+            foreach (var item in route)
+            {
+                polyline.Geopath.Add(item);
+            }
+
+
+            map.MapElements.Add(polyline);
         }
         /*
 
@@ -367,6 +415,13 @@ namespace RelateIT
             return poly;
         }
         */
+
+        private async void LogoutButton_OnClicked(object sender, EventArgs e)
+        {
+
+            await Navigation.PushAsync(new LoginPage());
+
+        }
 
     }
 }

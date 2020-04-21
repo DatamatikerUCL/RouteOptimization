@@ -22,10 +22,15 @@
             </Grid.ColumnDefinitions>
             <maps:Map x:Name="map" MapType="Street" IsShowingUser="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" />
 
-            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0"  HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
+            <Button Text="Rute Oversigt" TextColor="White" Margin="20, 20" 
+                    FontAttributes="Bold" FontSize="Medium" BackgroundColor="#088da5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"
+                    Grid.Row="1" Grid.Column="0" Clicked="RouteOverviewButtonClicked"/>
+            <Button Text="Log ud" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Margin="20, 20" 
+                    BackgroundColor="#088da5" Clicked="LogoutButton_OnClicked" Grid.Row="2" Grid.Column="0"></Button>
         </Grid>
 
-        <Grid x:Name="TabletView" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid x:Name="TabletView" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*">
                 </RowDefinition>
@@ -40,7 +45,12 @@
             </Grid.ColumnDefinitions>
 
             <maps:Map x:Name="map2" MapType="Street" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2"/>
-            <Button Text="Rute Oversigt" Margin="20, 20" Grid.Row="1" Grid.Column="0" HorizontalOptions="Center" Clicked="RouteOverviewButtonClicked"/>
+            <Button Text="Rute Oversigt" TextColor="White" Margin="20, 20" 
+                    FontAttributes="Bold" FontSize="Large" BackgroundColor="#088da5" HorizontalOptions="FillAndExpand" 
+                    Grid.Row="1" Grid.Column="0" Clicked="RouteOverviewButtonClicked"/>
+            <Button Text="Log ud" TextColor="White"  
+                    FontAttributes="Bold" FontSize="Large" HorizontalOptions="FillAndExpand"  
+                    BackgroundColor="#088da5" Clicked="LogoutButton_OnClicked" Grid.Row="2" Grid.Column="0"></Button>
         </Grid>
     </Grid>
 
