@@ -31,13 +31,6 @@ namespace RelateITWorking
             return users.ToList();
         }
 
-        //READ UNSAFE
-        public IEnumerable<User> GetUsersUnSafe(string input)
-        {
-            var users = connection.Query<User>("SELECT * FROM User WHERE Email = '" + input + "'");
-
-            return users;
-        }
 
         //READ
         public User GetUser(string email)
