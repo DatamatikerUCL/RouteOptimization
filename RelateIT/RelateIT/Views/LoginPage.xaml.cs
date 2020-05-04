@@ -38,11 +38,12 @@ namespace RelateIT.Views
             if (tempUser != null && tempUser.Username == user.Username && tempUser.Password == user.Password)
             {
                 await DisplayAlert("Login", "Login Success", "OK");
-                Application.Current.MainPage = new MainPage(user.ID);
+                await Navigation.PushAsync(new MainPage(user.ID));
+                //Application.Current.MainPage = new NavigationPage(new MainPage(user.ID));
             }
             else
             {
-               await DisplayAlert("Login", "Login failed, Password or Username is not correct", "OK");
+               await DisplayAlert("Login Failed", "Password or Username is not correct", "OK");
             }
         }
 

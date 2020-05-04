@@ -26,6 +26,7 @@ namespace RelateIT.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::RelateIT.Droid.Resource.String.library_name;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::RelateIT.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::RelateIT.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::RelateIT.Droid.Resource.Attribute.font;
@@ -12543,28 +12544,31 @@ namespace RelateIT.Droid
 			public const int hide_bottom_view_on_scroll_behavior = 2131623999;
 			
 			// aapt resource value: 0x7F0E0040
-			public const int mtrl_chip_close_icon_content_description = 2131624000;
+			public const int library_name = 2131624000;
 			
 			// aapt resource value: 0x7F0E0041
-			public const int password_toggle_content_description = 2131624001;
+			public const int mtrl_chip_close_icon_content_description = 2131624001;
 			
 			// aapt resource value: 0x7F0E0042
-			public const int path_password_eye = 2131624002;
+			public const int password_toggle_content_description = 2131624002;
 			
 			// aapt resource value: 0x7F0E0043
-			public const int path_password_eye_mask_strike_through = 2131624003;
+			public const int path_password_eye = 2131624003;
 			
 			// aapt resource value: 0x7F0E0044
-			public const int path_password_eye_mask_visible = 2131624004;
+			public const int path_password_eye_mask_strike_through = 2131624004;
 			
 			// aapt resource value: 0x7F0E0045
-			public const int path_password_strike_through = 2131624005;
+			public const int path_password_eye_mask_visible = 2131624005;
 			
 			// aapt resource value: 0x7F0E0046
-			public const int search_menu_title = 2131624006;
+			public const int path_password_strike_through = 2131624006;
 			
 			// aapt resource value: 0x7F0E0047
-			public const int status_bar_notification_info_overflow = 2131624007;
+			public const int search_menu_title = 2131624007;
+			
+			// aapt resource value: 0x7F0E0048
+			public const int status_bar_notification_info_overflow = 2131624008;
 			
 			static String()
 			{

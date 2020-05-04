@@ -29,7 +29,7 @@ namespace RelateIT.Views
 
         private async void Btn_RouteOverView_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Not implemetet", "asdad", "OK");
+            await Navigation.PushAsync(new GrafTest());
         }
 
         private async void Btn_CreateNewRoute_Clicked(object sender, EventArgs e)
