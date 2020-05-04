@@ -35,7 +35,7 @@ namespace RelateIT.Views
             
 
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
-            //Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
+            Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
         }
 
         async void Btn_Signin_Clicked(object sender, EventArgs e)
