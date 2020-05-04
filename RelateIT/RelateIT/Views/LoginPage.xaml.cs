@@ -19,6 +19,12 @@ namespace RelateIT.Views
             Init();
         }
 
+        protected override void OnAppearing()
+        {
+            Entry_Username.Text = string.Empty;
+            Entry_Password.Text = string.Empty;
+        }
+
         private void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
@@ -26,6 +32,7 @@ namespace RelateIT.Views
             lbl_Password.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
             LoginIcon.HeightRequest = Constants.LoginIconHeigth;
+            
 
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
             //Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);

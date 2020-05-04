@@ -6,6 +6,22 @@
              xmlns:map="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              mc:Ignorable="d"
              x:Class="RelateIT.Views.MainPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+            <Image Source="LoginIcon.png" HeightRequest="30" VerticalOptions="Center">
+            </Image>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.ToolbarItems>       
+        <ToolbarItem Text="Profile"                 
+                 Order="Secondary"
+                 Priority="0"
+                 Clicked="ToolbarItem_Profile_Clicked"/>
+        <ToolbarItem x:Name="tb_logout" Text="Logout" Order="Secondary" Priority="0" Clicked="tb_logout_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <Grid x:Name="MainGrid" Padding="0,0,0,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="400"></RowDefinition>

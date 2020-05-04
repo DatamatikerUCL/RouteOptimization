@@ -57,6 +57,16 @@ namespace RelateIT.Views
             Map.MapElements.Add(polyline);                
 
         }
+
+        private void ToolbarItem_Profile_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void tb_logout_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 
 }
