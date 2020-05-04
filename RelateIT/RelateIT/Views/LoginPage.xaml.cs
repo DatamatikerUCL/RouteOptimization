@@ -1,4 +1,5 @@
 ﻿using RelateIT.Models;
+using RelateIT.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,11 @@ namespace RelateIT.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private UserViewModel userViewModel; 
         public LoginPage()
         {
             InitializeComponent();
+            userViewModel = new UserViewModel();
             Init();
         }
 
@@ -35,14 +38,15 @@ namespace RelateIT.Views
             
 
             Entry_Username.Completed += (s, e) => Entry_Password.Focus();
-            Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
+            //Entry_Password.Completed += (s, e) => Btn_Signin_Clicked(s,e);
         }
 
         async void Btn_Signin_Clicked(object sender, EventArgs e)
         {
-            User user = new User(Entry_Username.Text, Entry_Password.Text);
-            User tempUser = App.UserDatebase.GetUser(user.Username);
-            if (tempUser != null && tempUser.Username == user.Username && tempUser.Password == user.Password)
+            UserViewModel checkuser = userViewModel.CreateUser(Entry_Username.Text, Entry_Password.Text);
+            UserViewModel user = userViewModel.GetUser();
+                //App.UserDatebase.GetUser(user.Username);
+            if (userViewModel.CheckUsers())
             {
                 await DisplayAlert("Login", "Login Success", "OK");
                 await Navigation.PushAsync(new MainPage(user.ID));
