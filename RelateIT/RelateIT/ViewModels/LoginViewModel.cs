@@ -5,28 +5,23 @@ using System.Text;
 
 namespace RelateIT.ViewModels
 {
-    public class UserViewModel
+    public class LoginViewModel
     {
         private User user;
         private User checkUser;
         public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public UserViewModel(string username, string password, int ID = 0)
+   
+        internal void CreateUser(string name, string password)
         {
-            Username = username;
-            Password = password;
-        }
-        internal UserViewModel CreateUser(string name, string password)
-        {
-            checkUser = new User(name, password);
-            return new UserViewModel(name, password);
+            checkUser = new User(name, password);            
         }
 
-        internal UserViewModel GetUser()
+        internal User GetUser()
         {
             user = App.UserDatebase.GetUser(checkUser.Username);
-            return new UserViewModel(checkUser.Username, checkUser.Password, checkUser.ID);
+            return user;
         }
 
         internal bool CheckUsers()

@@ -14,11 +14,12 @@ namespace RelateIT.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private UserViewModel userViewModel; 
+        private User user;
+        private readonly LoginViewModel userViewModel; 
         public LoginPage()
         {
             InitializeComponent();
-            userViewModel = new UserViewModel();
+            userViewModel = new LoginViewModel();
             Init();
         }
 
@@ -43,8 +44,8 @@ namespace RelateIT.Views
 
         async void Btn_Signin_Clicked(object sender, EventArgs e)
         {
-            UserViewModel checkuser = userViewModel.CreateUser(Entry_Username.Text, Entry_Password.Text);
-            UserViewModel user = userViewModel.GetUser();
+            userViewModel.CreateUser(Entry_Username.Text, Entry_Password.Text);
+            user = userViewModel.GetUser();
                 //App.UserDatebase.GetUser(user.Username);
             if (userViewModel.CheckUsers())
             {
