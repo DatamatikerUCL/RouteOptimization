@@ -5,14 +5,14 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android;
-using Android.Gms.Maps;
+
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Android.Gms.Maps.Model;
-using Newtonsoft.Json;
 using RelateITWorking.Helpers;
-using RelateITWorking.Models;
 using RelateITWorking.ViewModel;
+using RelateItNewest2605.Models;
+using Android.Gms.Maps;
 
 
 /*using TK.CustomMap.Api.Google;

@@ -2,15 +2,15 @@
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
 using RelateIT.Droid;
-using RelateIT.Interfaces;
+using RelateItNewest2605.Interfaces;
 
 [assembly: Xamarin.Forms.Dependency(typeof(TurnOnLocation))]
 namespace RelateIT.Droid
 {
     public class TurnOnLocation : ITurnOnLocation
     {
-        
-        
+
+
         public async void TurnOnGPS()
         {
             try
@@ -38,7 +38,7 @@ namespace RelateIT.Droid
             }
             catch (Exception e)
             {
-               
+
             }
         }
     }
