@@ -1,13 +1,13 @@
-﻿using System;
+﻿using RelateItNewest2605.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
-using RelateITWorking.Models;
 using Xamarin.Forms;
 
-namespace RelateITWorking.ViewModel
+namespace RelateItNewest2605.ViewModel
 {
     public class RegisterViewModel
     {

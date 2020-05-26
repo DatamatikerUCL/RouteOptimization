@@ -5,7 +5,7 @@ using System.Collections.Immutable;
 using System.Text;
 using Xamarin.Forms;
 
-namespace RelateIT.Models
+namespace RelateItNewest2605.Models
 {
     public class Route : IPlannable
     {

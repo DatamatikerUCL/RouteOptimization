@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Office2010.PowerPoint;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using RelateITWorking.Interfaces;
-using RelateITWorking.Models;
+using RelateItNewest2605.Interfaces;
+using RelateItNewest2605.Models;
 using SQLite;
 using Xamarin.Forms;
 
-namespace RelateITWorking
+namespace RelateItNewest2605
 {
     public class DatabaseAccess
     {

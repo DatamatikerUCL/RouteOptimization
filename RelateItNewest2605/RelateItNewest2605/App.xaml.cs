@@ -1,47 +1,48 @@
 ﻿using RelateIT.Repositories;
 using System;
 using RelateITWorking;
-using RelateITWorking.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace RelateIT
+
+using RelateItNewest2605;
+using RelateItNewest2605.View;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public NavigationPage LoginPage { get; private set; }
+    public static DatabaseAccess database;
+
+    public static DatabaseAccess Database
     {
-        public NavigationPage LoginPage { get; private set; }
-        public static DatabaseAccess database;
-
-        public static DatabaseAccess Database
+        get
         {
-            get
+            if (database == null)
             {
-                if (database == null)
-                {
-                    database = new DatabaseAccess();
-                }
-                return database;
+                database = new DatabaseAccess();
             }
-        }
-
-        public App()
-        {
-            InitializeComponent();
-
-            MainPage = new NavigationPage(new LoginPage());
-
-        }
-
-        protected override void OnStart()
-        {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            return database;
         }
     }
+
+    public App()
+    {
+        InitializeComponent();
+
+        MainPage = new NavigationPage(new LoginPage());
+
+    }
+
+    protected override void OnStart()
+    {
+    }
+
+    protected override void OnSleep()
+    {
+    }
+
+    protected override void OnResume()
+    {
+    }
 }
+

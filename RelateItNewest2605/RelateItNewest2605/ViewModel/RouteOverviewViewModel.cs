@@ -1,11 +1,11 @@
 ﻿using RelateIT.Repositories;
+using RelateItNewest2605.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
-using RelateIT.Models;
 
-namespace RelateITWorking.ViewModel
+namespace RelateItNewest2605.ViewModel
 {
 
     class RouteOverviewViewModel

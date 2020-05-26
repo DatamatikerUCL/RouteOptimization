@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -8,6 +9,6 @@ namespace RelateItNewest2605.Interfaces
 {
     public interface ISQLite
     {
-        Microsoft.Data.Sqlite.SqliteConnection GetConnection();
+        SQLiteConnection GetConnection();
     }
 }

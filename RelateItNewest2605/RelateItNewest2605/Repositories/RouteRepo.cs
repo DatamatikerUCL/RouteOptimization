@@ -1,11 +1,13 @@
-﻿using RelateIT.Interfaces;
-using RelateIT.Models;
+﻿
+
 using RouteOptimization.RoutePlanner.Datastructures;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 using RelateITWorking;
+using RelateItNewest2605.Interfaces;
+using RelateItNewest2605.Models;
 
 namespace RelateIT.Repositories
 {
@@ -47,5 +49,9 @@ namespace RelateIT.Repositories
             return routes.Find(route => route.Id == id);
         }
 
+        ImmutableList<RelateItNewest2605.Models.Route> IDataAccessable.GetRoutes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

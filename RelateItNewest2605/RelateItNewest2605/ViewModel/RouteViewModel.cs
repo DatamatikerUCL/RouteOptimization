@@ -1,21 +1,19 @@
 ﻿using System;
-using RelateIT.Models;
 using RelateIT.Repositories;
 using RouteOptimization.RoutePlanner.Datastructures;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Text;
-using Java.Lang;
 using Double = System.Double;
-using Exception = Java.Lang.Exception;
+using RelateItNewest2605.Models;
 
-namespace RelateITWorking.ViewModel
+namespace RelateItNewest2605.ViewModel
 {
     public class RouteViewModel
     {
         private RouteRepo _routeRepo;
-        private readonly Route _route;
+        private readonly RelateItNewest2605.Models.Route _route;
 
         public RouteViewModel(int routeId)
         {
@@ -30,7 +28,7 @@ namespace RelateITWorking.ViewModel
 
         }
 
-        public Route GetRoute()
+        public RelateItNewest2605.Models.Route GetRoute()
         {
             return _route;
         }

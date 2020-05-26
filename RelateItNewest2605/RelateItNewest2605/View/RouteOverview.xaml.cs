@@ -1,19 +1,18 @@
-﻿using RelateIT.Models;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Android.Content;
-using Android.Net.Wifi.Aware;
-using RelateIT.Interfaces;
 using RelateITWorking;
 using RouteOptimization.RoutePlanner.Datastructures;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.Xaml;
+using RelateItNewest2605.Interfaces;
+using RelateItNewest2605.Models;
+using RelateItNewest2605;
 
-namespace RelateIT
+namespace RelateItNewest2605
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RouteOverview : ContentPage

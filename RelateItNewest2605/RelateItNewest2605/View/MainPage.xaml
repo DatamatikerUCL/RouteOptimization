@@ -6,7 +6,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" 
              mc:Ignorable="d"
              Title="RelateIT"
-             x:Class="RelateIT.MainPage">
+             x:Class="RelateItNewest2605.MainPage">
 
 
 

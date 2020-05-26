@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              Title="Oversigt"
-             x:Class="RelateIT.RouteOverview">
+             x:Class="RelateItNewest2605.RouteOverview">
     <ContentPage.Content>
         <StackLayout>
             <ListView ItemsSource="{Binding}" x:Name="routeListview">

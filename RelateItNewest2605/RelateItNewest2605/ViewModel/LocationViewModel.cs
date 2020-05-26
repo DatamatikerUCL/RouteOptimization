@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RelateITWorking.ViewModel
+namespace RelateItNewest2605.ViewModel
 {
     class LocationViewModel
     {

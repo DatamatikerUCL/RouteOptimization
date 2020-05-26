@@ -1,27 +1,28 @@
-﻿using RelateIT.Interfaces;
-using RelateIT.Models;
+﻿
+using RelateItNewest2605.Interfaces;
+using RelateItNewest2605.Models;
 using RouteOptimization.RoutePlanner.Datastructures;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 
-namespace RelateITWorking
+namespace RelateItNewest2605
 {
     public class MockRouteData : IDataAccessable
     {
 
-        ImmutableList<Route> routes;
+        ImmutableList<RelateItNewest2605.Models.Route> routes;
         ImmutableList<ILocateable> locations;
 
 
         public MockRouteData()
         {
-            routes = ImmutableList<Route>.Empty;
+            routes = ImmutableList<RelateItNewest2605.Models.Route>.Empty;
             locations = ImmutableList<ILocateable>.Empty;
         }
 
-        public Route CreateRoute(string _name)
+        public RelateItNewest2605.Models.Route CreateRoute(string _name)
         {
 
             Location location1 = new Location(55.4211854, 10.3507287, "Bogensevej 105");
@@ -30,16 +31,16 @@ namespace RelateITWorking
             locations = locations.Add(location3);
 
 
-            Route route = new Route(_name, locations, locations.Count, locations[0], DateTime.Now, 5.0);
+            RelateItNewest2605.Models.Route route = new RelateItNewest2605.Models.Route(_name, locations, locations.Count, locations[0], DateTime.Now, 5.0);
 
             return route;
         }
-        public ImmutableList<Route> GetRoutes()
+
+
+        ImmutableList<RelateItNewest2605.Models.Route> IDataAccessable.GetRoutes()
         {
             routes = routes.Add(CreateRoute("firstRoute"));
             return routes;
-
         }
-
     }
 }

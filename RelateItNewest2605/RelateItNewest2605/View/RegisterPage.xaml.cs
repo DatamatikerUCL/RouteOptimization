@@ -5,13 +5,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RelateIT;
+using RelateItNewest2605.Models;
+using RelateItNewest2605.ViewModel;
 using RelateITWorking.Helpers;
-using RelateITWorking.Models;
-using RelateITWorking.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace RelateITWorking.View
+namespace RelateItNewest2605.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage

@@ -3,39 +3,27 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Presentation;
-using DocumentFormat.OpenXml.Vml;
-using Newtonsoft.Json;
-using Org.Apache.Http.Client.Methods;
-using Org.Apache.Http.Protocol;
-using Plugin.Geolocator;
 using Xamarin.Forms;
-using RelateIT.Interfaces;
-
+using RelateIT.Repositories;
+using RelateITWorking.Helpers;
+using RelateItNewest2605.Interfaces;
+using RelateItNewest2605.Models;
+using Plugin.Geolocator;
+using Newtonsoft.Json;
+using Plugin.Geolocator.Abstractions;
+using Xamarin.Forms.Maps;
+using Xamarin.Essentials;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using RelateIT.Models;
-using RelateIT.Repositories;
-using RelateITWorking;
-using RelateITWorking.ViewModel;
-using Permission = Plugin.Permissions.Abstractions.Permission;
-
-using MapSpan = Xamarin.Forms.Maps.MapSpan;
-using Xamarin.Forms.Maps;
-using Pin = Xamarin.Forms.Maps.Pin;
-using PinType = Xamarin.Forms.Maps.PinType;
 using Position = Xamarin.Forms.Maps.Position;
-using RelateITWorking.Helpers;
-using RelateITWorking.Models;
-using RelateITWorking.View;
-using Route = RelateIT.Models.Route;
-using Distance = Xamarin.Forms.Maps.Distance;
 using Polyline = Xamarin.Forms.Maps.Polyline;
+using RelateItNewest2605.ViewModel;
+using RelateItNewest2605.View;
 
-namespace RelateIT
+namespace RelateItNewest2605
 {
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
@@ -126,8 +114,8 @@ namespace RelateIT
             // if (status.Equals(PermissionStatus.Granted))
             // {
             var position = await GetPosition();
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longtitude),
-                Distance.FromKilometers(1)));
+            Xamarin.Forms.Maps.Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(position.Latitude, position.Longtitude),
+                Xamarin.Forms.Maps.Distance.FromKilometers(1)));
             //  }
             /* else
               {
@@ -139,14 +127,14 @@ namespace RelateIT
 
         public async void CenterOnRoute()
         {
-            var routePosition = new Position(55.4211854, 10.3507287);
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(routePosition, Distance.FromKilometers(2)));
+            var routePosition = new Xamarin.Forms.Maps.Position(55.4211854, 10.3507287);
+            Xamarin.Forms.Maps.Map.MoveToRegion(MapSpan.FromCenterAndRadius(routePosition, Xamarin.Forms.Maps.Distance.FromKilometers(2)));
         }
 
         public async void CheckLocationPermission()
         {
-            PermissionStatus status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-            if (status != PermissionStatus.Granted)
+            Plugin.Permissions.Abstractions.PermissionStatus status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+            if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
@@ -166,7 +154,7 @@ namespace RelateIT
                 await DisplayAlert("Access Denied", "Access was denied by you", "OK");
             }
 
-            if (status == PermissionStatus.Granted)
+            if (status == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
             {
                 //turn on location
                 DependencyService.Get<ITurnOnLocation>().TurnOnGPS();
@@ -262,8 +250,8 @@ namespace RelateIT
 
         public string MakeURL()
         {
-            List<Location> locations = new List<Location>();
-            foreach (Location location in _routeViewModel.GetRoute().Locations)
+            List<Models.Location> locations = new List<Models.Location>();
+            foreach (Models.Location location in _routeViewModel.GetRoute().Locations)
             {
                 locations.Add(location);
             }
@@ -343,8 +331,8 @@ namespace RelateIT
                   positions.Add(endPosition);
               }*/
 
-            Polyline polyline = new Polyline();
-            polyline.StrokeColor = Color.Red;
+            Xamarin.Forms.Maps.Polyline polyline = new Polyline();
+            polyline.StrokeColor = System.Drawing.Color.Red;
             polyline.StrokeWidth = 12;
             foreach (var item in route)
             {
