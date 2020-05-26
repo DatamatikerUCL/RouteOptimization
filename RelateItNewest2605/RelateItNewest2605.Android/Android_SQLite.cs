@@ -1,0 +1,23 @@
+﻿using System;
+
+using RelateITWorking.Droid;
+using RelateITWorking.Interfaces;
+using SQLite;
+using Xamarin.Forms;
+
+[assembly: Dependency(typeof(Android_SQLite))]
+namespace RelateITWorking.Droid
+{
+    public class Android_SQLite : ISQLite
+    {
+        // create connection to the db from android
+        public SQLiteConnection GetConnection()
+        {
+            var dbName = "UsersAndroid.db";
+            var dbPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var path = System.IO.Path.Combine(dbPath, dbName);
+            var conn = new SQLite.SQLiteConnection(path);
+            return conn;
+        }
+    }
+}
