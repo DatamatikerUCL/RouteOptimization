@@ -60,14 +60,14 @@ namespace RouteOptimization.RoutePlanning.RoutePlanningAlgorithms
 
         private ILocateable Closest(ILocateable current, ImmutableList<ILocateable> remaining)
         {
-            double tolerance = 0.01;
-            double smallestDistance = 0;
+
+            double smallestDistance = double.MaxValue;
             ILocateable nextLocation = current;
 
             foreach (ILocateable location in remaining)
             {
                 double tempDistance = _distanceCalculator.CalculateDistanceBetweenILocateables(current, location);
-                if (tempDistance < smallestDistance || Math.Abs(smallestDistance) < tolerance)
+                if (tempDistance < smallestDistance )
                 {
                     smallestDistance = tempDistance;
                     nextLocation = location;
