@@ -18,26 +18,36 @@ namespace RelateIT.Views
         public MainPage()
         {
             InitializeComponent();
-            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(1)));
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(2)));
+            BackgroundColor = Constants.BackgroundColor;
         }
-            
+
         public MainPage(int id)
         {
             InitializeComponent();
-            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(1)));
+            Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(2)));
+            BackgroundColor = Constants.BackgroundColor;
         }
 
-        private async void Btn_RouteOverView_Clicked(object sender, EventArgs e)
+    private async void Btn_RouteOverView_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new GrafTest());
         }
 
         private async void Btn_CreateNewRoute_Clicked(object sender, EventArgs e)
-        {            
-            string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(55.374181, 10.403406, 55.403772, 10.379840);
-            DrawTripOnMap(json);
+        {
+            for (int i = 0; i < Map.Pins.Count - 1; i++)
+            {
+                Position tempA = new Position(Map.Pins[i].Position.Latitude, Map.Pins[i].Position.Longitude);
+                Position tempB = new Position(Map.Pins[i+1].Position.Latitude, Map.Pins[i+1].Position.Longitude);
+                string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(tempA, tempB);
+                DrawTripOnMap(json);
+            }
+            //string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(55.374181, 10.403406, 55.403772, 10.379840);
+            //string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(55.374181, 10.403406, 55.403772, 10.379840);
+          
         }
-        public void DrawTripOnMap(string json)
+        private void DrawTripOnMap(string json)
         {
             var directionData = JsonConvert.DeserializeObject<Services.RootObject>(json);
 
@@ -58,14 +68,30 @@ namespace RelateIT.Views
 
         }
 
-        private void ToolbarItem_Profile_Clicked(object sender, EventArgs e)
+        private async void ToolbarItem_Profile_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            await Navigation.PushAsync(new Profile());
         }
 
-        private void tb_logout_Clicked(object sender, EventArgs e)
+        private async void tb_logout_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
+            await Navigation.PopAsync();
+        }
+
+        private void Map_MapClicked(object sender, MapClickedEventArgs e)
+        {
+            Map.Pins.Add(new Pin
+            {
+                Label = "Pin from tap",
+                Position = e.Position 
+            }); 
+        }
+
+        private async void tb_refresh_Clicked(object sender, EventArgs e)
+        {
+            var vUpdatedPage = new MainPage();
+            Navigation.InsertPageBefore(vUpdatedPage, this);
+            await Navigation.PopAsync();
         }
     }
 

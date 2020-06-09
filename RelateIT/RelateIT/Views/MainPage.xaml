@@ -20,6 +20,7 @@
                  Priority="0"
                  Clicked="ToolbarItem_Profile_Clicked"/>
         <ToolbarItem x:Name="tb_logout" Text="Logout" Order="Secondary" Priority="0" Clicked="tb_logout_Clicked"></ToolbarItem>
+        <ToolbarItem x:Name="tb_refresh" Text="Refresh" Order="Secondary" Priority="0" Clicked="tb_refresh_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <Grid x:Name="MainGrid" Padding="0,0,0,10">
@@ -31,7 +32,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <map:Map x:Name="Map" MapType="Street" HasZoomEnabled="True" Grid.ColumnSpan="2" Margin="5"></map:Map>
+        <map:Map x:Name="Map" MapType="Street" HasZoomEnabled="True" Grid.ColumnSpan="2" Margin="5" MapClicked="Map_MapClicked"></map:Map>
         <Button x:Name="Btn_RouteOverView" Text="Graf Test" Clicked="Btn_RouteOverView_Clicked" Grid.Row="1" Grid.Column="0"></Button>
         <Button x:Name="Btn_CreateNewRoute" Text="Create new route" Clicked="Btn_CreateNewRoute_Clicked" Grid.Row="1" Grid.Column="1"></Button>
 

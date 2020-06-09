@@ -48,13 +48,8 @@ namespace RelateIT.Views
         }
         public GrafTest()
         {
-            foreach (var item in listB)
-            {
-
-            }
-
-
             InitializeComponent();
+            BackgroundColor = Constants.BackgroundColor;
             readCSVFile();
             List<Microcharts.Entry> entries2 = new List<Microcharts.Entry>();
 

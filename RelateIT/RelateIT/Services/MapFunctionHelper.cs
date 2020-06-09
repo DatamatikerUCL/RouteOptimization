@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms.Maps;
 
 namespace RelateIT.Services
 {
@@ -27,11 +28,11 @@ namespace RelateIT.Services
         }
         
 
-        public static async Task<string> GetDirectionJsonAsync(double location_lat, double location_lng, double destination_lat, double destination_lng)
+        public static async Task<string> GetDirectionJsonAsync(Position startposistion, Position endPosition)
         {
-            string str_origin = "origin=" + location_lat + "," + location_lng;
+            string str_origin = "origin=" + startposistion.Latitude + "," + startposistion.Longitude;
 
-            string str_destination = "destination=" + destination_lat + "," + destination_lng;
+            string str_destination = "destination=" + endPosition.Latitude + "," + endPosition.Longitude;
 
             string mode = "mode=driving";
 
