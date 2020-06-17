@@ -11,7 +11,7 @@
             <forms:ChartView x:Name="Chart1" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
             <forms:ChartView x:Name="Chart2" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
             <forms:ChartView x:Name="Chart3" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
-            <forms:ChartView x:Name="Chart4" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
+            <forms:ChartView x:Name="Chart4" HeightRequest="500" VerticalOptions="CenterAndExpand"></forms:ChartView>
             <forms:ChartView x:Name="Chart5" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
             <forms:ChartView x:Name="Chart6" HeightRequest="700" VerticalOptions="CenterAndExpand"></forms:ChartView>
         </StackLayout>

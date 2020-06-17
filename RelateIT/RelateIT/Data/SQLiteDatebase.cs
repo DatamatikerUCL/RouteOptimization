@@ -16,7 +16,6 @@ namespace RelateIT.Data
            
             var sqliteFileName = "TestDB.db3";
             var path = Path.Combine(FileSystem.AppDataDirectory, sqliteFileName);
-           // File.Delete(sqliteFileName);
             var conn = new SQLite.SQLiteConnection(path);            
             return conn;
         }

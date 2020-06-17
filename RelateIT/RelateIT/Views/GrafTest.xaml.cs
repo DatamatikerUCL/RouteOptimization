@@ -96,19 +96,19 @@ namespace RelateIT.Views
         {
             new Microcharts.Entry(200)
             {
-                Color = SkiaSharp.SKColor.Parse("#FF1493"),
+                Color = SkiaSharp.SKColor.Parse("#cc0404"),
                 Label = "Janaury",
                 ValueLabel = "200"
             },
             new Microcharts.Entry(400)
             {
-                Color = SkiaSharp.SKColor.Parse("#00BFFF"),
+                Color = SkiaSharp.SKColor.Parse("#0313fc"),
                 Label = "Febuary",
                 ValueLabel = "400"
             },
             new Microcharts.Entry(-100)
             {
-                Color = SkiaSharp.SKColor.Parse("#00CED1"),
+                Color = SkiaSharp.SKColor.Parse("#04ba16"),
                 Label = "March",
                 ValueLabel = "-100"
             }

@@ -45,9 +45,6 @@ namespace RelateIT.Views
                 string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(tempA, tempB);
                 DrawTripOnMap(json);
             }
-            //string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(55.374181, 10.403406, 55.403772, 10.379840);
-            //string json = await Services.MapFunctionHelper.GetDirectionJsonAsync(55.374181, 10.403406, 55.403772, 10.379840);
-          
         }
         private void DrawTripOnMap(string json)
         {
