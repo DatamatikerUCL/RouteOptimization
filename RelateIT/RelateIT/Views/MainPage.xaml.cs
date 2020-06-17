@@ -20,6 +20,7 @@ namespace RelateIT.Views
             InitializeComponent();
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(2)));
             BackgroundColor = Constants.BackgroundColor;
+            NavigationPage.SetHasBackButton(this, false);
         }
 
         public MainPage(int id)
@@ -27,6 +28,7 @@ namespace RelateIT.Views
             InitializeComponent();
             Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(55.374181, 10.403406), Distance.FromKilometers(2)));
             BackgroundColor = Constants.BackgroundColor;
+            NavigationPage.SetHasBackButton(this, false);
         }
 
     private async void Btn_RouteOverView_Clicked(object sender, EventArgs e)
