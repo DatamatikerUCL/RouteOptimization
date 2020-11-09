@@ -39,11 +39,8 @@ namespace HPlusSports
             {                
                 return null;
             }
-            //Geolocator geolocator = new Geolocator();
-            //DependencyService.Get<ITurnOnGPS>().turnOnGPS();
             var request = new GeolocationRequest(GeolocationAccuracy.Medium, new TimeSpan(0, 0, 3));
             var location = await Geolocation.GetLocationAsync(request);
-            //var location = await Geolocation.GetLastKnownLocationAsync();
             return location;
         }
 
